@@ -146,9 +146,15 @@ module.exports = {
             components: [createMenu()]
         });
 
+        const timeoutDuration = 120000; // 60 segundos
+        const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
+
         // Coletor para respostas do menu suspenso
         const filter = i => i.customId === 'automod-select' && i.user.id === interaction.user.id;
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 120000 });
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: timeoutDuration });
+
+        // Armazenar o coletor no Map com o tempo de início e duração
+        collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
 
         collector.on('collect', async i => {
             const selectedOption = i.values[0];
@@ -311,8 +317,27 @@ module.exports = {
                 sendMenu();
                 await i.reply({ content: replyMessage, ephemeral: true });
             }
-
-
         })
+
+        collector.on('end', async (collected, reason) => {
+            const originalMessage = await interaction.fetchReply().catch(() => null);
+
+            if (!originalMessage) {
+                return collectors.delete(userId)
+            }
+
+            if (reason === 'time') {
+                await interaction.editReply({
+                    components: []
+                });
+            } else {
+                await interaction.editReply({
+                    components: []
+                });
+            }
+
+            collectors.delete(userId)
+        })
+
     }
 }

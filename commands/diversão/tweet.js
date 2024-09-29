@@ -27,54 +27,45 @@ module.exports = {
 
     async execute(interaction) {
 
-
-        const cmd = await comandos.findOne({
+        const canalID = await comandos.findOne({
             guildId: interaction.guild.id
         })
-
-        if (!cmd) return interaction.reply({
+        if (!canalID) return interaction.reply({
             content: `> \`-\` <a:alerta:1163274838111162499> Um Adminitrador ainda não configurou o canal para uso de comandos!`,
             ephemeral: true
         })
 
-
-        let cmd1 = cmd.canal1
-
-        if (cmd1 === null || cmd1 === true || !client.channels.cache.get(cmd1) || cmd1 === interaction.channel.id) {
-
-
-            // Obtendo o usuário mencionado ou o próprio autor
-            const user = interaction.options.getUser("usuário") || interaction.user;
-
-            // Comentário fornecido pelo usuário
-            const comment = interaction.options.getString("comentário");
-
-            // URL do avatar do usuário
-            const avatarURL = user.displayAvatarURL({ format: 'png', size: 1024 });
-
-            // Criando a imagem de estilo Tweet usando Canvafy
-            const tweetCard = await new canvafy.Tweet()
-                .setTheme("dim")  // Tema escuro
-                .setUser({ displayName: user.username, username: user.username })
-                .setVerified(true)  // Definindo o usuário como verificado
-                .setComment(comment)  // Comentário personalizado do usuário
-                .setAvatar(avatarURL)  // Avatar do usuário
-                .build();
-
-            // Convertendo a imagem em um attachment para enviar no Discord
-            const attachment = new AttachmentBuilder(tweetCard, { name: "tweet.png" });
-
-            // Respondendo a interação com a imagem gerada
-            await interaction.reply({ files: [attachment] });
-
-        }
-        else if (interaction.channel.id !== cmd1) {
-            interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${cmd1}>.`,
+        let canalPermitido = canalID.canal1
+        if (interaction.channel.id !== canalPermitido) {
+            return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
                 ephemeral: true
             })
         }
 
+        // Obtendo o usuário mencionado ou o próprio autor
+        const user = interaction.options.getUser("usuário") || interaction.user;
+
+        // Comentário fornecido pelo usuário
+        const comment = interaction.options.getString("comentário");
+
+        // URL do avatar do usuário
+        const avatarURL = user.displayAvatarURL({ format: 'png', size: 1024 });
+
+        // Criando a imagem de estilo Tweet usando Canvafy
+        const tweetCard = await new canvafy.Tweet()
+            .setTheme("dim")  // Tema escuro
+            .setUser({ displayName: user.username, username: user.username })
+            .setVerified(true)  // Definindo o usuário como verificado
+            .setComment(comment)  // Comentário personalizado do usuário
+            .setAvatar(avatarURL)  // Avatar do usuário
+            .build();
+
+        // Convertendo a imagem em um attachment para enviar no Discord
+        const attachment = new AttachmentBuilder(tweetCard, { name: "tweet.png" });
+
+        // Respondendo a interação com a imagem gerada
+        await interaction.reply({ files: [attachment] });
 
     }
 }

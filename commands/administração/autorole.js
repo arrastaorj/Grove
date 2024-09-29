@@ -174,10 +174,34 @@ module.exports = {
                     const currentRoles = autoroleData ? autoroleData.cargos : [];
 
                     if (currentRoles.length >= 5) {
-                        await i.reply({ content: '> \`-\` <a:alerta:1163274838111162499> O máximo de cargos definidos foi atingido! Para adicionar outro cargo, remova algum da lista.', ephemeral: true });
+                        await i.reply({
+                            content: '> \`-\` <a:alerta:1163274838111162499> O máximo de cargos definidos foi atingido! Para adicionar outro cargo, remova algum da lista.',
+                            ephemeral: true
+                        });
                     } else {
-                        const roleMenu = await createAddRoleMenu(interaction.guild);
-                        await i.reply({ content: 'Selecione os cargos para adicionar:', components: [roleMenu], ephemeral: true });
+                        try {
+                            const roleMenu = await createAddRoleMenu(interaction.guild);
+
+                            // Verifica se o menu tem opções disponíveis
+                            if (roleMenu.components[0].options.length === 0) {
+                                await i.reply({
+                                    content: '> \`-\` <a:alerta:1163274838111162499> Não há cargos disponíveis para adicionar.',
+                                    ephemeral: true
+                                });
+                            } else {
+                                await i.reply({
+                                    content: 'Selecione os cargos para adicionar:',
+                                    components: [roleMenu],
+                                    ephemeral: true
+                                });
+                            }
+                        } catch (error) {
+                            console.error('Erro ao criar o menu de cargos:', error);
+                            await i.reply({
+                                content: '> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar carregar os cargos. Tente novamente mais tarde.',
+                                ephemeral: true
+                            });
+                        }
                     }
                 }
 
@@ -332,8 +356,8 @@ async function createAddRoleMenu(guild) {
     const autoroleData = await autoroles.findOne({ guildId: guild.id });
     const currentRoles = autoroleData ? autoroleData.cargos : [];
 
-    // Calcula quantos cargos ainda podem ser adicionados
-    const maxRolesToAdd = Math.max(0, 5 - currentRoles.length);
+    // Calcula quantos cargos ainda podem ser adicionados (máximo 5 cargos)
+    const maxRolesToAdd = Math.max(1, 5 - currentRoles.length);
 
     // Filtra os cargos disponíveis
     const availableRoles = guild.roles.cache
@@ -351,15 +375,17 @@ async function createAddRoleMenu(guild) {
             value: role.id
         }));
 
+    // Limita o número de cargos disponíveis a 25 (limite do SelectMenu do Discord)
+    const limitedRoles = availableRoles.slice(0, 25);
+
     return new ActionRowBuilder().addComponents(
         new StringSelectMenuBuilder()
             .setCustomId('select_role_to_add')
             .setPlaceholder('Escolha os cargos para adicionar')
-            .setMaxValues(maxRolesToAdd)
-            .addOptions(availableRoles) // Adiciona as opções disponíveis
+            .setMaxValues(Math.min(maxRolesToAdd, limitedRoles.length)) // Limita o número de seleções
+            .addOptions(limitedRoles) // Adiciona até 25 opções
     );
 }
-
 
 // Função para criar o menu de remover cargos
 function createRemoveRoleMenu(autoroleData, guild) {

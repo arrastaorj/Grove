@@ -17,12 +17,26 @@ module.exports = {
             process.exit(1);
         }
 
-        // Definindo presença
-        client.user.setPresence({
-            activities: [{ name: '✏️ Personalize com /embed criar', type: ActivityType.Custom }],
-            status: 'online',
-        });
+        const statuses = [
+            { name: '✏️ Personalize com /embed criar', type: ActivityType.Custom },
+            { name: '🚫 proteger com /antilink', type: ActivityType.Custom },
+            { name: '🎭 gerencie com /cargos', type: ActivityType.Custom },
+            { name: '🛡️ moderação com /automod', type: ActivityType.Custom }
+        ]
+
+        let index = 0
+
+
+        setInterval(() => {
+            client.user.setPresence({
+                activities: [statuses[index]],
+                status: 'online',
+            })
+
+            index = (index + 1) % statuses.length
+
+        }, 60000)
 
         console.log("[Bot-Status]".bgBlue, `> Estou online como: ${client.user.username}`.blue);
-    },
-};
+    }
+}
