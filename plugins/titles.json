@@ -1,0 +1,2456 @@
+{
+    "titles": {
+        "1ec141e3-f99d-53fe-98e7-ccf09f12e97b": {
+            "name": "Aprendiz",
+            "itemId": 1,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "6e291d4d-a730-d2e0-c127-0ef0416c2977": {
+            "name": "Deus do ARAM",
+            "itemId": 10100006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "10ebe6e9-8e92-30b2-8c65-bbcaa7b3c33d": {
+            "name": "Implacável",
+            "itemId": 10110005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "bfe264b0-83d5-d0a2-a438-bc3ff40cd7ce": {
+            "name": "Anjo da misericórdia",
+            "itemId": 10110403,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "7f5173eb-6049-1660-8e5c-41c799ba3125": {
+            "name": "Veloz",
+            "itemId": 10120005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0d1edb7b-e6ac-2b83-bdfb-3c81ad7094e5": {
+            "name": "Avalanche",
+            "itemId": 10120303,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "85ee86b6-b4db-88fb-2d19-69a03ad04970": {
+            "name": "Nobreza Poro",
+            "itemId": 10120601,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "92b298c0-4316-9b14-e2f0-9832bb01bc94": {
+            "name": "Abissal",
+            "itemId": 10130005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "acd49fd9-d9fe-6881-0f20-4dfe0ccef9b4": {
+            "name": "Intocável",
+            "itemId": 10130604,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0fd97fbb-9c07-20bb-dc63-186bddb3034a": {
+            "name": "Inteligência fenomenal",
+            "itemId": 10300006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "7224afe4-4bec-ab3d-2560-a131e6633bed": {
+            "name": "Estiloso",
+            "itemId": 10310005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "e0cba5d4-f151-fff6-17fb-0a9cd0b9b785": {
+            "name": "Inovador",
+            "itemId": 10320005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "68af6c96-9c1f-9ae6-1ec1-3b51d1ae98dd": {
+            "name": "Gamer de nicho",
+            "itemId": 10320103,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "910449ad-1994-908d-8ea7-feec2c7ce6b1": {
+            "name": "Brilhante",
+            "itemId": 10320303,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "3e3dc4e6-beda-6ed1-1360-7e86729cb316": {
+            "name": "Sobrevivente",
+            "itemId": 10320503,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "fa0746f4-4c98-a85a-d3d2-377e10f84547": {
+            "name": "Ás",
+            "itemId": 10320704,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0a37a4e7-1126-d1d0-2ed1-6d3f9b172f06": {
+            "name": "Estratégico",
+            "itemId": 10330005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9c27b615-c1ca-4598-9efc-6b21e9514eed": {
+            "name": "Insolente",
+            "itemId": 10330404,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "5b6c5a35-85a7-9db0-ef5e-1569804efb77": {
+            "name": "Detonador de Bots",
+            "itemId": 12000006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9894dc50-d106-45c7-ba88-6d7afc7c8994": {
+            "name": "Teste de Turing",
+            "itemId": 12100007,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "4c367562-4c52-3c01-c063-11467263ef41": {
+            "name": "Letal",
+            "itemId": 20100006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "a9efec66-16d9-a951-cb68-42e4fb0f1a28": {
+            "name": "Tropa",
+            "itemId": 20100204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0aba96f9-1e18-e6bc-160a-63c89db5ad9b": {
+            "name": "Demônio Indestrutível",
+            "itemId": 20100304,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "c84e5849-db76-9db6-c3b9-a1b928a3eb39": {
+            "name": "Maioral",
+            "itemId": 20200006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "8871176d-2e56-a23a-39a5-0f5141ce0e07": {
+            "name": "Dominador",
+            "itemId": 20210005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9d8a7d6d-08d1-d5b1-cd50-2beaa7fec0f2": {
+            "name": "Indomável",
+            "itemId": 20210104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "3042eff8-5709-8d01-daa5-a9cf51309750": {
+            "name": "Inigualável",
+            "itemId": 20220005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "696ce835-dbf5-0a4a-7562-09d7f2e45bc3": {
+            "name": "''Desafinante'' 2022",
+            "itemId": 202200006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "d0f0b791-053d-c6dc-b545-d893627741a7": {
+            "name": "Patrulheiro",
+            "itemId": 20220204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "8da3e07f-2c76-0343-22ec-9db9acab5bf1": {
+            "name": "Sublime",
+            "itemId": 20230005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "707aef35-1a35-4d8f-808f-0fd067d9ad91": {
+            "name": "''Desafinante'' 2023",
+            "itemId": 202300006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "535f8159-bbbf-115f-0855-1594affaa70d": {
+            "name": "Prodígio",
+            "itemId": 20230204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "10fac6af-edb6-429c-912f-63ac4b43006e": {
+            "name": "Cria do Vazio",
+            "itemId": 202410007,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "49426bcc-3cd3-424a-bbe7-5a7d847cd066": {
+            "name": "Infernal",
+            "itemId": 20242007,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "8e8ccfd9-80f3-0302-48ce-da26c5d7afdf": {
+            "name": "Lenda",
+            "itemId": 20300006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "e67c9b79-e52c-b6dd-7e50-96dcce03cd07": {
+            "name": "Exibido",
+            "itemId": 20310005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "e94589d7-7816-e0f5-472f-5f01314f305f": {
+            "name": "Pés Velozes",
+            "itemId": 20310203,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0cb4b317-3f2c-3c56-2dd2-6a6935669a47": {
+            "name": "Captain Jack",
+            "itemId": 20310302,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "3103dbf9-3bba-4ba4-c89c-18cb94b71491": {
+            "name": "Gigante",
+            "itemId": 20320005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "bdd5c05b-aa7d-a5f3-9fda-789a0f9f73f4": {
+            "name": "Unidade absoluta",
+            "itemId": 20320104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "6f84bb03-1e7b-bb27-5832-2fc251261d30": {
+            "name": "Dissidente",
+            "itemId": 20330005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "b98889bc-a899-796e-bbbe-a7ad517e3b51": {
+            "name": "Lobo Solitário",
+            "itemId": 20330103,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "8207216a-313f-4dc7-6c0c-7cc964193d99": {
+            "name": "Sortudo",
+            "itemId": 20330204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "f96a02ef-e20a-91c4-899d-689615efc381": {
+            "name": "Predador",
+            "itemId": 20340005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "910aa4c2-ab02-dea9-cf38-545444e40a70": {
+            "name": "Caçador de Aronguejos",
+            "itemId": 20340502,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "55803f71-59d3-5497-2712-4b3bcae2ee55": {
+            "name": "Invasor",
+            "itemId": 20340804,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "fae4ad12-8c09-9726-b783-f1b5444c4ec5": {
+            "name": "Mandante",
+            "itemId": 20400006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0523b90b-cf27-99cf-fba6-3c1f87ba3ce1": {
+            "name": "Alicerce",
+            "itemId": 20410005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ca61e261-64b2-0252-d94d-1ac10ade6f1c": {
+            "name": "Onisciente",
+            "itemId": 20410204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "336f002a-ec1b-350d-b35a-3e948cfb875c": {
+            "name": "Visionário",
+            "itemId": 20420005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "bcc76308-9587-1310-fb02-3af7cc9ed5d5": {
+            "name": "Sentinela das sentinelas",
+            "itemId": 20420202,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "6f6d663c-19b1-934a-6706-dcff8bbc2681": {
+            "name": "Top dos Tops",
+            "itemId": 21000006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "aaa7b94c-1a36-deca-9c62-596e9cca1837": {
+            "name": "S+",
+            "itemId": 21000104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "459b85ab-a74f-af8a-7d2c-ba1e2965033e": {
+            "name": "Magistral",
+            "itemId": 21000406,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "15071ea8-1f06-1f61-1dcc-9b1624111cb0": {
+            "name": "AMA Invejável",
+            "itemId": 21000506,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "34bdbec2-62ea-0e2c-ab5a-70657a33597c": {
+            "name": "Obstinado",
+            "itemId": 30100006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "60411e6c-7d71-4b2a-1dea-a701387eed93": {
+            "name": "Caçador de Grandes Partidas",
+            "itemId": 30110005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "66621933-01e7-64d2-6d3b-be1c13dc3a0b": {
+            "name": "Épico",
+            "itemId": 30110102,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "3f932d88-74f6-4799-26a6-ede3f6942e96": {
+            "name": "Quem cedo madruga",
+            "itemId": 30110203,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "02e53d02-0714-6c4e-1af9-051e5f0024f0": {
+            "name": "Corajoso",
+            "itemId": 30120005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "467d7e9e-4074-7864-ad2a-91dcaa4efc9b": {
+            "name": "Especialista em viradas",
+            "itemId": 30120104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "f711a38c-aa8d-aec1-9ea9-a2fb6d599dcd": {
+            "name": "Desinibição",
+            "itemId": 30120203,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "909a9d72-4ddc-2b31-0487-9a062f75cf6f": {
+            "name": "Incendiário",
+            "itemId": 30120504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "5c7b4984-32a1-e55c-eb10-e138a685d964": {
+            "name": "Excepcional",
+            "itemId": 30130005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "48c93e98-2ceb-981a-8aef-9e956e480f51": {
+            "name": "Impecável",
+            "itemId": 30130106,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9cd0b2aa-f5df-bb3f-8d8b-2218d005e800": {
+            "name": "Pé de valsa",
+            "itemId": 30130503,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ec7962d6-ada1-a400-750a-22d3ab1db13e": {
+            "name": "Armador de Jogadas",
+            "itemId": 30200006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "bf51eb9c-9636-16ac-a58a-60b80c38137e": {
+            "name": "Estrategista",
+            "itemId": 30210005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ea6b48fc-c6db-f36c-defe-4faead29e826": {
+            "name": "Coletor de Campeões",
+            "itemId": 30210203,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "7614fc8f-3dfd-a987-6511-45e21cabe676": {
+            "name": "No Controle",
+            "itemId": 30210504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "e9a8cf55-7c3b-72b3-2da0-e747ae320a2a": {
+            "name": "Demolidor",
+            "itemId": 30220005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "fa6e156d-78c6-8bec-eeac-42ef16e9c79a": {
+            "name": "Lenhador",
+            "itemId": 30220204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "5b4472e8-d672-e89a-d2b2-82f398dd2afe": {
+            "name": "Sinergizado",
+            "itemId": 30230005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "71d878b1-88ca-66b1-2b12-384704f88645": {
+            "name": "Fanático",
+            "itemId": 30230103,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "35e857af-e091-62fe-aff7-821894d7a0c4": {
+            "name": "Anjo guardião",
+            "itemId": 30230302,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "f35cc43d-ecfc-327e-68f2-7c4da2457968": {
+            "name": "Especialista em Insec",
+            "itemId": 30230504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "91cd7b24-d564-f78c-5a15-0bc2cba86031": {
+            "name": "Espirituoso",
+            "itemId": 30240005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "90b2a228-3e35-49ff-b613-52b42cc43bad": {
+            "name": "Penetra",
+            "itemId": 30240402,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "63b88448-caa9-b8d0-0cb6-92b830734e03": {
+            "name": "Espírito de Equipe",
+            "itemId": 30300006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "cae4d25b-e28f-92b7-0ed0-c68c5c830dde": {
+            "name": "Mestre do Clash",
+            "itemId": 30320005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "84863ab8-4f76-1353-0635-05039d32941b": {
+            "name": "Clasher",
+            "itemId": 30320103,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "e7cc6ac0-c379-fe6a-86a1-73e5574d263a": {
+            "name": "Sincronia Perfeita",
+            "itemId": 30330005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "7a3e599d-acc4-9363-f5f4-7b52225d87d9": {
+            "name": "Harmonioso",
+            "itemId": 30340005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "70291f22-76ac-8f60-dd23-fccc4f09eb8c": {
+            "name": "Habitante de Runeterra",
+            "itemId": 30350005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "b5a1e20a-8981-78c7-6482-6e1abfd0bd5e": {
+            "name": "Erudição",
+            "itemId": 40100006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "87b17e70-562f-4181-80f2-df52c91f1298": {
+            "name": "Guia",
+            "itemId": 40110005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "469313e9-ad38-b813-0d06-5ff2fc360e03": {
+            "name": "Mestre de Campeões",
+            "itemId": 40110104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "86045acd-1dab-d218-e7a2-dd15d85d2e0f": {
+            "name": "Mergulho profundo",
+            "itemId": 40110504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "cd06edb4-392b-4358-8a58-8de3031cc303": {
+            "name": "Maestria em Tudo",
+            "itemId": 40110704,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "35f83a0f-e19e-1ae5-679d-0315d8530d5e": {
+            "name": "Inigualável",
+            "itemId": 40120005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "1a3eedd4-2ac5-9d97-e209-2357dce64d6c": {
+            "name": "Mestre da morte",
+            "itemId": 40120104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "183dec90-c113-4018-b685-eabde9372a90": {
+            "name": "Mestre da guerra",
+            "itemId": 40120204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "6be16fbf-d331-eacb-2c40-41beddfde0cc": {
+            "name": "Arquimago",
+            "itemId": 40120304,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "266341a2-5765-8601-a998-d5160078db2a": {
+            "name": "Na Mosca",
+            "itemId": 40120404,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "c2e9ae6a-359f-4923-3468-543bf357bf2c": {
+            "name": "Vigia",
+            "itemId": 40120504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "207f86c6-5157-2407-773c-07ce56486ff1": {
+            "name": "Titã",
+            "itemId": 40120604,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "afb2a766-d044-4ec9-b508-ffa3ad107d46": {
+            "name": "Ceifador",
+            "itemId": 40120704,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "a7c3c82c-49c5-42ec-97ad-c5fdee2d9399": {
+            "name": "Conquistador",
+            "itemId": 40120804,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "59895324-64b5-45ba-9812-4f00a6f37908": {
+            "name": "Feiticeiro Supremo",
+            "itemId": 40120904,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0bd88ba8-007f-4162-9661-dfba8be425ca": {
+            "name": "Atirador",
+            "itemId": 40121004,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "53fbb989-3d8c-40c0-9988-0aca2eff5313": {
+            "name": "Guardião Supremo",
+            "itemId": 40121104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "f7b35bb8-6b52-4a1a-891b-7637f21c5387": {
+            "name": "Colosso",
+            "itemId": 40121204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ba32d399-fe37-0ccd-17ee-fc3347566010": {
+            "name": "Simplesmente o Melhor",
+            "itemId": 40130005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9c2bf977-d78d-1749-f58d-d376ae1ba925": {
+            "name": "Selva Diff",
+            "itemId": 40130104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "a8850549-79a0-d38c-c294-d3434f99e093": {
+            "name": "Suporte Diff",
+            "itemId": 40130204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0d3972e4-bc53-46b5-46cc-e458a332bb78": {
+            "name": "Bot Diff",
+            "itemId": 40130304,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "99c2087a-6639-d410-0c54-d39dc268ddd0": {
+            "name": "Mid Diff",
+            "itemId": 40130404,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "1e0c5477-44d7-d8a6-27f5-49666983e29f": {
+            "name": "Top Diff",
+            "itemId": 40130504,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "8876bac1-22ec-7b6f-f980-600c69187d5a": {
+            "name": "Habilidade Diferenciada",
+            "itemId": 40130604,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "b21e7992-aab1-7264-878c-d3e2236bedbe": {
+            "name": "Veterano",
+            "itemId": 40200006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "40175c36-7ad0-bac4-3ff9-d6dc26c67357": {
+            "name": "Carrasco",
+            "itemId": 40210005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "42d6a78d-e13b-8e1f-e69e-7a571db19404": {
+            "name": "Especialista em Penta Kill",
+            "itemId": 40210604,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ba301cb3-71e2-36b9-0fea-b275827b18ab": {
+            "name": "Sanguinário",
+            "itemId": 40210903,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "fdf8202a-1861-aeb3-87a6-a8df2d7a7f0c": {
+            "name": "Patrulheiros",
+            "itemId": 40220005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "ea5e0fa2-627c-45a0-0888-e2a2b8a953f8": {
+            "name": "Ladrão",
+            "itemId": 40220104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "49575cf8-6ac8-9134-43a1-f4b230a860b2": {
+            "name": "Engenhoso",
+            "itemId": 40240005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "273fd8ef-b825-71bf-1ea4-281ba93b967d": {
+            "name": "Mítico",
+            "itemId": 40240603,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "9cf2746b-c78a-a66a-7925-03c63c015631": {
+            "name": "Caça às recompensas",
+            "itemId": 40240802,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "4cbccb18-1dc4-86cd-91ee-df5cc4caf3f5": {
+            "name": "Encantado",
+            "itemId": 40250005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "269c0182-6a71-5c24-33f6-0b41d146de50": {
+            "name": "Protetor",
+            "itemId": 40250104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "dc18a696-4075-1739-2172-e454852302c9": {
+            "name": "Fenômeno",
+            "itemId": 50200005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "af1ce27f-643f-0fc8-33a0-d623b17254ea": {
+            "name": "Titular",
+            "itemId": 50200104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "d703bfa3-e610-2c26-c32a-55a35114d2ed": {
+            "name": "Tesoureiro",
+            "itemId": 50400005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "916993a7-b117-6820-df82-40301ae3422e": {
+            "name": "Icônico",
+            "itemId": 50400204,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "81256cdb-5f7a-ef5b-141b-9caf49fa2345": {
+            "name": "Colecionador",
+            "itemId": 50500005,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "f6a3a4c5-f36e-421c-e310-9c073436bb1e": {
+            "name": "Especialista",
+            "itemId": 51000006,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "0c381982-6178-9b33-6699-a6c92bbb1124": {
+            "name": "Companheiro",
+            "itemId": 51000203,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "56f98d6b-4d60-7532-cd0b-2a4547afb779": {
+            "name": "Elegante",
+            "itemId": 51000603,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "96d71f77-ee67-63f4-f28a-919fd23150e9": {
+            "name": "Criação de tendências",
+            "itemId": 51000904,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "38a4e9d4-b2f2-2356-969f-e39316e18ede": {
+            "name": "Fashionista",
+            "itemId": 51001104,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "DEFAULT"
+        },
+        "efc28981-0879-454c-8a95-411d115c17a1": {
+            "name": "Lutador da Arena",
+            "itemId": 60100004,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "58d9c800-9e10-4616-b7ef-13783fe02e66": {
+            "name": "Triunfo da Arena",
+            "itemId": 60200004,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "14c1ee15-2321-4c9f-907d-cd367e935f0c": {
+            "name": "Divindade da Arena",
+            "itemId": 60200307,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "41838af6-c43b-47c6-9a6c-e8c2f907a5a7": {
+            "name": "Sobrevivente do Enxame",
+            "itemId": 60300007,
+            "titleAcquisitionName": "",
+            "titleRequirementDescription": "",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHALLENGE"
+        },
+        "c3615f3f-1f4e-4999-a2c0-261e1110c633": {
+            "name": "Dragão Disfarçado",
+            "itemId": 1400,
+            "titleAcquisitionName": "Festival Lunar 2024",
+            "titleRequirementDescription": "Marco 55 do Passe",
+            "isPermanentTitle": true,
+            "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1400_Title_Icon.svg",
+            "titleAcquisitionType": "EVENT"
+        },
+        "8f2a198c-891f-416e-a43c-e1fa56a32bb2": {
+            "name": "Barão do Brócolis",
+            "itemId": 1401,
+            "titleAcquisitionName": "Hall of Legends 2024",
+            "titleRequirementDescription": "Marco 99 do Passe",
+            "isPermanentTitle": true,
+            "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/HoL_Title_Icon.svg",
+            "titleAcquisitionType": "EVENT"
+        },
+        "83f6744e-4e0e-4482-bb97-e164b0b2cc58": {
+            "name": "Faker Chefão Final",
+            "itemId": 1402,
+            "titleAcquisitionName": "Hall of Legends 2024",
+            "titleRequirementDescription": "Coleção Lenda Imortalizada – Edição Autografada",
+            "isPermanentTitle": true,
+            "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/HoL_Title_Icon.svg",
+            "titleAcquisitionType": "EVENT"
+        },
+        "1cd78e6a-9fb1-4b26-9d0f-97629a31a3c0": {
+            "name": "A Espada Darkin",
+            "itemId": 2000266,
+            "titleAcquisitionName": "Aatrox",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "668adf77-e084-45e5-aeb1-101b99e83802": {
+            "name": "A Raposa de Nove Caudas",
+            "itemId": 2000103,
+            "titleAcquisitionName": "Ahri",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "ff651b6a-6b0a-43a8-bd07-b58960bbff70": {
+            "name": "A Assassina Renegada",
+            "itemId": 2000084,
+            "titleAcquisitionName": "Akali",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f793d76d-9807-4012-b63d-11f79a6eedc6": {
+            "name": "O Sentinela Rebelde",
+            "itemId": 2000166,
+            "titleAcquisitionName": "Akshan",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "67fc0399-9d1d-4a0a-9d2d-253c5963b370": {
+            "name": "O Minotauro",
+            "itemId": 2000012,
+            "titleAcquisitionName": "Alistar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "343bd768-4d22-4599-9604-8a3412179a93": {
+            "name": "A Múmia Triste",
+            "itemId": 2000032,
+            "titleAcquisitionName": "Amumu",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "97118bc5-4ed0-44a5-8fde-983fb30172d5": {
+            "name": "A Criofênix",
+            "itemId": 2000034,
+            "titleAcquisitionName": "Anivia",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "db72f415-204a-47b3-954c-0970c49e851c": {
+            "name": "A Criança Sombria",
+            "itemId": 2000001,
+            "titleAcquisitionName": "Annie",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5c454fa4-e969-43c5-a25d-1c811af636a7": {
+            "name": "A Arma dos Devotos",
+            "itemId": 2000523,
+            "titleAcquisitionName": "Aphelios",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f3a62c57-3336-48a3-aed2-22d0c5f1a2f9": {
+            "name": "A Arqueira do Gelo",
+            "itemId": 2000022,
+            "titleAcquisitionName": "Ashe",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b99d9d4e-fe60-42ed-897e-ce161ff63b47": {
+            "name": "O Forjador de Estrelas",
+            "itemId": 2000136,
+            "titleAcquisitionName": "Aurelion Sol",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "0d3e1e8e-8bcc-455d-8b00-eedae7dc8173": {
+            "name": "A Bruxa Entre Mundos",
+            "itemId": 2000893,
+            "titleAcquisitionName": "Aurora",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "e89557db-318c-46ee-8871-5871b8106d78": {
+            "name": "O Imperador das Areias",
+            "itemId": 2000268,
+            "titleAcquisitionName": "Azir",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "e774973a-f5fb-48b2-84c9-69a1aabb9fb0": {
+            "name": "O Protetor Andarilho",
+            "itemId": 2000432,
+            "titleAcquisitionName": "Bardo",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b345a6e2-e5d2-41d8-891e-317281e3b6e9": {
+            "name": "A Imperatriz do Vazio",
+            "itemId": 2000200,
+            "titleAcquisitionName": "Bel'Veth",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5f84a83b-e6b3-4413-b77c-8730ec44fd37": {
+            "name": "O Grande Golem a Vapor",
+            "itemId": 2000053,
+            "titleAcquisitionName": "Blitzcrank",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5ec232ad-fb33-449d-8c7e-9ad2cad30754": {
+            "name": "A Vingança Flamejante",
+            "itemId": 2000063,
+            "titleAcquisitionName": "Brand",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "0e0ad0eb-3c4d-48dc-8e1d-8c645233bebc": {
+            "name": "O Coração de Freljord",
+            "itemId": 2000201,
+            "titleAcquisitionName": "Braum",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "518e8b4c-1cc3-45d9-940a-c953633b0a74": {
+            "name": "A Fome Contida",
+            "itemId": 2000233,
+            "titleAcquisitionName": "Briar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "273ccec5-b528-4875-88dd-d81899799456": {
+            "name": "A Xerife de Piltover",
+            "itemId": 2000051,
+            "titleAcquisitionName": "Caitlyn",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "dbaec031-5697-4263-9f8d-7eb3b28e951b": {
+            "name": "A Sombra De Aço",
+            "itemId": 2000164,
+            "titleAcquisitionName": "Camille",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "90346d6c-d2c3-43cc-bece-48b72cb87db8": {
+            "name": "O Abraço da Serpente",
+            "itemId": 2000069,
+            "titleAcquisitionName": "Cassiopeia",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "56d0f12f-43e1-497d-82b1-00a3dc5e4ddc": {
+            "name": "O Terror do Vazio",
+            "itemId": 2000031,
+            "titleAcquisitionName": "Cho'Gath",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "cfe02a8f-0cd4-429c-acc8-960ff53a399d": {
+            "name": "O Bombardeiro Ousado",
+            "itemId": 2000042,
+            "titleAcquisitionName": "Corki",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "fd5c0d63-7f47-499b-a4c9-3567f8e6bd11": {
+            "name": "A Mão de Noxus",
+            "itemId": 2000122,
+            "titleAcquisitionName": "Darius",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "838155b9-f0d3-4fb7-85dc-c3bf34a56b9e": {
+            "name": "O Escárnio da Lua",
+            "itemId": 2000131,
+            "titleAcquisitionName": "Diana",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "1aa10dc6-15ea-4334-bd33-cd906a7de33e": {
+            "name": "O Louco de Zaun",
+            "itemId": 2000036,
+            "titleAcquisitionName": "Dr. Mundo",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "340fd0fc-9166-4d71-af5a-fd4b59646300": {
+            "name": "O Carrasco de Noxus",
+            "itemId": 2000119,
+            "titleAcquisitionName": "Draven",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "970cbd05-4111-4db0-a571-69e9b62b2ea1": {
+            "name": "O Rapaz que Estilhaçou o Tempo",
+            "itemId": 2000245,
+            "titleAcquisitionName": "Ekko",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "89647680-5ebe-417a-88ff-5bdc6cbe303a": {
+            "name": "A Aranha Rainha",
+            "itemId": 2000060,
+            "titleAcquisitionName": "Elise",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "6e9ef960-8d5f-4cb1-a575-2e802e77eedc": {
+            "name": "O Abraço da Agonia",
+            "itemId": 2000028,
+            "titleAcquisitionName": "Evelynn",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "021dd7b2-96cb-4f0f-83a2-464d3aa8b770": {
+            "name": "O Explorador Pródigo",
+            "itemId": 2000081,
+            "titleAcquisitionName": "Ezreal",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "652574ef-0729-4a00-884f-645adef90af0": {
+            "name": "O Terror Ancestral",
+            "itemId": 2000009,
+            "titleAcquisitionName": "Fiddlesticks",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "541906ca-9954-4d4e-8b8b-9fc9ceda3619": {
+            "name": "A Grande Duelista",
+            "itemId": 2000114,
+            "titleAcquisitionName": "Fiora",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "652fa812-13b6-4c7b-a71b-3623bea01b61": {
+            "name": "O Trapaceiro das Marés",
+            "itemId": 2000105,
+            "titleAcquisitionName": "Fizz",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "12e35172-7ba7-4072-b204-1e3c69e49fca": {
+            "name": "O Colosso",
+            "itemId": 2000003,
+            "titleAcquisitionName": "Galio",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "fd829c9c-5cc3-422a-a516-89161639dc1d": {
+            "name": "O Terror dos Doze Mares",
+            "itemId": 2000041,
+            "titleAcquisitionName": "Gangplank",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "896f3f41-79c7-4db4-adc1-5a68b82ef194": {
+            "name": "O Poder de Demacia",
+            "itemId": 2000086,
+            "titleAcquisitionName": "Garen",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "7ccfd3fd-0abd-42ef-b19e-d027e78163ef": {
+            "name": "O Yordle Pré-Histórico",
+            "itemId": 2000150,
+            "titleAcquisitionName": "Gnar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f492d495-bea8-40dd-a223-9655cb6dfde0": {
+            "name": "O Badernista",
+            "itemId": 2000079,
+            "titleAcquisitionName": "Gragas",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9a5a4ca6-b723-492b-8b15-a8cc2cf51a45": {
+            "name": "O Foragido",
+            "itemId": 2000104,
+            "titleAcquisitionName": "Graves",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "3382a6ed-af26-4160-bffb-941cdc7be97a": {
+            "name": "A Costureira Encantada",
+            "itemId": 2000887,
+            "titleAcquisitionName": "Gwen",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "25d59206-2ff6-4242-b9aa-83793ef0700c": {
+            "name": "A Sombra da Guerra",
+            "itemId": 2000120,
+            "titleAcquisitionName": "Hecarim",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9e1555ea-dc68-4c90-97d1-fed650ff790d": {
+            "name": "O Inventor Idolatrado",
+            "itemId": 2000074,
+            "titleAcquisitionName": "Heimerdinger",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "31a47ee3-821b-4524-af96-f0a59ec145bc": {
+            "name": "O Visionário",
+            "itemId": 2000910,
+            "titleAcquisitionName": "Hwei",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5f82ac66-38d0-4ef8-a51c-22ce5d94c8c2": {
+            "name": "A Sacerdotisa Cráquem",
+            "itemId": 2000420,
+            "titleAcquisitionName": "Illaoi",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b3f4a089-f51f-4ee6-b39d-bf7750bb0994": {
+            "name": "A Dançarina das Lâminas",
+            "itemId": 2000039,
+            "titleAcquisitionName": "Irelia",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c5502fa7-ea25-49d7-9a2a-fe913c805c5f": {
+            "name": "O Pai do Verde",
+            "itemId": 2000427,
+            "titleAcquisitionName": "Ivern",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d1daf96f-f135-4f7c-af1a-f62e878619fc": {
+            "name": "A Fúria da Tormenta",
+            "itemId": 2000040,
+            "titleAcquisitionName": "Janna",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "cda6165c-b934-4ebe-8201-93255c22bde8": {
+            "name": "O Exemplo de Demacia",
+            "itemId": 2000059,
+            "titleAcquisitionName": "Jarvan IV",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "610bd950-6ab5-4cb5-959a-c3df4400dded": {
+            "name": "O Grão-Mestre das Armas",
+            "itemId": 2000024,
+            "titleAcquisitionName": "Jax",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "be9c193b-8b9e-4602-bae3-1d5933790b85": {
+            "name": "O Defensor do Amanhã",
+            "itemId": 2000126,
+            "titleAcquisitionName": "Jayce",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "1c1384a4-f3b8-4148-a01b-c3bf63a0c245": {
+            "name": "O Virtuoso",
+            "itemId": 2000202,
+            "titleAcquisitionName": "Jhin",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d71cef79-27ee-4d8b-843c-0c463c69c347": {
+            "name": "O Gatilho Desenfreado",
+            "itemId": 2000222,
+            "titleAcquisitionName": "Jinx",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "84158e8d-5b8f-4639-95a1-301d073e8159": {
+            "name": "O Orgulho de Nazumah",
+            "itemId": 2000897,
+            "titleAcquisitionName": "K'Sante",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "de453d11-72ed-4441-98a2-7c0d1bc39d4d": {
+            "name": "A Filha do Vazio",
+            "itemId": 2000145,
+            "titleAcquisitionName": "Kai'Sa",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "509ce47b-e2db-496e-a390-e8bef187881f": {
+            "name": "A Lança da Vingança",
+            "itemId": 2000429,
+            "titleAcquisitionName": "Kalista",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d071fcd3-4684-4cc8-bc4e-cc660a803088": {
+            "name": "A Iluminada",
+            "itemId": 2000043,
+            "titleAcquisitionName": "Karma",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5e48b0cf-a27e-4690-94f6-8424cbe816cf": {
+            "name": "A Voz Mortal",
+            "itemId": 2000030,
+            "titleAcquisitionName": "Karthus",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "58ec3ee5-b971-4a6e-b0dc-ebc99c793932": {
+            "name": "O Andarilho do Vazio",
+            "itemId": 2000038,
+            "titleAcquisitionName": "Kassadin",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "a779c929-ea2d-41ef-a27a-e1533fafcd09": {
+            "name": "A Lâmina Sinistra",
+            "itemId": 2000055,
+            "titleAcquisitionName": "Katarina",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "971e3ede-048a-4264-87af-af5499abe96e": {
+            "name": "A Justa",
+            "itemId": 2000010,
+            "titleAcquisitionName": "Kayle",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "a833d886-0419-4b36-845a-490b7e74d939": {
+            "name": "O Ceifador das Sombras",
+            "itemId": 2000141,
+            "titleAcquisitionName": "Kayn",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "616cb0e2-e83c-418d-8186-29778f186b30": {
+            "name": "O Coração da Tempestade",
+            "itemId": 2000085,
+            "titleAcquisitionName": "Kennen",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "4ddaf17c-3686-48df-ba97-0cc18b77d97f": {
+            "name": "O Ceifador do Vazio",
+            "itemId": 2000121,
+            "titleAcquisitionName": "Kha'Zix",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "72125e8c-af72-4604-b4b2-f2f15e2fa582": {
+            "name": "Os Caçadores Eternos",
+            "itemId": 2000203,
+            "titleAcquisitionName": "Kindred",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f7ae9771-a715-4003-abc7-ad476ca5aec0": {
+            "name": "O Cavaleiro Intratável",
+            "itemId": 2000240,
+            "titleAcquisitionName": "Kled",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c59e9be7-bd74-4cb8-b511-073b2b0c78bc": {
+            "name": "A Boca do Abismo",
+            "itemId": 2000096,
+            "titleAcquisitionName": "Kog'Maw",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "6578cc1c-48a0-483f-a7ec-b3d6edb543b2": {
+            "name": "A Farsante",
+            "itemId": 2000007,
+            "titleAcquisitionName": "LeBlanc",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "bffe38ca-d796-4d5d-9f37-0e80ad3c0a5f": {
+            "name": "O Monge Cego",
+            "itemId": 2000064,
+            "titleAcquisitionName": "Lee Sin",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "ad32d121-987c-4776-a6df-b34330ef6e28": {
+            "name": "A Alvorada Radiante",
+            "itemId": 2000089,
+            "titleAcquisitionName": "Leona",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "973a951a-3a10-482f-9269-95993cdb8238": {
+            "name": "O Florir Receoso",
+            "itemId": 2000876,
+            "titleAcquisitionName": "Lillia",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "074e7c2d-432a-4c65-a8d7-7af37f78d820": {
+            "name": "A Bruxa Gélida",
+            "itemId": 2000127,
+            "titleAcquisitionName": "Lissandra",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "25022929-4cdc-48d2-86ba-2743640db319": {
+            "name": "O Purificador",
+            "itemId": 2000236,
+            "titleAcquisitionName": "Lucian",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "eb2f132e-5c53-42bc-8796-0233a022a101": {
+            "name": "A Fada Feiticeira",
+            "itemId": 2000117,
+            "titleAcquisitionName": "Lulu",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "6833fd6a-1998-42a0-9ef2-cc73493b7475": {
+            "name": "A Dama da Luz",
+            "itemId": 2000099,
+            "titleAcquisitionName": "Lux",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "3efec7b7-bf0d-46be-bc4a-607f55e47a80": {
+            "name": "O Fragmento do Monolito",
+            "itemId": 2000054,
+            "titleAcquisitionName": "Malphite",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "2c5f18c1-c29f-4375-a71a-7859031b5486": {
+            "name": "O Profeta do Vazio",
+            "itemId": 2000090,
+            "titleAcquisitionName": "Malzahar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "88f3dfa7-cc7f-490f-a92f-cf449d77276e": {
+            "name": "O Ente Sinistro",
+            "itemId": 2000057,
+            "titleAcquisitionName": "Maokai",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "094c0907-040e-4b7f-90a4-a05a47302a16": {
+            "name": "O Espadachim Wuju",
+            "itemId": 2000011,
+            "titleAcquisitionName": "Master Yi",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "dc674510-24b0-427d-ad43-a60aae542d05": {
+            "name": "A Chama Gentil",
+            "itemId": 2000902,
+            "titleAcquisitionName": "Milio",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b813bdcc-5f9b-4647-a088-d855deeaa0c8": {
+            "name": "A Caçadora de Recompensas",
+            "itemId": 2000021,
+            "titleAcquisitionName": "Miss Fortune",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5238e613-ff83-47bf-bb8b-2dcccbefd69f": {
+            "name": "O Macaco Rei",
+            "itemId": 2000062,
+            "titleAcquisitionName": "Wukong",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f29896ee-c3c7-479b-8663-584783f2e6bb": {
+            "name": "O Revenã de Ferro",
+            "itemId": 2000082,
+            "titleAcquisitionName": "Mordekaiser",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f35216f2-3203-4b4d-8ae9-fc62ea9a2098": {
+            "name": "A Caída",
+            "itemId": 2000025,
+            "titleAcquisitionName": "Morgana",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "79233ab5-fbc9-45b9-8907-2f361da8173b": {
+            "name": "A Fera das Cem Mordidas",
+            "itemId": 2000950,
+            "titleAcquisitionName": "Naafiri",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "34c97e3e-1b16-4b51-b65b-02203e0383e1": {
+            "name": "A Conjuradora das Marés",
+            "itemId": 2000267,
+            "titleAcquisitionName": "Nami",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9b1229a5-ff10-4939-8b99-5c8f6b321306": {
+            "name": "O Curador das Areias",
+            "itemId": 2000075,
+            "titleAcquisitionName": "Nasus",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b4439cf6-df50-43c4-a04f-468a2deb2421": {
+            "name": "O Titã das Profundezas",
+            "itemId": 2000111,
+            "titleAcquisitionName": "Nautilus",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "aee2f0a2-5f9d-4f2a-b201-853beb087189": {
+            "name": "A Camaleoa Curiosa",
+            "itemId": 2000518,
+            "titleAcquisitionName": "Neeko",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "71f42c72-578a-4a8d-8e56-a680ea0fb8de": {
+            "name": "A Caçadora Bestial",
+            "itemId": 2000076,
+            "titleAcquisitionName": "Nidalee",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d53e0662-7dfd-45a5-a418-00845768bb7d": {
+            "name": "A Alegria Irrestrita",
+            "itemId": 2000895,
+            "titleAcquisitionName": "Nilah",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d603a7ec-d8bf-4a79-ad48-cea58abc1c92": {
+            "name": "O Eterno Pesadelo",
+            "itemId": 2000056,
+            "titleAcquisitionName": "Nocturne",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "11011784-9baa-41a9-9e96-b2598b0a1be9": {
+            "name": "O Garoto e seu Yeti",
+            "itemId": 2000020,
+            "titleAcquisitionName": "Nunu e Willump",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "ae453cf8-48d3-4e01-a2da-17f48c6f2965": {
+            "name": "O Berserker",
+            "itemId": 2000002,
+            "titleAcquisitionName": "Olaf",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "fceee5f1-ca50-4df4-8c42-03b764d05ce1": {
+            "name": "A Donzela Mecânica",
+            "itemId": 2000061,
+            "titleAcquisitionName": "Orianna",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "33803781-1352-4b3a-981c-5b48267b28ff": {
+            "name": "O Fogo sob a Montanha",
+            "itemId": 2000516,
+            "titleAcquisitionName": "Ornn",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9dfade59-ba9c-4138-aed2-56ffc03b2b69": {
+            "name": "A Lança Indestrutível",
+            "itemId": 2000080,
+            "titleAcquisitionName": "Pantheon",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "8355e35f-d6cc-4ed5-8ba1-484305d2e1a5": {
+            "name": "A Guardiã do Martelo",
+            "itemId": 2000078,
+            "titleAcquisitionName": "Poppy",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "0597f30c-f4fd-4a7b-b562-78e31b76df15": {
+            "name": "O Estripador das Águas Sangrentas",
+            "itemId": 2000555,
+            "titleAcquisitionName": "Pyke",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "398f590c-884f-4285-b30b-cbbd4a153676": {
+            "name": "A Imperatriz dos Elementos",
+            "itemId": 2000246,
+            "titleAcquisitionName": "Qiyana",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "8c446e1c-7d17-4848-a8ec-537e47ff3ea9": {
+            "name": "As Asas de Demacia",
+            "itemId": 2000133,
+            "titleAcquisitionName": "Quinn",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d03e6623-76ba-4a7c-9baa-5deb766fb00c": {
+            "name": "O Charmoso",
+            "itemId": 2000497,
+            "titleAcquisitionName": "Rakan",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "3fd74f32-c74d-4525-8ca9-813c239cbf0d": {
+            "name": "O Tatu Blindado",
+            "itemId": 2000033,
+            "titleAcquisitionName": "Rammus",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c3688b53-a912-4780-806d-e637594e43a6": {
+            "name": "A Escavadora do Vazio",
+            "itemId": 2000421,
+            "titleAcquisitionName": "Rek'Sai",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "a7472c02-9802-484d-88b8-c9cecaba7f29": {
+            "name": "A Dama de Ferro",
+            "itemId": 2000526,
+            "titleAcquisitionName": "Rell",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "e4e50f87-fd0b-4723-a2ed-d4f6a52e5392": {
+            "name": "A Baronesa da Química",
+            "itemId": 2000888,
+            "titleAcquisitionName": "Renata Glasc",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d010bbe4-fb17-45d4-9d81-4556e6d2def6": {
+            "name": "O Carniceiro das Areias",
+            "itemId": 2000058,
+            "titleAcquisitionName": "Renekton",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "375c52cd-32b1-4c8c-9192-f891822ea3ae": {
+            "name": "O Acossador da Alcateia",
+            "itemId": 2000107,
+            "titleAcquisitionName": "Rengar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "71f79ccc-d111-4f4c-8cc6-bc435f8d56a1": {
+            "name": "A Exilada",
+            "itemId": 2000092,
+            "titleAcquisitionName": "Riven",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b328f729-9ea5-4e15-8102-dfed868e1c6b": {
+            "name": "A Ameaça Mecânica",
+            "itemId": 2000068,
+            "titleAcquisitionName": "Rumble",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c620cb48-b18b-4974-aebc-6266cb6f7645": {
+            "name": "O Mago Rúnico",
+            "itemId": 2000013,
+            "titleAcquisitionName": "Ryze",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "71d91fbb-ac67-4702-a2d0-34b45a100ceb": {
+            "name": "A Rosa do Deserto",
+            "itemId": 2000360,
+            "titleAcquisitionName": "Samira",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "8a9da3bc-2b83-4615-9459-6532849d243c": {
+            "name": "A Fúria do Norte",
+            "itemId": 2000113,
+            "titleAcquisitionName": "Sejuani",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "0a384bec-e44e-40e9-838f-e43bf473a019": {
+            "name": "A Redentora",
+            "itemId": 2000235,
+            "titleAcquisitionName": "Senna",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d9b7a28d-51e2-49cc-ba5c-776e05cc38dd": {
+            "name": "A Cantora Sonhadora",
+            "itemId": 2000147,
+            "titleAcquisitionName": "Seraphine",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5a7344f8-79ae-4ea1-ba5d-f1352d1734c2": {
+            "name": "O Chefe",
+            "itemId": 2000875,
+            "titleAcquisitionName": "Sett",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "8010f990-d8a2-4f47-bb6e-c4c740c64e77": {
+            "name": "O Bufão Demoníaco",
+            "itemId": 2000035,
+            "titleAcquisitionName": "Shaco",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d197ae5d-06f4-4762-a051-f2477df48015": {
+            "name": "O Olho do Crepúsculo",
+            "itemId": 2000098,
+            "titleAcquisitionName": "Shen",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9ad44b3a-5c72-4684-b660-bb2473e95eb8": {
+            "name": "A Meio-Dragão",
+            "itemId": 2000102,
+            "titleAcquisitionName": "Shyvana",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d45473b3-14c3-45d2-b78f-d33197f4f8c7": {
+            "name": "O Químico Louco",
+            "itemId": 2000027,
+            "titleAcquisitionName": "Singed",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b382c422-630f-4919-a0f2-d201dfe581d9": {
+            "name": "O Colosso Morto-Vivo",
+            "itemId": 2000014,
+            "titleAcquisitionName": "Sion",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9a803a0c-f8ef-49fb-8c23-8782c60bc44a": {
+            "name": "A Mestra da Batalha",
+            "itemId": 2000015,
+            "titleAcquisitionName": "Sivir",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "9e8be6b4-aef0-465c-b8fe-9d2bb79b73a1": {
+            "name": "O Soberano Primordial",
+            "itemId": 2000072,
+            "titleAcquisitionName": "Skarner",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "42d0dd2a-3fe5-469a-af4f-133d106d8fe7": {
+            "name": "O Filhote Flamejante",
+            "itemId": 2000901,
+            "titleAcquisitionName": "Smolder",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "854b11d7-7f1d-47be-afa1-72f5c9dc02d9": {
+            "name": "A Mestra das Cordas",
+            "itemId": 2000037,
+            "titleAcquisitionName": "Sona",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "6234aec1-1b5e-43de-98e4-f5f899c2837c": {
+            "name": "A Filha das Estrelas",
+            "itemId": 2000016,
+            "titleAcquisitionName": "Soraka",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c81fa86d-6c75-4f10-8f90-42be0153a02f": {
+            "name": "O Grande General Noxiano",
+            "itemId": 2000050,
+            "titleAcquisitionName": "Swain",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d92e0706-668d-452f-9c2b-b5632a67e66b": {
+            "name": "O Abjugado",
+            "itemId": 2000517,
+            "titleAcquisitionName": "Sylas",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "11a31f55-d9ad-4e1f-afa0-0a59a2cb0ef3": {
+            "name": "A Soberana Sombria",
+            "itemId": 2000134,
+            "titleAcquisitionName": "Syndra",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "428accf6-7444-4b93-8a95-f1a0cd82f039": {
+            "name": "O Rei do Rio",
+            "itemId": 2000223,
+            "titleAcquisitionName": "Tahm Kench",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "60434a83-b93e-4d2d-92c2-93ffe9d56fd2": {
+            "name": "A Tecelã de Pedras",
+            "itemId": 2000163,
+            "titleAcquisitionName": "Taliyah",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "80b9fcc8-31b5-42e1-96dc-61ad2f786840": {
+            "name": "A Sombra da Lâmina",
+            "itemId": 2000091,
+            "titleAcquisitionName": "Talon",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "a098821a-12af-463e-8d64-cd5c0204067d": {
+            "name": "O Escudo de Valoran",
+            "itemId": 2000044,
+            "titleAcquisitionName": "Taric",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "b41874cb-014d-4273-b237-4157b50098df": {
+            "name": "O Explorador Veloz",
+            "itemId": 2000017,
+            "titleAcquisitionName": "Teemo",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "2ff10bde-4e3c-41bf-8c73-fb9e05a56807": {
+            "name": "O Guardião das Correntes",
+            "itemId": 2000412,
+            "titleAcquisitionName": "Thresh",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "3f506b06-f234-4036-8dfa-a7a68feeb88e": {
+            "name": "A Artilheira Yordle",
+            "itemId": 2000018,
+            "titleAcquisitionName": "Tristana",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f045c969-8932-4f42-be46-6198140594d2": {
+            "name": "O Rei dos Trolls",
+            "itemId": 2000048,
+            "titleAcquisitionName": "Trundle",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "84db626a-6c9a-4893-8c96-60d5f5cdb4e4": {
+            "name": "O Rei Bárbaro",
+            "itemId": 2000023,
+            "titleAcquisitionName": "Tryndamere",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "01df9bc5-4537-40fd-a4c6-a2ec8b90da8c": {
+            "name": "O Mestre das Cartas",
+            "itemId": 2000004,
+            "titleAcquisitionName": "Twisted Fate",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "591d0246-2714-4003-9cb8-c092c72b8aec": {
+            "name": "O Semeador da Peste",
+            "itemId": 2000029,
+            "titleAcquisitionName": "Twitch",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "f6cc05f7-2202-4263-80a5-eb1ee3c793ea": {
+            "name": "O Andarilho Espiritual",
+            "itemId": 2000077,
+            "titleAcquisitionName": "Udyr",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c3aa4588-f980-454e-9a59-daa8f26bd6e7": {
+            "name": "O Encouraçado",
+            "itemId": 2000006,
+            "titleAcquisitionName": "Urgot",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "7cd3d47d-7f31-434f-9f2f-077221558e06": {
+            "name": "A Flecha da Vingança",
+            "itemId": 2000110,
+            "titleAcquisitionName": "Varus",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "e17ed68e-d73f-43da-8dba-870759062516": {
+            "name": "A Caçadora Noturna",
+            "itemId": 2000067,
+            "titleAcquisitionName": "Vayne",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "d6c087cb-745d-43c7-b109-9b634a74dfc4": {
+            "name": "O Pequeno Mestre do Mal",
+            "itemId": 2000045,
+            "titleAcquisitionName": "Veigar",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "35ed200a-c4d6-444f-a722-9b9a92bd059c": {
+            "name": "O Olho do Vazio",
+            "itemId": 2000161,
+            "titleAcquisitionName": "Vel'Koz",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "89245a18-c0f9-4306-a2c4-44f6c9133fe4": {
+            "name": "A Melancolista",
+            "itemId": 2000711,
+            "titleAcquisitionName": "Vex",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c6e58be2-80cb-46cb-a35c-e24676c97419": {
+            "name": "A Defensora de Piltover",
+            "itemId": 2000254,
+            "titleAcquisitionName": "Vi",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "0d6e1efb-37de-4d1d-ad7d-d7a1ddb01143": {
+            "name": "O Rei Destruído",
+            "itemId": 2000234,
+            "titleAcquisitionName": "Viego",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "c0380b49-6d0f-4717-85f4-dc43715f02de": {
+            "name": "O Arauto Das Máquinas",
+            "itemId": 2000112,
+            "titleAcquisitionName": "Viktor",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "1fb6820d-00f0-46cc-8c4a-4732d0147dd2": {
+            "name": "O Sanguinário Escarlate",
+            "itemId": 2000008,
+            "titleAcquisitionName": "Vladimir",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "a7e31747-951e-4a65-a094-7c8998a11de2": {
+            "name": "A Tempestade Implacável",
+            "itemId": 2000106,
+            "titleAcquisitionName": "Volibear",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "22617a9d-a884-4d00-bb49-25d9d3bb971a": {
+            "name": "A Ira Desimpedida de Zaun",
+            "itemId": 2000019,
+            "titleAcquisitionName": "Warwick",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "7d6de186-4500-437c-9190-9af4c1e1fa62": {
+            "name": "A Rebelde",
+            "itemId": 2000498,
+            "titleAcquisitionName": "Xayah",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "3d754ad8-5155-4b2e-bc67-8ce8884a9e10": {
+            "name": "O Mago Ascendente",
+            "itemId": 2000101,
+            "titleAcquisitionName": "Xerath",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "cf2a9b47-56bb-4a7f-bebd-adf9766c64ce": {
+            "name": "O Senescal de Demacia",
+            "itemId": 2000005,
+            "titleAcquisitionName": "Xin Zhao",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "39f258bc-223e-4a19-8569-0910253de68c": {
+            "name": "O Imperdoável",
+            "itemId": 2000157,
+            "titleAcquisitionName": "Yasuo",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "cab151f0-ad8e-4821-bbaf-0c5682291f66": {
+            "name": "O Inesquecido",
+            "itemId": 2000777,
+            "titleAcquisitionName": "Yone",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "5b07f437-37b4-49b2-8fe1-104fea6b3033": {
+            "name": "O Pastor de Almas",
+            "itemId": 2000083,
+            "titleAcquisitionName": "Yorick",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "bbcc363a-9c71-4fd1-a848-db94ee5f6030": {
+            "name": "A Gata Mágica",
+            "itemId": 2000350,
+            "titleAcquisitionName": "Yuumi",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "6f3173c8-e92c-44ee-9eef-5cb33915eaf6": {
+            "name": "A Arma Secreta",
+            "itemId": 2000154,
+            "titleAcquisitionName": "Zac",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "59454194-64b9-412e-9928-54acb55a7ec3": {
+            "name": "O Mestre das Sombras",
+            "itemId": 2000238,
+            "titleAcquisitionName": "Zed",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "e396547e-5861-4aa0-af2f-62f51b0bc3c4": {
+            "name": "A Faísca de Zaun",
+            "itemId": 2000221,
+            "titleAcquisitionName": "Zeri",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "7f6ec0d3-f59c-4c34-907e-12174a601b51": {
+            "name": "O Especialista em Hexplosivos",
+            "itemId": 2000115,
+            "titleAcquisitionName": "Ziggs",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "8c0e9bf5-13e4-4071-85cc-8f0dd7ce7800": {
+            "name": "O Guardião do Tempo",
+            "itemId": 2000026,
+            "titleAcquisitionName": "Zilean",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "bbec6916-83d8-458e-b5e2-23d0f89326db": {
+            "name": "O Aspecto do Crepúsculo",
+            "itemId": 2000142,
+            "titleAcquisitionName": "Zoe",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "ed61b94c-c86f-4c1e-a870-f4fed0afb906": {
+            "name": "A Ascensão dos Espinhos",
+            "itemId": 2000143,
+            "titleAcquisitionName": "Zyra",
+            "titleRequirementDescription": "Nível de Maestria 10",
+            "isPermanentTitle": true,
+            "titleAcquisitionType": "CHAMPION_MASTERY"
+        },
+        "ceebbf0b-11af-4b56-9bf0-118dc44f6423": {
+            "name": "Conquistador do Enxame",
+            "itemId": 60300705,
+            "titleAcquisitionName": "Enxame 2024",
+            "titleRequirementDescription": "[EXTREMO] Derrote Aatrox com todos os Campeões",
+            "isPermanentTitle": true,
+            "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/AnimaSquad2024_AchievementTitle.png",
+            "titleAcquisitionType": "EVENT"
+        }
+    }
+}
