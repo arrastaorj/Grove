@@ -18,11 +18,15 @@ const collectors = new Map()
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('bem-vindo')
-        .setDescription('Definir canal de Bem-Vindo(a).'),
+        .setName('bem')
+        .setDescription('Configure o sistema de bem-vindo para novos membros.')
+        .addSubcommand(subcommad =>
+            subcommad
+                .setName("vindo")
+                .setDescription("Configure o sistema de bem-vindo para novos membros.")
+        ),
 
     async execute(interaction) {
-
 
         // Verificação de permissões
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
