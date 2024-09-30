@@ -1,7 +1,6 @@
 const { AttachmentBuilder } = require("discord.js");
 const client = require('../../index');
 const bemvindoModel = require("../../database/models/bemvindo");
-const fbvModel = require("../../database/models/fbv");
 const Canvas = require("canvas");
 
 // Registre a fonte uma vez, fora do evento
@@ -12,26 +11,22 @@ module.exports = {
     name: 'guildMemberAdd',
     async execute(member) {
         try {
-            // Consulta para obter as configurações de boas-vindas e de imagem de bandeira
-            const [boasVindasConfig, fbvConfig] = await Promise.all([
-                bemvindoModel.findOne({ guildId: member.guild.id }),
-                fbvModel.findOne({ guildId: member.guild.id })
-            ]);
+            // Consulta para obter as configurações de boas-vindas
+            const boasVindasConfig = await bemvindoModel.findOne({ guildId: member.guild.id });
 
             // Verifica se o sistema de boas-vindas está ativo e se há um canal configurado
             const isBoasVindasAtivo = boasVindasConfig && boasVindasConfig.isActive;
             const canalBoasVindas = boasVindasConfig?.canal1;
+            const welcomeImage = boasVindasConfig?.welcomeImage || "https://raw.githubusercontent.com/arrastaorj/flags/main/bemvindo.jpg";
 
             if (!isBoasVindasAtivo || !canalBoasVindas) return;
-
-            const foto = fbvConfig?.canal1 || "https://raw.githubusercontent.com/arrastaorj/flags/main/bemvindo.jpg";
 
             // Criação do canvas para a imagem de boas-vindas
             const canvas = Canvas.createCanvas(1024, 500);
             const context = canvas.getContext('2d');
 
             context.fillStyle = '#F8F8FF';
-            const img = await Canvas.loadImage(foto);
+            const img = await Canvas.loadImage(welcomeImage);
             context.drawImage(img, 0, 0, 1024, 500);
 
             context.font = '65px "Nexa-Heavy"';

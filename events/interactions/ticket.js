@@ -93,7 +93,7 @@ module.exports = async (interaction) => {
                     .setCustomId('ticket')
                     .setLabel(button_name)
                     .setStyle(2)
-                    .setEmoji('<:crvt:1168027546202407013>')
+                    .setEmoji('<:Ticket:1289442436556259359>')
 
                 const row = new ActionRowBuilder().setComponents(button)
 
