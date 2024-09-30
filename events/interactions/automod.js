@@ -21,7 +21,7 @@ module.exports = async (interaction) => {
                 `  - **Spam de Mensagem:** ${automodSettings.messageSpamBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado'}\n` +
                 `  - **Limite de Menções:** ${automodSettings.mentionLimit > 0 ? `<:meno:1289442211213086730> ${automodSettings.mentionLimit} menções` : '<:meno:1289442211213086730> 0'}\n` +
                 `  - **Palavras-chave Bloqueadas:** ${automodSettings.blockedKeywords.length > 0 ? `<:bloquea:1285256594011193457> ${automodSettings.blockedKeywords.join(', ')}` : '<:bloquea:1285256594011193457> Nenhuma'}\n\n` +
-                `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+                `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
             await interaction.message.edit({ embeds: [embed] });
         }
     }

@@ -86,7 +86,7 @@ module.exports = {
                 `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                 `  - **Status:** ${isActive ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado'}\n` +
                 `  - **Cargos Atribuídos:** <:Members:1289442534216568893> ${assignedRoles}\n\n` +
-                `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+                `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
             .setColor('#ba68c8')
             .setFooter({ text: `O sistema de AutoRole permite a configuração de no máximo 5 cargos.`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
             .setTimestamp();
@@ -161,7 +161,7 @@ module.exports = {
                         `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                         `  - **Status:** ${updatedStatus}\n` +
                         `  - **Cargos Atribuídos:** <:Members:1289442534216568893> ${updatedRoles}\n\n` +
-                        `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+                        `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
 
                     const newMenu = createAutoroleMenu(newIsActive);
                     await interaction.editReply({ embeds: [embed], components: [newMenu] });
@@ -243,11 +243,11 @@ module.exports = {
                     `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                     `  - **Status:** ${updatedStatus}\n` +
                     `  - **Cargos Atribuídos:** <:Members:1289442534216568893> ${updatedRoles}\n\n` +
-                    `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`);
+                    `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`);
 
 
                 await interaction.editReply({ embeds: [embed], components: [createAutoroleMenu(isActive)] });
-                await i.editReply({ content: `<:1078434426368839750:1288777030443335710> Cargos **configurados** com sucesso!`, components: [] });
+                await i.editReply({ content: `<:1078434426368839750:1290114335909085257> Cargos **configurados** com sucesso!`, components: [] });
 
             }
 
@@ -280,11 +280,11 @@ module.exports = {
                         `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                         `  - **Status:** ${updatedStatus}\n` +
                         `  - **Cargos Atribuídos:** <:Members:1289442534216568893> Nenhum cargo atribuído\n\n` +
-                        `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+                        `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
 
 
                     await interaction.editReply({ embeds: [embed], components: [createAutoroleMenu(isActive)] }); // Atualiza a embed inicial
-                    await i.editReply({ content: '<:1078434426368839750:1288777030443335710> Todos cargos foram **removido** com sucesso!', components: [], ephemeral: true });
+                    await i.editReply({ content: '<:1078434426368839750:1290114335909085257> Todos cargos foram **removido** com sucesso!', components: [], ephemeral: true });
 
                 } else {
                     await autoroles.findOneAndUpdate(
@@ -312,20 +312,17 @@ module.exports = {
                         ? '<:8047onlinegray:1289442869060440109> Ativado'
                         : '<:red_dot:1289442683705888929> Desativado';
 
-                    // Exibindo o status atualizado
-                    console.log(updatedStatus);
-
                     embed.setDescription(
                         `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao sistema de atribuição automática de cargos do Grove!**\n` +
                         `  - Quando um novo usuário entrar no servidor, ele receberá automaticamente os cargos configurados. Utilize o menu abaixo para configurar.\n\n` +
                         `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                         `  - **Status:** ${updatedStatus}\n` +
                         `  - **Cargos Atribuídos:** <:Members:1289442534216568893> ${updatedRoles}\n\n` +
-                        `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+                        `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
 
                     await interaction.editReply({ embeds: [embed], components: [createAutoroleMenu(isActive)] }); // Atualiza a embed inicial
 
-                    await i.editReply({ content: `<:1078434426368839750:1288777030443335710> Cargo **removido** com sucesso!`, components: [] });
+                    await i.editReply({ content: `<:1078434426368839750:1290114335909085257> Cargo **removido** com sucesso!`, components: [] });
                 }
             }
         })
@@ -396,7 +393,7 @@ function createRemoveRoleMenu(autoroleData, guild) {
     roleOptions.push({
         label: 'Resetar todos (Irreversível)',
         description: `Essa opção irá remover todos os cargos definidos.`,
-        emoji: `<:member_red:1288778428379693181>`,
+        emoji: `<:NA_Intr004:1289442144255213618>`,
         value: 'reset_all'
     });
 

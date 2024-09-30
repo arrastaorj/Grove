@@ -14,7 +14,6 @@ module.exports = {
 
         // Verificar se o autorole está ativo (isActive)
         if (!addRoles.isActive) {
-            console.log(`> \`-\` O sistema de AutoRole está desativado no servidor: ${member.guild.name}`);
             return;
         }
 
@@ -23,7 +22,6 @@ module.exports = {
         const hasPermission = botMember.permissions.has(PermissionFlagsBits.ManageRoles);
 
         if (!hasPermission) {
-            console.log(`> \`-\` O bot não tem permissão para gerenciar cargos no servidor: ${member.guild.name}`);
             return;
         }
 
@@ -33,20 +31,16 @@ module.exports = {
 
         // Se não houver cargos válidos configurados, sair
         if (rolesToAdd.length === 0) {
-            console.log(`> \`-\` Nenhum cargo configurado no sistema de AutoRole para o servidor: ${member.guild.name}`);
             return;
         }
 
         // Adicionar os cargos ao membro
         try {
             await member.roles.add(rolesToAdd);
-            console.log(`> \`+\` Cargos adicionados ao membro ${member.user.tag} no servidor ${member.guild.name}.`);
         } catch (error) {
-            console.error(`Erro ao adicionar cargos para ${member.user.tag} no servidor ${member.guild.name}:`, error);
             try {
                 await member.send(`> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois ainda não recebi permissão para gerenciar cargos no servidor **${member.guild.name}**.`);
             } catch (dmError) {
-                console.error(`Erro ao enviar mensagem direta para ${member.user.tag}:`, dmError);
             }
         }
     }

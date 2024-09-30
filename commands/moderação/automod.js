@@ -76,8 +76,6 @@ module.exports = {
             const keywordStatus = automodSettings.keywordBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado';
             const spamStatus = automodSettings.messageSpamBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado';
 
-
-
             embed.setDescription(
                 `* <:new:1289442513094049854> **Bem-vindo(a) ao Sistema AutoMod - Proteção Inteligente para o Seu Servidor**\n` +
                 `  - O AutoMod é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +
@@ -86,7 +84,7 @@ module.exports = {
                 `  - **Spam de Mensagens:** ${spamStatus}\n` +
                 `  - **Limite de Menções:** ${automodSettings.mentionLimit > 0 ? `<:meno:1289442211213086730> ${automodSettings.mentionLimit} menções` : '<:meno:1289442211213086730> 0'}\n` +
                 `  - **Palavras-chave Bloqueadas:** ${automodSettings.blockedKeywords.length > 0 ? `<:bloquea:1285256594011193457> ${automodSettings.blockedKeywords.join(', ')}` : `<:bloquea:1285256594011193457> Nenhuma`}\n\n` +
-                `-# <:channels_and_roles:1289442612088147980> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
+                `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
             );
         };
 
