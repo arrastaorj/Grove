@@ -26,20 +26,33 @@ module.exports = {
 
     async execute(interaction) {
 
-        const canalID = await comandos.findOne({
-            guildId: interaction.guild.id
-        })
-        if (!canalID) return interaction.reply({
-            content: `> \`-\` <a:alerta:1163274838111162499> Um Adminitrador ainda não configurou o canal para uso de comandos!`,
-            ephemeral: true
-        })
+        const canalID = await comandos.findOne({ guildId: interaction.guild.id });
 
-        let canalPermitido = canalID.canal1
+        // Verifica se o resultado da consulta é null
+        if (!canalID) {
+            return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                ephemeral: true
+            });
+        }
+
+        // Desestruturação para obter canal1
+        const { canal1: canalPermitido } = canalID;
+
+
+        // Verifica se o canal foi cadastrado ou foi resetado
+        if (!canalPermitido) {
+            return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                ephemeral: true
+            });
+        }
+
         if (interaction.channel.id !== canalPermitido) {
             return interaction.reply({
                 content: `> \`-\` <a:alerta:1163274838111162499> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
                 ephemeral: true
-            })
+            });
         }
 
 
