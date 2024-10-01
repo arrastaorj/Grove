@@ -220,7 +220,7 @@ module.exports = {
                     components: [initialSelectMenu],
                 });
 
-                await i.followUp({ content: '✅ As configurações de canal de comandos foram redefinidas com sucesso.', ephemeral: true });
+                await i.followUp({ content: '<:1078434426368839750:1290114335909085257> As configurações de canal de comandos foram redefinidas com sucesso.', ephemeral: true });
             }
         });
 
