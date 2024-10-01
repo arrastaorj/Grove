@@ -7,7 +7,6 @@ const {
     ActionRowBuilder
 } = require('discord.js')
 
-const client = require("../../index")
 const cargos = require("../../database/models/cargos")
 
 module.exports = {
@@ -107,9 +106,11 @@ module.exports = {
             });
         }
 
-        const botMember = interaction.guild.members.cache.get(client.user.id)
-        if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true })
+        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) {
+            return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
+                ephemeral: true
+            });
         }
 
         const { options, guild, member, message } = interaction

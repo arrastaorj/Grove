@@ -7,11 +7,8 @@ const {
     PermissionFlagsBits,
 } = require('discord.js');
 
-const client = require("../../index");
-const autoroles = require("../../database/models/autorole");
-const canalComandos = require("../../database/models/comandos");
-
-const collectors = new Map(); // Armazenar coletores ativos
+const autoroles = require("../../database/models/autorole")
+const collectors = new Map()
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -39,19 +36,20 @@ module.exports = {
         }
 
 
-        // Verificação de permissões
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+           // Verificação de permissões
+           if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
                 content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
                 ephemeral: true
-            })
+            });
         }
 
-        const botMember = interaction.guild.members.cache.get(client.user.id)
-        if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true })
+        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) {
+            return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
+                ephemeral: true
+            });
         }
-
 
 
         // Verificação se existe um registro para a guilda no banco de dados

@@ -13,7 +13,6 @@ const {
 const client = require("../../index")
 const comandos = require("../../database/models/comandos")
 const meme = require("../../database/models/meme")
-const fbv = require("../../database/models/fbv")
 const ticket = require("../../database/models/ticket")
 
 module.exports = {
@@ -29,16 +28,6 @@ module.exports = {
                         .setDescription('Mencione o canal de texto ou coloque o ID.')
                         .setRequired(true)
                         .addChannelTypes(ChannelType.GuildText)
-                )
-        )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('fbv')
-                .setDescription('Definir um wallpaper de fundo do Bem-Vindo(a).')
-                .addStringOption(option =>
-                    option.setName('imagem')
-                        .setDescription('Anexe uma imagem válida. (PNG/JPEG)')
-                        .setRequired(true)
                 )
         )
         .addSubcommand(subcommand =>
@@ -167,92 +156,6 @@ module.exports = {
 
                     let LogsAddUser = new EmbedBuilder()
                         .setDescription(`**Canal de comandos atualizado:** \n\n> \`+\` ${cargoNames}`)
-                        .setTimestamp()
-                        .setColor('13F000')
-                        .setFooter({ text: `${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
-
-                    return interaction.reply({ embeds: [LogsAddUser], ephemeral: true })
-                }
-
-
-                break
-            }
-
-            //////// fbv Atualizado MongoDB
-            case "fbv": {
-
-
-                // Verificação de permissões
-                if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-                    return await interaction.reply({
-                        content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
-                        ephemeral: true
-                    });
-                }
-
-
-                const botMember = interaction.guild.members.cache.get(client.user.id)
-                if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-                    return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true })
-                }
-
-                const cmd1 = interaction.options.getString('imagem')
-
-                if (cmd1 && !/\.(png|jpeg)$/i.test(cmd1)) {
-                    return interaction.reply({ content: 'O link da imagem deve terminar com .png ou .jpeg.\nExemplo: https://i.imgur.com/lCmmOZD.jpeg', ephemeral: true })
-                }
-
-
-                const user = await fbv.findOne({
-                    guildId: interaction.guild.id
-                })
-
-                if (!user) {
-                    const newCmd = {
-                        guildId: interaction.guild.id,
-                    }
-                    if (cmd1) {
-                        newCmd.canal1 = cmd1
-                    }
-
-                    await fbv.create(newCmd)
-
-                    let cargoNames = []
-
-                    if (cmd1) {
-                        cargoNames.push(cmd1)
-                    }
-
-                    let LogsAddUser = new EmbedBuilder()
-                        .setDescription(`**Imagem de Boas-Vindas configurada:** \n\n> \`+\` Nome: **${cmd1.name}** \n\n > \`+\` Altura: **${cmd1.height}** \n\n > \`+\` Largura: **${cmd1.width}**`)
-                        .setImage(cmd1)
-                        .setTimestamp()
-                        .setColor('13F000')
-                        .setFooter({ text: `${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
-
-                    return interaction.reply({ embeds: [LogsAddUser], ephemeral: true })
-                } else {
-
-                    if (!cmd1) {
-                        await fbv.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $unset: { "canal1": "" } })
-                    } else {
-                        await fbv.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $set: { "canal1": cmd1 } })
-                    }
-
-                    let cargoNames = []
-
-                    if (cmd1) {
-                        cargoNames.push(cmd1)
-                    }
-
-
-                    let LogsAddUser = new EmbedBuilder()
-                        .setDescription(`**Imagem de Boas-Vindas atualizado:** \n\n> \`+\` Nome: **${cmd1.name}** \n\n > \`+\` Altura: **${cmd1.height}** \n\n > \`+\` Largura: **${cmd1.width}**`)
-                        .setImage(cmd1.url)
                         .setTimestamp()
                         .setColor('13F000')
                         .setFooter({ text: `${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
