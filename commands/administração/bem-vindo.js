@@ -146,6 +146,9 @@ module.exports = {
             assignedChannel = settings?.canal1 ? `<#${settings.canal1}>` : "Nenhum canal configurado";
             welcomeImage = settings?.welcomeImage || null;
 
+            // Atualiza a embed com as informações mais recentes
+            embed = createEmbed(isActive, assignedChannel, welcomeImage);
+
             if (i.values[0] === 'configure_image') {
                 // Criar o modal para receber a URL da imagem
                 const modal = new ModalBuilder()
@@ -204,7 +207,6 @@ module.exports = {
                     ephemeral: true
                 });
             }
-
 
 
             if (i.values[0] === 'select_channel') {
@@ -277,8 +279,7 @@ module.exports = {
                             components: [],
                         });
 
-                        // Atualizar a embed original
-                        embed = createEmbed(isActive, `<#${selectedChannelId}>`); // Atualiza a embed corretamente
+                        embed = createEmbed(isActive, `<#${selectedChannelId}>`, welcomeImage); // Atualiza a embed corretamente
 
                         // Editar a mensagem original do menu
                         await interaction.editReply({
@@ -319,7 +320,7 @@ module.exports = {
                 if (!updateResult) throw new Error("Erro ao atualizar o banco de dados.");
 
                 // Atualiza a embed com o novo estado
-                embed = createEmbed(isActive, assignedChannel); // Atualiza a embed novamente
+                embed = createEmbed(isActive, assignedChannel, welcomeImage); // Atualiza a embed novamente
 
                 // Atualiza as opções do menu
                 const updatedSelectMenu = new ActionRowBuilder()

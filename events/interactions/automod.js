@@ -14,7 +14,7 @@ module.exports = async (interaction) => {
         if (interaction.message.embeds.length > 0) {
             const embed = EmbedBuilder.from(interaction.message.embeds[0]);
             embed.setDescription(
-                `* <:new:1289442513094049854> **Bem-vindo(a) ao Sistema AutoMod - Proteção Inteligente para o Seu Servidor**\n` +
+                `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao Sistema AutoMod - Proteção Inteligente para o Seu Servidor**\n` +
                 `  - O AutoMod é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +
                 `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                 `  - **Palavras Ofensivas:** ${automodSettings.keywordBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado'}\n` +
