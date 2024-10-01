@@ -75,7 +75,7 @@ module.exports = {
                     `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao sistema de configuração de canal de comandos!**\n` +
                     `  - Promova uma organização eficiente em seu servidor, permitindo que os membros utilizem os comandos do Grove exclusivamente no canal designado.\n\n` +
                     `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
-                    `  - **Canal Configurado:** ${assignedChannel}`
+                    `  - **Canal Configurado:** <:channels_and_roles:1289442612088147980> ${assignedChannel}`
                 )
                 .setColor('#3498db')
                 .setFooter({ text: 'O sistema de comandos permite configurar apenas um canal.', iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
