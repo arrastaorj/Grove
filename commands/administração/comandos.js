@@ -77,7 +77,7 @@ module.exports = {
                     `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                     `  - **Canal Configurado:** <:channels_and_roles:1289442612088147980> ${assignedChannel}`
                 )
-                .setColor('#3498db')
+                .setColor('#ba68c8')
                 .setFooter({ text: 'O sistema de comandos permite configurar apenas um canal.', iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
                 .setTimestamp();
         };

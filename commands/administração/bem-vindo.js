@@ -169,7 +169,7 @@ module.exports = {
 
                 // Coleta a resposta do modal
                 const modalFilter = (modalInteraction) => modalInteraction.customId === 'welcome_image_modal' && modalInteraction.user.id === interaction.user.id;
-                const modalCollector = await i.awaitModalSubmit({ filter: modalFilter, time: 15000 });
+                const modalCollector = await i.awaitModalSubmit({ filter: modalFilter, time: 60000 });
 
                 const imageUrl = modalCollector.fields.getTextInputValue('imageUrl');
 

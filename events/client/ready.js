@@ -17,11 +17,17 @@ module.exports = {
             process.exit(1);
         }
 
+        const guildCount = await client.shard.fetchClientValues('guilds.cache.size')
+        const totalGuilds = guildCount.reduce((acc, count) => acc + count, 0)
+        const totalUsers = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)
+        const formattedTotalUsers = totalUsers.toLocaleString('pt-BR')
+        const shardId = client.shard.ids[0] // Obtém o ID da shard atual
+
         const statuses = [
-            { name: '✏️ Personalize com /embed criar', type: ActivityType.Custom },
-            { name: '🚫 proteger com /antilink', type: ActivityType.Custom },
-            { name: '🎭 gerencie com /cargos', type: ActivityType.Custom },
-            { name: '🛡️ moderação com /automod', type: ActivityType.Custom }
+            { name: `💜 Online | ${totalGuilds} Servidores`, type: ActivityType.Custom },
+            { name: `💜 Online | ${formattedTotalUsers} Usuários`, type: ActivityType.Custom },
+            { name: `💜 Online | Cluster: ${shardId}`, type: ActivityType.Custom },
+
         ]
 
         let index = 0

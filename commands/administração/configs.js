@@ -21,17 +21,6 @@ module.exports = {
         .setDescription('Veja meus comandos de configuração.')
         .addSubcommand(subcommand =>
             subcommand
-                .setName('memes')
-                .setDescription('Definir um canal para o uso do comando /meme.')
-                .addChannelOption(option =>
-                    option.setName('canal')
-                        .setDescription('Mencione o canal de texto ou coloque o ID.')
-                        .setRequired(true)
-                        .addChannelTypes(ChannelType.GuildText)
-                )
-        )
-        .addSubcommand(subcommand =>
-            subcommand
                 .setName('ticket')
                 .setDescription('Configure o menu do ticket.')
                 .addChannelOption(option =>
@@ -76,81 +65,6 @@ module.exports = {
 
 
         switch (subcommands) {
-
-            case "memes": {
-
-
-                // Verificação de permissões
-                if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-                    return await interaction.reply({
-                        content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
-                        ephemeral: true
-                    });
-                }
-
-                const botMember = interaction.guild.members.cache.get(client.user.id)
-                if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-                    return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true })
-                }
-
-                const canal = interaction.options.getChannel('canal')
-
-                const user = await meme.findOne({
-                    guildId: interaction.guild.id
-                })
-
-                if (!user) {
-                    const newCmd = {
-                        guildId: interaction.guild.id,
-                    }
-                    if (canal) {
-                        newCmd.canal1 = canal.id
-                    }
-
-                    await meme.create(newCmd)
-
-                    let cargoNames = []
-
-                    if (canal) {
-                        cargoNames.push(canal)
-                    }
-
-                    let LogsAddUser = new EmbedBuilder()
-                        .setDescription(`**Canal de memes configurado:** \n\n> \`+\` ${cargoNames}`)
-                        .setTimestamp()
-                        .setColor('13F000')
-                        .setFooter({ text: `${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
-
-                    return interaction.reply({ embeds: [LogsAddUser], ephemeral: true })
-                } else {
-
-                    if (!canal) {
-                        await meme.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $unset: { "canal1": "" } })
-                    } else {
-                        await meme.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $set: { "canal1": canal.id } })
-                    }
-
-                    let cargoNames = []
-
-                    if (canal) {
-                        cargoNames.push(canal)
-                    }
-
-
-                    let LogsAddUser = new EmbedBuilder()
-                        .setDescription(`**Canal de memes atualizado:** \n\n> \`+\` ${cargoNames}`)
-                        .setTimestamp()
-                        .setColor('13F000')
-                        .setFooter({ text: `${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
-
-                    return interaction.reply({ embeds: [LogsAddUser], ephemeral: true })
-                }
-                break
-            }
 
             case "ticket": {
 
