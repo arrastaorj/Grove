@@ -64,7 +64,7 @@ module.exports = async (interaction) => {
             automodSettings.blockedKeywords.push(palavra); // Atualiza no banco de dados
             await automodSettings.save(); // Salva no banco de dados
             await updateEmbed(); // Atualiza o embed com as informações mais recentes
-            return reply(`A palavra-chave **${palavra}** foi adicionada com sucesso.`);
+            return reply(`<:1078434426368839750:1290114335909085257> A palavra-chave **${palavra}** foi adicionada com sucesso.`);
         } else {
             // Se não existir regra de palavras-chave, cria uma nova
             await guild.autoModerationRules.create({
@@ -88,7 +88,7 @@ module.exports = async (interaction) => {
             automodSettings.blockedKeywords.push(palavra);
             await automodSettings.save();
             await updateEmbed();
-            return reply(`A palavra-chave **${palavra}** foi adicionada com sucesso.`);
+            return reply(`<:1078434426368839750:1290114335909085257> A palavra-chave **${palavra}** foi adicionada com sucesso.`);
         }
     }
 
@@ -102,32 +102,39 @@ module.exports = async (interaction) => {
             return reply(`> \`-\` <a:alerta:1163274838111162499> Esta regra já está configurada com o limite de menções de **${limite}**.`);
         }
 
-        if (mentionRule) {
-            await mentionRule.edit({
-                triggerMetadata: { mentionTotalLimit: limite }
-            });
-        } else {
-            await guild.autoModerationRules.create({
-                name: `Grove AutoMod`,
-                creatorId: client.user.id,
-                enabled: true,
-                eventType: 1,
-                triggerType: 5,
-                triggerMetadata: { mentionTotalLimit: limite },
-                actions: [{
-                    type: 1,
-                    metadata: {
-                        channel: interaction.channel,
-                        durationSeconds: 10,
-                        customMessage: `> \`-\` <a:alerta:1163274838111162499> O GroveAutoMod bloqueou esta mensagem por excesso de menções.`
-                    }
-                }]
-            });
+        try {
+
+            if (mentionRule) {
+                await mentionRule.edit({
+                    triggerMetadata: { mentionTotalLimit: limite }
+                });
+            } else {
+                await guild.autoModerationRules.create({
+                    name: `Grove AutoMod`,
+                    creatorId: client.user.id,
+                    enabled: true,
+                    eventType: 1,
+                    triggerType: 5,
+                    triggerMetadata: { mentionTotalLimit: limite },
+                    actions: [{
+                        type: 1,
+                        metadata: {
+                            channel: interaction.channel,
+                            durationSeconds: 10,
+                            customMessage: `> \`-\` <a:alerta:1163274838111162499> O GroveAutoMod bloqueou esta mensagem por excesso de menções.`
+                        }
+                    }]
+                });
+            }
+
+            automodSettings.mentionLimit = limite;
+            await automodSettings.save();
+            await updateEmbed();
+            return reply(`<:1078434426368839750:1290114335909085257> O limite de menções foi atualizado para **${limite}**.`)
+
+        } catch (error) {
+            return reply('> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao configurar o limite de menções. Por favor, tente novamente mais tarde.')
         }
 
-        automodSettings.mentionLimit = limite;
-        await automodSettings.save();
-        await updateEmbed();
-        return reply(`O limite de menções foi atualizado para **${limite}**.`);
     }
-};
+}

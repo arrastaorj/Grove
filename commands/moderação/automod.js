@@ -182,7 +182,7 @@ module.exports = {
                             }
                         }]
                     });
-                    await i.reply({ content: 'A regra **bloquear palavras ofensivas** foi configurada com sucesso!', ephemeral: true });
+                    await i.reply({ content: '<:1078434426368839750:1290114335909085257> A regra **bloquear palavras ofensivas** foi configurada com sucesso!', ephemeral: true });
                 }
                 updateEmbed(automodSettings, embed);
                 sendMenu();
@@ -216,7 +216,7 @@ module.exports = {
                             }
                         ]
                     })
-                    await i.reply({ content: `A regra **bloqueio de spam de mensagens** foi configuradfa com sucesso!`, ephemeral: true })
+                    await i.reply({ content: `<:1078434426368839750:1290114335909085257> A regra **bloqueio de spam de mensagens** foi configuradfa com sucesso!`, ephemeral: true })
                 }
                 updateEmbed(automodSettings, embed);
                 sendMenu();
@@ -242,6 +242,7 @@ module.exports = {
                 await i.showModal(mencaoModal);
                 sendMenu();
             }
+
             if (selectedOption === 'palavra-chave') {
                 const palavraModal = new ModalBuilder()
                     .setCustomId('palavra-chave-modal')

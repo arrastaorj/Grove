@@ -5,6 +5,8 @@ const {
     StringSelectMenuBuilder,
     PermissionsBitField,
     PermissionFlagsBits,
+    ButtonBuilder,
+    ButtonStyle,
 } = require('discord.js');
 
 const autoroles = require("../../database/models/autorole")
@@ -36,8 +38,8 @@ module.exports = {
         }
 
 
-           // Verificação de permissões
-           if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+        // Verificação de permissões
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
                 content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
                 ephemeral: true
@@ -178,18 +180,18 @@ module.exports = {
                         });
                     } else {
                         try {
-                            const roleMenu = await createAddRoleMenu(interaction.guild);
+                            const { components, totalPages } = await createAddRoleMenu(interaction.guild, 0); // Página inicial (0)
 
                             // Verifica se o menu tem opções disponíveis
-                            if (roleMenu.components[0].options.length === 0) {
+                            if (components[0].components[0].options.length === 0) {
                                 await i.reply({
                                     content: '> \`-\` <a:alerta:1163274838111162499> Não há cargos disponíveis para adicionar.',
                                     ephemeral: true
                                 });
                             } else {
                                 await i.reply({
-                                    content: 'Selecione os cargos para adicionar:',
-                                    components: [roleMenu],
+                                    content: `Selecione os cargos para adicionar: (Página 1 de ${totalPages})`,
+                                    components: components, // Inclui o select menu e os botões de paginação
                                     ephemeral: true
                                 });
                             }
@@ -247,6 +249,22 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [createAutoroleMenu(isActive)] });
                 await i.editReply({ content: `<:1078434426368839750:1290114335909085257> Cargos **configurados** com sucesso!`, components: [] });
 
+            } else if (i.customId.startsWith('prev_page') || i.customId.startsWith('next_page')) {
+                await i.deferUpdate();
+
+                // Pega a página atual diretamente do customId
+                const currentPage = parseInt(i.customId.split('_')[2], 10);
+
+                // Atualiza a página com base no botão pressionado
+                const newPage = i.customId.startsWith('next_page') ? currentPage + 1 : currentPage - 1;
+
+                // Gera novamente o menu com a página atualizada
+                const { components } = await createAddRoleMenu(interaction.guild, newPage);
+
+                await i.editReply({
+                    content: `Escolha os cargos para adicionar: (Página ${newPage + 1})`,
+                    components: components
+                });
             }
 
             if (i.customId === 'select_role_to_remove') {
@@ -345,13 +363,12 @@ module.exports = {
         })
     }
 }
-
-// Função para criar o menu de adicionar cargos
-async function createAddRoleMenu(guild) {
+// Função para criar o menu de adicionar cargos com paginação
+async function createAddRoleMenu(guild, currentPage = 0) {
     const autoroleData = await autoroles.findOne({ guildId: guild.id });
     const currentRoles = autoroleData ? autoroleData.cargos : [];
 
-    // Calcula quantos cargos ainda podem ser adicionados (máximo 5 cargos)
+    // Limite de cargos que podem ser adicionados (máximo 5)
     const maxRolesToAdd = Math.max(1, 5 - currentRoles.length);
 
     // Filtra os cargos disponíveis
@@ -370,17 +387,44 @@ async function createAddRoleMenu(guild) {
             value: role.id
         }));
 
-    // Limita o número de cargos disponíveis a 25 (limite do SelectMenu do Discord)
-    const limitedRoles = availableRoles.slice(0, 25);
+    const rolesPerPage = 25;
+    const totalPages = Math.ceil(availableRoles.length / rolesPerPage);
 
-    return new ActionRowBuilder().addComponents(
+    // Pega a lista de cargos da página atual
+    const paginatedRoles = availableRoles.slice(currentPage * rolesPerPage, (currentPage + 1) * rolesPerPage);
+
+    // Verifica se há cargos suficientes para adicionar
+    if (paginatedRoles.length === 0) {
+        throw new Error('Não há cargos disponíveis para exibir nesta página.');
+    }
+
+    // Cria o select menu
+    const selectMenu = new ActionRowBuilder().addComponents(
         new StringSelectMenuBuilder()
             .setCustomId('select_role_to_add')
             .setPlaceholder('Escolha os cargos para adicionar')
-            .setMaxValues(Math.min(maxRolesToAdd, limitedRoles.length)) // Limita o número de seleções
-            .addOptions(limitedRoles) // Adiciona até 25 opções
+            .setMaxValues(Math.min(maxRolesToAdd, paginatedRoles.length)) // Limita o número de seleções
+            .addOptions(paginatedRoles) // Adiciona opções paginadas
     );
+
+    // Cria os botões de navegação de páginas
+    const buttons = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`prev_page_${currentPage}`) // Adiciona o número da página no customId
+            .setLabel('Página Anterior')
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(currentPage === 0), // Desabilita se estiver na primeira página
+        new ButtonBuilder()
+            .setCustomId(`next_page_${currentPage}`) // Adiciona o número da página no customId
+            .setLabel('Próxima Página')
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(currentPage === totalPages - 1) // Desabilita se estiver na última página
+    );
+
+    // Retorna o select menu e os botões de navegação
+    return { components: [selectMenu, buttons], totalPages };
 }
+
 
 // Função para criar o menu de remover cargos
 function createRemoveRoleMenu(autoroleData, guild) {
