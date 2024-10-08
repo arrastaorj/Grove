@@ -11,8 +11,6 @@ const {
 } = require('discord.js')
 
 const client = require("../../index")
-const comandos = require("../../database/models/comandos")
-const meme = require("../../database/models/meme")
 const ticket = require("../../database/models/ticket")
 
 module.exports = {

@@ -23,14 +23,14 @@ module.exports = {
         // Verificação se o canal já está destrancado
         const channelPermissions = interaction.channel.permissionOverwrites.cache.get(interaction.guild.id);
         if (channelPermissions && channelPermissions.allow.has('SendMessages')) {
-          
+
             return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> O canal <#${interaction.channel.id}> já está destrancado. `, ephemeral: true });
         }
 
 
         // Responder primeiro para evitar o erro
         await interaction.reply({
-            content: `> \`+\` Acabei de destrancar o canal de texto como você pediu.`,
+            content: `> \`+\` Acabei de <:Ouvert:1292499630927515668> destrancar o canal de texto como você pediu.`,
             ephemeral: true
         });
 

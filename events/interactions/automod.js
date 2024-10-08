@@ -94,15 +94,16 @@ module.exports = async (interaction) => {
 
 
     if (interaction.customId === 'mencao-spam-modal') {
-        const limite = parseInt(interaction.fields.getTextInputValue('mencao-spam-input'));
-        const mentionRule = existingRules.find(rule => rule.triggerType === 5);
-
-        if (mentionRule && mentionRule.triggerMetadata.mentionTotalLimit === limite) {
-            await updateEmbed();
-            return reply(`> \`-\` <a:alerta:1163274838111162499> Esta regra já está configurada com o limite de menções de **${limite}**.`);
-        }
-
         try {
+
+            const limite = parseInt(interaction.fields.getTextInputValue('mencao-spam-input'));
+            const mentionRule = existingRules.find(rule => rule.triggerType === 5);
+
+            if (mentionRule && mentionRule.triggerMetadata.mentionTotalLimit === limite) {
+                await updateEmbed();
+                return reply(`> \`-\` <a:alerta:1163274838111162499> Esta regra já está configurada com o limite de menções de **${limite}**.`);
+            }
+
 
             if (mentionRule) {
                 await mentionRule.edit({

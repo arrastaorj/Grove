@@ -107,7 +107,7 @@ module.exports = {
                     `  - O Antilink é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +
                     `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
                     `  - **Status do Antilink:** ${antilinkStatus}\n` +
-                    `  - **Cargos Permitidos:** <:Members:1289442534216568893> ${permittedRoles}\n` +
+                    `  - **Cargos Permitidos:** <:Members:1289442534216568893> ${permittedRoles}\n\n` +
                     `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
                 )
                 .setColor('#ba68c8')
@@ -216,11 +216,13 @@ module.exports = {
                             new ButtonBuilder()
                                 .setCustomId('previous_page')
                                 .setLabel('Voltar')
+                                .setEmoji('<:arrowwhite_left:1293008404662587402>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === 0),
                             new ButtonBuilder()
                                 .setCustomId('next_page')
                                 .setLabel('Avançar')
+                                .setEmoji('<:arrowwhite:1293008459968544779>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === totalPages - 1)
                         );

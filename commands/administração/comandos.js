@@ -141,13 +141,13 @@ module.exports = {
                             new ButtonBuilder()
                                 .setCustomId('previous_page')
                                 .setLabel('Voltar')
-                                .setEmoji('<:reply_3389006:1290102452732821597>')
+                                .setEmoji('<:arrowwhite_left:1293008404662587402>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === 0),
                             new ButtonBuilder()
                                 .setCustomId('next_page')
                                 .setLabel('Avançar')
-                                .setEmoji('<:forward_3389009:1290102446764462182>')
+                                .setEmoji('<:arrowwhite:1293008459968544779>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === totalPages - 1)
                         );

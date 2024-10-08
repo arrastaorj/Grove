@@ -1,10 +1,10 @@
-const { 
-    SlashCommandBuilder, 
-    PermissionFlagsBits, 
-    ActionRowBuilder, 
-    ButtonStyle, 
-    ButtonBuilder, 
-    EmbedBuilder 
+const {
+    SlashCommandBuilder,
+    PermissionFlagsBits,
+    ActionRowBuilder,
+    ButtonStyle,
+    ButtonBuilder,
+    EmbedBuilder
 } = require('discord.js');
 
 
@@ -12,7 +12,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('slowmode')
         .setDescription('Painel para gerenciar o SlowMode do chat.'),
-   
+
 
     async execute(interaction) {
         // Verifica se o usuário tem permissão para gerenciar canais
@@ -47,20 +47,20 @@ module.exports = {
             .setTitle('Painel de Configuração de SlowMode')
             .setDescription('Personalize o modo lento do chat ajustando o tempo de espera entre mensagens.')
             .addFields({ name: 'Configurações Disponíveis', value: 'Ajuste o tempo de espera entre mensagens.' })
-            .setFooter({ 
-                iconURL: interaction.user.displayAvatarURL({ extension: 'png' }), 
-                text: `Solicitado por ${interaction.user.username}` 
+            .setFooter({
+                iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
+                text: `Solicitado por ${interaction.user.username}`
             })
             .setThumbnail(interaction.guild.iconURL({ extension: 'png' }))
             .setTimestamp()
             .setColor('#41b2b0');
 
-    
+
         // Responde à interação
         return interaction.reply({
             embeds: [embed],
             components: [buttons],
-            
+
         });
     }
 };

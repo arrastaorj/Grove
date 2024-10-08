@@ -184,10 +184,35 @@ module.exports = {
 
                             // Verifica se o menu tem opções disponíveis
                             if (components[0].components[0].options.length === 0) {
+
+                                const embed = new EmbedBuilder()
+                                    .setColor('#FF0000') // Cor do erro
+                                    .setAuthor({
+                                        name: interaction.guild.name,
+                                        iconURL: interaction.guild.iconURL({ dynamic: true })
+                                    })
+                                    .setDescription(
+                                        `* <:NA_Intr004:1289442144255213618> **Erro ao exibir os cargos do servidor!**\n` +
+                                        `  - Infelizmente, não foi possível gerenciar o cargo solicitado. Aqui estão os motivos:\n\n` +
+                                        `* <:info:1290116635814002749> **Motivos:**\n` +
+                                        `  - **Não há cargos disponíveis** para exibir nesta página.\n` +
+                                        `  - **O cargo do bot está abaixo** de outros cargos no servidor.\n` +
+                                        `  - **Alguns cargos podem não ser editáveis.**\n\n` +
+                                        `* <:settings:1289442654806999040> **Sugestões:**\n` +
+                                        `  - Verifique se o cargo do bot está acima dos outros cargos.\n` +
+                                        `  - Tente novamente mais tarde.\n\n` +
+                                        `-# Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
+                                    )
+                                    .setImage("https://raw.githubusercontent.com/arrastaorj/flags/refs/heads/main/imagem_2024-10-07_201030753.png")
+                                    .setFooter({ text: 'A imagem a cima mostra como deve fica o cargo do bot.', iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
+                                    .setTimestamp();
+
                                 await i.reply({
-                                    content: '> \`-\` <a:alerta:1163274838111162499> Não há cargos disponíveis para adicionar.',
+                                    embeds: [embed],
                                     ephemeral: true
                                 });
+
+
                             } else {
                                 await i.reply({
                                     content: `Selecione os cargos para adicionar: (Página 1 de ${totalPages})`,
@@ -196,11 +221,34 @@ module.exports = {
                                 });
                             }
                         } catch (error) {
-                            console.error('Erro ao criar o menu de cargos:', error);
+                            const embed = new EmbedBuilder()
+                                .setColor('#FF0000') // Cor do erro
+                                .setAuthor({
+                                    name: interaction.guild.name,
+                                    iconURL: interaction.guild.iconURL({ dynamic: true })
+                                })
+                                .setDescription(
+                                    `* <:NA_Intr004:1289442144255213618> **Erro ao exibir os cargos do servidor!**\n` +
+                                    `  - Infelizmente, não foi possível gerenciar o cargo solicitado. Aqui estão os motivos:\n\n` +
+                                    `* <:info:1290116635814002749> **Motivos:**\n` +
+                                    `  - **Não há cargos disponíveis** para exibir nesta página.\n` +
+                                    `  - **O cargo do bot está abaixo** de outros cargos no servidor.\n` +
+                                    `  - **Alguns cargos podem não ser editáveis.**\n\n` +
+                                    `* <:settings:1289442654806999040> **Sugestões:**\n` +
+                                    `  - Verifique se o cargo do bot está acima dos outros cargos.\n` +
+                                    `  - Tente novamente mais tarde.\n\n` +
+                                    `-# Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
+                                )
+                                .setImage("https://raw.githubusercontent.com/arrastaorj/flags/refs/heads/main/imagem_2024-10-07_201030753.png")
+                                .setFooter({ text: 'A imagem a cima mostra como deve fica o cargo do bot.', iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
+                                .setTimestamp();
+
                             await i.reply({
-                                content: '> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar carregar os cargos. Tente novamente mais tarde.',
+                                embeds: [embed],
                                 ephemeral: true
                             });
+
+
                         }
                     }
                 }
@@ -393,10 +441,6 @@ async function createAddRoleMenu(guild, currentPage = 0) {
     // Pega a lista de cargos da página atual
     const paginatedRoles = availableRoles.slice(currentPage * rolesPerPage, (currentPage + 1) * rolesPerPage);
 
-    // Verifica se há cargos suficientes para adicionar
-    if (paginatedRoles.length === 0) {
-        throw new Error('Não há cargos disponíveis para exibir nesta página.');
-    }
 
     // Cria o select menu
     const selectMenu = new ActionRowBuilder().addComponents(
@@ -412,11 +456,13 @@ async function createAddRoleMenu(guild, currentPage = 0) {
         new ButtonBuilder()
             .setCustomId(`prev_page_${currentPage}`) // Adiciona o número da página no customId
             .setLabel('Página Anterior')
+            .setEmoji('<:arrowwhite_left:1293008404662587402>')
             .setStyle(ButtonStyle.Primary)
             .setDisabled(currentPage === 0), // Desabilita se estiver na primeira página
         new ButtonBuilder()
             .setCustomId(`next_page_${currentPage}`) // Adiciona o número da página no customId
             .setLabel('Próxima Página')
+            .setEmoji('<:arrowwhite:1293008459968544779>')
             .setStyle(ButtonStyle.Primary)
             .setDisabled(currentPage === totalPages - 1) // Desabilita se estiver na última página
     );

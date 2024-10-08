@@ -29,7 +29,7 @@ module.exports = {
 
         // Responder primeiro para evitar erro
         await interaction.reply({
-            content: `> \`+\` Acabei de trancar o canal de texto como você pediu.`,
+            content: `> \`+\` Acabei de <:Fermer:1292499635713216564> trancar o canal de texto como você pediu.`,
             ephemeral: true
         })
 
