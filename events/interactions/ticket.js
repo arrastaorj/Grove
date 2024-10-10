@@ -20,100 +20,88 @@ module.exports = async (interaction) => {
 
 
     if (interaction.isModalSubmit()) {
-        if (interaction.customId === 'modal_ticket') {
+        // Função para carregar as informações do banco de dados
+        const getUpdatedTicketConfig = async (guildId) => {
+            return await ticket.findOne({ guildId }) || {};
+        };
 
-            const titulo = interaction.fields.getTextInputValue('titulo')
-            const descrição = interaction.fields.getTextInputValue('descrição')
+        // Função para montar e atualizar a embed
+        const updateEmbed = async (interaction, updatedTicketConfig) => {
+            let assignedChannel = updatedTicketConfig?.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
+            let assignedChannelLogs = updatedTicketConfig?.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
+            let ticketCategory = updatedTicketConfig?.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
+            let updatedButtonName = updatedTicketConfig?.nomeBotao || 'Não configurado';
+            let allowedRole = updatedTicketConfig?.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
 
-            let fotos = "https://raw.githubusercontent.com/arrastaorj/flags/main/standard.gif"
+            let titulo01 = updatedTicketConfig?.titulo01 || 'Não configurado';
+            let descrição01 = updatedTicketConfig?.descrição01 || 'Não configurado';
+            let titulo02 = updatedTicketConfig?.titulo02 || 'Não configurado';
+            let descrição02 = updatedTicketConfig?.descrição02 || 'Não configurado';
 
-
-            const titulo02 = interaction.fields.getTextInputValue('titulo02')
-            const descrição02 = interaction.fields.getTextInputValue('descrição02')
-
-            try {
-
-
-                const cmd = await ticket.findOne({
-                    guildId: interaction.guild.id
-                })
-
-
-                if (!cmd) {
-                    const newCmd = {
-                        guildId: interaction.guild.id,
-                    }
-                    if (titulo02) {
-                        newCmd.titulo02 = titulo02
-                    }
-                    if (descrição02) {
-                        newCmd.descrição02 = descrição02
-                    }
-                    await ticket.create(newCmd)
-
-                } else {
-
-                    if (!titulo02) {
-                        await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $unset: { "titulo02": "" } })
-                    } else {
-                        await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $set: { "titulo02": titulo02 } })
-                    }
-                    if (!descrição02) {
-                        await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $unset: { "descrição02": "" } })
-                    } else {
-                        await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
-                        }, { $set: { "descrição02": descrição02 } })
-                    }
-
+            if (interaction.message.embeds.length > 0) {
+                const embed = EmbedBuilder.from(interaction.message.embeds[0]);
+                embed.setDescription(
+                    `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao sistema de configuração de tickets!**\n` +
+                    `  - Utilize o menu abaixo para configurar as opções necessárias.\n\n` +
+                    `* <:settings:1289442654806999040> **Informações sobre o sistema:**\n` +
+                    `  - **Canal do Ticket:** <:channel:1290115652828270613> ${assignedChannel}\n` +
+                    `  - **Canal de Logs:** <:channel:1290115652828270613> ${assignedChannelLogs}\n` +
+                    `  - **Categoria:** <:search:1293726966360440966> ${ticketCategory}\n` +
+                    `  - **Nome do Botão:** <:edit1:1293726236505542788> ${updatedButtonName}\n` +
+                    `  - **Cargo Permitido:** <:announcement:1293726066174595215> ${allowedRole}\n` +
+                    `  - **Titulo 1 (Para abrir o ticket):** <:edit1:1293726236505542788> ${titulo01}\n` +
+                    `  - **Descrição 1 (Para abrir o ticket):** <:summary:1293727240114278422> ${descrição01}\n` +
+                    `  - **Titulo 2 (Dentro do ticket):** <:edit1:1293726236505542788> ${titulo02}\n` +
+                    `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n\n` +
+                    `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
+                );
+                try {
+                    await interaction.message.edit({ embeds: [embed] });
+                } catch (error) {
+                    console.error("Erro ao atualizar a embed:", error);
                 }
-
-                const cmd2 = await ticket.findOne({
-                    guildId: interaction.guild.id
-                })
-
-                let button_name = cmd2.nomeBotao
-
-
-                const embed = new EmbedBuilder()
-                    .setColor('#2f3136')
-                    .setAuthor({ name: `${titulo}`, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
-                    .setDescription(descrição)
-                    // .setImage(`${fotos}`)
-
-                    .setThumbnail(interaction.guild.iconURL({ extension: 'png', dynamic: true }))
-
-                const button = new ButtonBuilder()
-                    .setCustomId('ticket')
-                    .setLabel(button_name)
-                    .setStyle(2)
-                    .setEmoji('<:Ticket:1289442436556259359>')
-
-                const row = new ActionRowBuilder().setComponents(button)
-
-
-                let channel = cmd2.canal1
-
-
-                let canal = interaction.guild.channels.cache.get(channel)
-
-                canal.send({ embeds: [embed], components: [row] })
-
-                await interaction.deferUpdate()
-
-            } catch (error) {
-
-                return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro inesperado, Tente de novo em alguns segundos.`, ephemeral: true })
             }
+        };
 
+        // Função para salvar dados e atualizar embed
+        const handleModalSubmit = async (interaction, updateData) => {
+            // Atualizar o banco de dados
+            await ticket.findOneAndUpdate(
+                { guildId: interaction.guild.id },
+                { $set: updateData },
+                { upsert: true }
+            );
+
+            // Recarregar as informações do banco e atualizar a embed
+            let updatedTicketConfig = await getUpdatedTicketConfig(interaction.guild.id);
+            await updateEmbed(interaction, updatedTicketConfig);
+
+            // Responder ao usuário
+            await interaction.reply({
+                content: `A configuração foi atualizada com sucesso.`,
+                ephemeral: true
+            });
+        };
+
+        // Verificar qual modal foi submetido
+        if (interaction.customId === 'button_name_modal') {
+            const buttonName = interaction.fields.getTextInputValue('button_name_input');
+            await handleModalSubmit(interaction, { nomeBotao: buttonName });
+        } else if (interaction.customId === 'titulo1_modal') {
+            const titulo1 = interaction.fields.getTextInputValue('titulo1_input');
+            await handleModalSubmit(interaction, { titulo01: titulo1 });
+        } else if (interaction.customId === 'descricao1_modal') {
+            const descricao1 = interaction.fields.getTextInputValue('descricao1_input');
+            await handleModalSubmit(interaction, { descrição01: descricao1 });
+        } else if (interaction.customId === 'titulo2_modal') {
+            const titulo2 = interaction.fields.getTextInputValue('titulo2_input');
+            await handleModalSubmit(interaction, { titulo02: titulo2 });
+        } else if (interaction.customId === 'descricao2_modal') {
+            const descricao2 = interaction.fields.getTextInputValue('descricao2_input');
+            await handleModalSubmit(interaction, { descrição02: descricao2 });
         }
     }
+
 
 
     if (interaction.isButton) {

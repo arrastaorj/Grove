@@ -42,13 +42,32 @@ module.exports = {
             const timeElapsed = Date.now() - startTime;
             const timeRemaining = timeout - timeElapsed;
 
+            // Convertendo o tempo restante para segundos
             const secondsRemaining = Math.ceil(timeRemaining / 1000);
 
+            // Função para formatar o tempo em horas, minutos e segundos
+            function formatTime(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secondsLeft = seconds % 60;
+
+                let result = '';
+                if (hours > 0) result += `${hours} hora${hours > 1 ? 's' : ''}, `;
+                if (minutes > 0) result += `${minutes} minuto${minutes > 1 ? 's' : ''}, `;
+                result += `${secondsLeft} segundo${secondsLeft > 1 ? 's' : ''}`;
+
+                return result;
+            }
+
+            // Formatando o tempo restante
+            const formattedTime = formatTime(secondsRemaining);
+
             return interaction.reply({
-                content: `> ⚠️ Você já iniciou uma configuração. Aguarde ${secondsRemaining} segundos antes de tentar novamente.`,
+                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de AntiLink. Aguarde ${formattedTime} antes de tentar novamente.`,
                 ephemeral: true
             });
         }
+
 
         // Verificar se já existe um registro no banco de dados
         let antilinkConfig = await antilinkModel.findOne({ guildId: interaction.guild.id });

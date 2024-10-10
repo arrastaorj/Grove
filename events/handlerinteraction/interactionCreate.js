@@ -51,7 +51,8 @@ client.on("interactionCreate", async (interaction) => {
         const ticketButtonIds = [
             'modal_ticket', 'ticket', 'assumirTicket', 'call', 'EncerrarChamado',
             'AdicionarMembro', 'RemoverMembro', 'poke', 'addmembro',
-            'removermembrotexto', 'SairdoTicket', 'close', 'reabrir', 'msg', 'deletar'
+            'removermembrotexto', 'SairdoTicket', 'close', 'reabrir', 'msg', 'deletar',
+            'button_name_modal', 'titulo1_modal', 'descricao1_modal', 'titulo2_modal', 'descricao2_modal'
         ];
 
         if (ticketButtonIds.includes(interaction.customId)) {
