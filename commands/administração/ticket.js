@@ -77,7 +77,6 @@ module.exports = {
 
 
 
-
         // Buscar as configurações do banco de dados
         let ticketConfig = await ticket.findOne({ guildId: interaction.guild.id });
 
@@ -104,16 +103,14 @@ module.exports = {
         let ticketCategory = ticketConfig?.categoria ? `<#${ticketConfig.categoria}>` : 'Não configurada';
         let buttonName = ticketConfig?.nomeBotao || 'Não configurado';
         let allowedRole = ticketConfig?.cargo ? `<@&${ticketConfig.cargo}>` : 'Não configurado';
-
         let titulo01 = ticketConfig?.titulo01 ? `${ticketConfig.titulo01}` : 'Não configurado';
         let descrição01 = ticketConfig?.descrição01 ? `${ticketConfig.descrição01}` : 'Não configurado';
-
         let titulo02 = ticketConfig?.titulo02 ? `${ticketConfig.titulo02}` : 'Não configurado';
         let descrição02 = ticketConfig?.descrição02 ? `${ticketConfig.descrição02}` : 'Não configurado';
 
 
         // Função para criar a embed
-        const createEmbed = (assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole) => {
+        const createEmbed = (assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02) => {
             const embed = new EmbedBuilder()
                 .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setDescription(
@@ -137,7 +134,7 @@ module.exports = {
             return embed;
         };
 
-        let embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole)
+        let embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02)
 
 
         const selectMenu = new StringSelectMenuBuilder()
@@ -154,6 +151,7 @@ module.exports = {
                 { label: 'Descrição 1', value: 'descrição1', description: 'Configurar a descrição para abrir o ticket.', emoji: '<:summary:1293727240114278422>' },
                 { label: 'Titulo 2', value: 'titulo2', description: 'Configurar o titulo dentro do ticket.', emoji: '<:edit1:1293726236505542788>' },
                 { label: 'Descrição 2', value: 'descrição2', description: 'Configurar a descrição dentro do ticket.', emoji: '<:summary:1293727240114278422>' },
+                { label: 'Redefinir Configurações', value: 'reset_settings', description: 'Redefina todas as configurações do ticket.', emoji: '<:NA_Intr004:1289442144255213618>' },
 
             ]);
 
@@ -266,7 +264,7 @@ module.exports = {
                     );
 
                     assignedChannel = `<#${selectedChannelId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole);
+                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
 
                     await interaction.editReply({
                         embeds: [embed],
@@ -274,7 +272,7 @@ module.exports = {
                     });
 
                     await i.update({
-                        content: `Canal de tickets configurado com sucesso: <#${selectedChannelId}>`,
+                        content: `<:1078434426368839750:1290114335909085257> Canal de tickets configurado com sucesso: <#${selectedChannelId}>`,
                         components: []
                     });
                 });
@@ -323,7 +321,7 @@ module.exports = {
                     );
 
                     assignedChannelLogs = `<#${selectedLogChannelId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole);
+                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
 
                     await interaction.editReply({
                         embeds: [embed],
@@ -331,7 +329,7 @@ module.exports = {
                     });
 
                     await i.update({
-                        content: `Canal de logs configurado com sucesso: <#${selectedLogChannelId}>`,
+                        content: `<:1078434426368839750:1290114335909085257> Canal de logs configurado com sucesso: <#${selectedLogChannelId}>`,
                         components: []
                     });
                 });
@@ -387,7 +385,7 @@ module.exports = {
                     );
 
                     ticketCategory = `<#${selectedCategoryId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole);
+                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
 
                     await interaction.editReply({
                         embeds: [embed],
@@ -397,7 +395,7 @@ module.exports = {
 
                     // Atualiza a mensagem do menu para confirmar a configuração
                     await i.update({
-                        content: `Categoria configurada com sucesso: <#${selectedCategoryId}>`,
+                        content: `<:1078434426368839750:1290114335909085257> Categoria configurada com sucesso: <#${selectedCategoryId}>`,
                         components: [] // Remove os componentes após a seleção
                     });
                 });
@@ -506,7 +504,7 @@ module.exports = {
 
 
                     allowedRole = `<@&${selectedRoleId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole);
+                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
 
                     await interaction.editReply({
                         embeds: [embed],
@@ -516,7 +514,7 @@ module.exports = {
 
                     // Atualiza a mensagem do menu para confirmar a configuração
                     await i.update({
-                        content: `Cargo permitido configurado com sucesso: <@&${selectedRoleId}>`, // Menciona o cargo
+                        content: `<:1078434426368839750:1290114335909085257> Cargo permitido configurado com sucesso: <@&${selectedRoleId}>`, // Menciona o cargo
                         components: [] // Remove os componentes após a seleção
                     });
                 });
@@ -643,7 +641,7 @@ module.exports = {
                 // Se houver itens faltando, informa o usuário
                 if (missingItems.length > 0) {
                     return await i.reply({
-                        content: `Os seguintes itens não foram configurados: **${missingItems.join(', ')}**`,
+                        content: `> \`-\` <a:alerta:1163274838111162499> Os seguintes itens não foram configurados: **${missingItems.join(', ')}**`,
                         ephemeral: true
                     });
                 }
@@ -674,10 +672,68 @@ module.exports = {
 
                 // Responde a interação confirmando o envio da embed
                 await i.reply({
-                    content: `A embed do ticket foi enviada para o canal <#${ticketChannel.id}>.`,
+                    content: `<:1078434426368839750:1290114335909085257> A embed do ticket foi enviada para o canal <#${ticketChannel.id}>.`,
                     ephemeral: true
                 });
             }
+
+            if (selectedOption === 'reset_settings') {
+
+                // Recupera as configurações do ticket
+                const ticketConfig = await ticket.findOne({ guildId: interaction.guild.id });
+
+                // Verifica se as configurações existem antes de tentar resetá-las
+                if (!ticketConfig) {
+                    return await i.reply({
+                        content: 'Nenhuma configuração foi encontrada para este servidor.',
+                        ephemeral: true
+                    });
+                }
+
+                // Reseta todas as configurações (dependendo da estrutura do seu banco de dados)
+                await ticket.updateOne(
+                    { guildId: interaction.guild.id },
+                    {
+                        $set: {
+                            canal1: null,
+                            canalLog: null,
+                            categoria: null,
+                            nomeBotao: null,
+                            cargo: null,
+                            titulo01: null,
+                            descrição01: null,
+                            titulo02: null,
+                            descrição02: null
+                        }
+                    }
+                );
+
+                // Valores resetados para a embed
+                let assignedChannel = 'Não configurado';
+                let assignedChannelLogs = 'Não configurado';
+                let ticketCategory = 'Não configurada';
+                let buttonName = 'Não configurado';
+                let allowedRole = 'Não configurado';
+                let titulo01 = 'Não configurado';
+                let descrição01 = 'Não configurado';
+                let titulo02 = 'Não configurado';
+                let descrição02 = 'Não configurado';
+
+                embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
+
+                await interaction.editReply({
+                    embeds: [embed],
+                    components: [row],
+                });
+
+
+                await i.reply({
+                    content: '<:1078434426368839750:1290114335909085257> As configurações do sistema de Ticket foram redefinidas.',
+                    ephemeral: true
+                });
+            }
+
+
         })
 
         collector.on('end', async (collected, reason) => {

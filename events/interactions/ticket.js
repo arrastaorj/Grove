@@ -78,7 +78,7 @@ module.exports = async (interaction) => {
 
             // Responder ao usuário
             await interaction.reply({
-                content: `A configuração foi atualizada com sucesso.`,
+                content: `<:1078434426368839750:1290114335909085257> A configuração foi atualizada com sucesso.`,
                 ephemeral: true
             });
         };
