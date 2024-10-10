@@ -3,7 +3,7 @@ require('dotenv').config()
 require('colors')
 
 const manager = new ShardingManager('./index.js', {
-    token: process.env.tokenGroveTest, 
+    token: process.env.tokenGroveTest,
     totalShards: 'auto',
 });
 
