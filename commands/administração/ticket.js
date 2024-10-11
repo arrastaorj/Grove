@@ -93,8 +93,10 @@ module.exports = {
                 descrição01: null,
                 titulo02: null,
                 descrição02: null,
-            });
-            await ticketConfig.save();
+                imagem01: null,
+                imagem02: null,
+            })
+            await ticketConfig.save()
         }
 
         // Garantir que as variáveis estão sendo corretamente definidas, evitando `undefined` 
@@ -108,9 +110,12 @@ module.exports = {
         let titulo02 = ticketConfig?.titulo02 ? `${ticketConfig.titulo02}` : 'Não configurado';
         let descrição02 = ticketConfig?.descrição02 ? `${ticketConfig.descrição02}` : 'Não configurado';
 
+        let imagem01 = ticketConfig?.imagem01 ? `${ticketConfig.imagem01}` : 'Não configurado';
+        let imagem02 = ticketConfig?.imagem02 ? `${ticketConfig.imagem02}` : 'Não configurado';
+
 
         // Função para criar a embed
-        const createEmbed = (assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02) => {
+        const createEmbed = (assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02) => {
             const embed = new EmbedBuilder()
                 .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setDescription(
@@ -124,8 +129,10 @@ module.exports = {
                     `  - **Cargo Permitido:** <:announcement:1293726066174595215> ${allowedRole}\n` +
                     `  - **Titulo 1 (Para abrir o ticket):** <:edit1:1293726236505542788> ${titulo01}\n` +
                     `  - **Descrição 1 (Para abrir o ticket):** <:summary:1293727240114278422> ${descrição01}\n` +
+                    `  - **Imagem/GIF (Para abrir o ticket):** <:media:1290453610911760396> ${imagem01}\n` +
                     `  - **Titulo 2 (Dentro do ticket):** <:edit1:1293726236505542788> ${titulo02}\n` +
-                    `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n\n` +
+                    `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n` +
+                    `  - **Imagem/GIF (Dentro do ticket):** <:media:1290453610911760396> ${imagem02}\n\n` +
                     `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
                 .setColor('#ba68c8')
                 .setFooter({ text: `O sistema de tickets permite configurar apenas um canal, uma categoria e um cargo permitido.`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
@@ -134,7 +141,36 @@ module.exports = {
             return embed;
         };
 
-        let embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02)
+        let embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02)
+
+
+        async function updateTicketEmbed(interaction, row) {
+            // Buscar as informações mais recentes do banco de dados
+            const updatedTicketConfig = await ticket.findOne({ guildId: interaction.guild.id });
+
+            // Atualizar as variáveis com os novos valores do banco de dados
+            const assignedChannel = updatedTicketConfig.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
+            const assignedChannelLogs = updatedTicketConfig.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
+            const ticketCategory = updatedTicketConfig.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
+            const buttonName = updatedTicketConfig.nomeBotao || 'Não configurado';
+            const allowedRole = updatedTicketConfig.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
+            const titulo01 = updatedTicketConfig.titulo01 || 'Não configurado';
+            const descrição01 = updatedTicketConfig.descrição01 || 'Não configurado';
+            const titulo02 = updatedTicketConfig.titulo02 || 'Não configurado';
+            const descrição02 = updatedTicketConfig.descrição02 || 'Não configurado';
+            const imagem01 = updatedTicketConfig.imagem01 || 'Não configurado';
+            const imagem02 = updatedTicketConfig.imagem02 || 'Não configurado';
+
+            // Recriar a embed com as novas informações
+            const embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02);
+
+            // Atualizar a resposta da interação com a nova embed
+            await interaction.editReply({
+                embeds: [embed],
+                components: [row],
+            });
+        }
+
 
 
         const selectMenu = new StringSelectMenuBuilder()
@@ -147,10 +183,16 @@ module.exports = {
                 { label: 'Categoria', value: 'categoria', description: 'Configurar a categoria onde os tickets serão criados.', emoji: '<:search:1293726966360440966>' },
                 { label: 'Nome do Botão', value: 'nome_botao', description: 'Configurar o nome do botão que abrirá os tickets.', emoji: '<:edit1:1293726236505542788>' },
                 { label: 'Cargo Permitido', value: 'cargo', description: 'Configurar o cargo que poderá ver os tickets.', emoji: '<:announcement:1293726066174595215>' },
-                { label: 'Titulo 1', value: 'titulo1', description: 'Configurar o titulo para abrir o ticket.', emoji: '<:edit1:1293726236505542788>' },
-                { label: 'Descrição 1', value: 'descrição1', description: 'Configurar a descrição para abrir o ticket.', emoji: '<:summary:1293727240114278422>' },
-                { label: 'Titulo 2', value: 'titulo2', description: 'Configurar o titulo dentro do ticket.', emoji: '<:edit1:1293726236505542788>' },
-                { label: 'Descrição 2', value: 'descrição2', description: 'Configurar a descrição dentro do ticket.', emoji: '<:summary:1293727240114278422>' },
+                { label: 'Titulo 1 (Abrir o ticket)', value: 'titulo1', description: 'Configurar o titulo para abrir o ticket.', emoji: '<:edit1:1293726236505542788>' },
+                { label: 'Descrição 1 (Abrir o ticket)', value: 'descrição1', description: 'Configurar a descrição para abrir o ticket.', emoji: '<:summary:1293727240114278422>' },
+
+                { label: 'Imagem/GIF (Abrir o ticket)', value: 'imagem01', description: 'Configurar uma imagem ou gif para abrir o ticket.', emoji: '<:media_add:1294097077579550794>' },
+
+                { label: 'Titulo 2 (Dentro do ticket)', value: 'titulo2', description: 'Configurar o titulo dentro do ticket.', emoji: '<:edit1:1293726236505542788>' },
+                { label: 'Descrição 2 (Dentro do ticket)', value: 'descrição2', description: 'Configurar a descrição dentro do ticket.', emoji: '<:summary:1293727240114278422>' },
+
+                { label: 'Imagem/GIF (Dentro do ticket)', value: 'imagem02', description: 'Configurar uma imagem ou gif dentro do ticket.', emoji: '<:media_add:1294097077579550794>' },
+
                 { label: 'Redefinir Configurações', value: 'reset_settings', description: 'Redefina todas as configurações do ticket.', emoji: '<:NA_Intr004:1289442144255213618>' },
 
             ]);
@@ -250,7 +292,6 @@ module.exports = {
                     });
                 });
 
-
                 const selectMenuCollector = paginationMessage.createMessageComponentCollector({ filter: (int) => int.customId === 'select_ticket_channel', time: timeoutDuration });
 
                 selectMenuCollector.on('collect', async (i) => {
@@ -263,13 +304,8 @@ module.exports = {
                         { upsert: true }
                     );
 
-                    assignedChannel = `<#${selectedChannelId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
+                    await updateTicketEmbed(interaction, row);
 
-                    await interaction.editReply({
-                        embeds: [embed],
-                        components: [row],
-                    });
 
                     await i.update({
                         content: `<:1078434426368839750:1290114335909085257> Canal de tickets configurado com sucesso: <#${selectedChannelId}>`,
@@ -320,13 +356,7 @@ module.exports = {
                         { upsert: true }
                     );
 
-                    assignedChannelLogs = `<#${selectedLogChannelId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
-
-                    await interaction.editReply({
-                        embeds: [embed],
-                        components: [row],
-                    });
+                    await updateTicketEmbed(interaction, row);
 
                     await i.update({
                         content: `<:1078434426368839750:1290114335909085257> Canal de logs configurado com sucesso: <#${selectedLogChannelId}>`,
@@ -384,13 +414,7 @@ module.exports = {
                         { upsert: true }
                     );
 
-                    ticketCategory = `<#${selectedCategoryId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
-
-                    await interaction.editReply({
-                        embeds: [embed],
-                        components: [row],
-                    });
+                    await updateTicketEmbed(interaction, row);
 
 
                     // Atualiza a mensagem do menu para confirmar a configuração
@@ -503,14 +527,7 @@ module.exports = {
                     );
 
 
-                    allowedRole = `<@&${selectedRoleId}>`;
-                    embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
-
-                    await interaction.editReply({
-                        embeds: [embed],
-                        components: [row],
-                    });
-
+                    await updateTicketEmbed(interaction, row);
 
                     // Atualiza a mensagem do menu para confirmar a configuração
                     await i.update({
@@ -563,6 +580,50 @@ module.exports = {
                 modal.addComponents(actionRow);
 
                 // Envia o modal ao usuário
+                await i.showModal(modal);
+            }
+
+            if (selectedOption === 'imagem01') {
+                // Cria o modal para coletar o link da imagem 01
+                const modal = new ModalBuilder()
+                    .setCustomId('imagem01Modal')
+                    .setTitle('Configurar Imagem 01');
+
+                // Campo para o usuário inserir o link da imagem 01
+                const imageLinkInput = new TextInputBuilder()
+                    .setCustomId('imagem01Link')
+                    .setLabel('Insira o link da Imagem 01')
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('https://example.com/imagem.png')
+                    .setRequired(true);
+
+                // Adiciona o campo de texto ao modal
+                const actionRow = new ActionRowBuilder().addComponents(imageLinkInput);
+                modal.addComponents(actionRow);
+
+                // Exibe o modal para o usuário
+                await i.showModal(modal);
+            }
+
+            if (selectedOption === 'imagem02') {
+                // Cria o modal para coletar o link da imagem 02
+                const modal = new ModalBuilder()
+                    .setCustomId('imagem02Modal')
+                    .setTitle('Configurar Imagem 02');
+
+                // Campo para o usuário inserir o link da imagem 02
+                const imageLinkInput = new TextInputBuilder()
+                    .setCustomId('imagem02Link')
+                    .setLabel('Insira o link da Imagem 02')
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('https://example.com/imagem.png')
+                    .setRequired(true);
+
+                // Adiciona o campo de texto ao modal
+                const actionRow = new ActionRowBuilder().addComponents(imageLinkInput);
+                modal.addComponents(actionRow);
+
+                // Exibe o modal para o usuário
                 await i.showModal(modal);
             }
 
@@ -651,11 +712,17 @@ module.exports = {
 
                 // Configura as informações para a embed
                 const embed = new EmbedBuilder()
-                    .setTitle(ticketConfig.titulo01)
+                    .setAuthor({ name: `${ticketConfig.titulo01}`, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
                     .setDescription(ticketConfig.descrição01)
                     .setColor('#2f3136')
-                    .setFooter({ text: "Sistema avançado de Tickets" })
-                    .setThumbnail(interaction.guild.iconURL({ extension: 'png', dynamic: true }));
+                    .setThumbnail(interaction.guild.iconURL({ extension: 'png', dynamic: true }))
+                    .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
+                    .setTimestamp();
+
+                // Verifica se imagem01 foi configurada antes de adicionar a imagem
+                if (ticketConfig.imagem01 && ticketConfig.imagem01.trim() !== "") {
+                    embed.setImage(ticketConfig.imagem01);
+                }
 
                 // Cria o botão com o nome configurado no ticket
                 const button = new ActionRowBuilder()
@@ -703,7 +770,9 @@ module.exports = {
                             titulo01: null,
                             descrição01: null,
                             titulo02: null,
-                            descrição02: null
+                            descrição02: null,
+                            imagem01: null,
+                            imagem02: null,
                         }
                     }
                 );
@@ -718,8 +787,10 @@ module.exports = {
                 let descrição01 = 'Não configurado';
                 let titulo02 = 'Não configurado';
                 let descrição02 = 'Não configurado';
+                let imagem01 = 'Não configurado';
+                let imagem02 = 'Não configurado';
 
-                embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02);
+                embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02)
 
                 await interaction.editReply({
                     embeds: [embed],
@@ -759,3 +830,5 @@ module.exports = {
 
     }
 }
+
+

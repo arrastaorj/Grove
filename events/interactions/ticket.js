@@ -38,6 +38,11 @@ module.exports = async (interaction) => {
             let titulo02 = updatedTicketConfig?.titulo02 || 'Não configurado';
             let descrição02 = updatedTicketConfig?.descrição02 || 'Não configurado';
 
+
+            let imagem01 = updatedTicketConfig?.imagem01 ? `${updatedTicketConfig.imagem01}` : 'Não configurado';
+            let imagem02 = updatedTicketConfig?.imagem02 ? `${updatedTicketConfig.imagem02}` : 'Não configurado';
+
+
             if (interaction.message.embeds.length > 0) {
                 const embed = EmbedBuilder.from(interaction.message.embeds[0]);
                 embed.setDescription(
@@ -51,8 +56,10 @@ module.exports = async (interaction) => {
                     `  - **Cargo Permitido:** <:announcement:1293726066174595215> ${allowedRole}\n` +
                     `  - **Titulo 1 (Para abrir o ticket):** <:edit1:1293726236505542788> ${titulo01}\n` +
                     `  - **Descrição 1 (Para abrir o ticket):** <:summary:1293727240114278422> ${descrição01}\n` +
+                    `  - **Imagem/GIF (Para abrir o ticket):** <:media:1290453610911760396> ${imagem01}\n` +
                     `  - **Titulo 2 (Dentro do ticket):** <:edit1:1293726236505542788> ${titulo02}\n` +
-                    `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n\n` +
+                    `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n` +
+                    `  - **Imagem/GIF (Dentro do ticket):** <:media:1290453610911760396> ${imagem02}\n\n` +
                     `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
                 );
                 try {
@@ -62,6 +69,21 @@ module.exports = async (interaction) => {
                 }
             }
         };
+
+        async function isValidImageUrl(url) {
+            try {
+                // Faz uma requisição HEAD para o URL
+                const response = await fetch(url, { method: 'HEAD' });
+
+                // Verifica o content-type do cabeçalho da resposta
+                const contentType = response.headers.get('content-type');
+                return contentType && (contentType.startsWith('image/jpeg') || contentType.startsWith('image/png') || contentType.startsWith('image/gif'));
+            } catch (error) {
+                // Se houver erro, a URL não é válida ou acessível
+                return false;
+            }
+        }
+
 
         // Função para salvar dados e atualizar embed
         const handleModalSubmit = async (interaction, updateData) => {
@@ -99,9 +121,38 @@ module.exports = async (interaction) => {
         } else if (interaction.customId === 'descricao2_modal') {
             const descricao2 = interaction.fields.getTextInputValue('descricao2_input');
             await handleModalSubmit(interaction, { descrição02: descricao2 });
-        }
-    }
 
+
+
+
+        } else if (interaction.customId === 'imagem01Modal') {
+            const imageUrl = interaction.fields.getTextInputValue('imagem01Link');
+
+            // Verifica se a URL é válida para imagens JPEG, PNG ou GIF
+            if (!(await isValidImageUrl(imageUrl))) {
+                return await interaction.reply({
+                    content: '> \`-\` <a:alerta:1163274838111162499> O link fornecido não é uma URL válida para uma imagem (somente arquivos JPEG, PNG ou GIF são permitidos).',
+                    ephemeral: true
+                });
+            }
+
+            await handleModalSubmit(interaction, { imagem01: imageUrl });
+
+        } else if (interaction.customId === 'imagem02Modal') {
+            const imageUrl = interaction.fields.getTextInputValue('imagem02Link');
+
+            // Verifica se a URL é válida para imagens JPEG, PNG ou GIF
+            if (!(await isValidImageUrl(imageUrl))) {
+                return await interaction.reply({
+                    content: '> \`-\` <a:alerta:1163274838111162499> O link fornecido não é uma URL válida para uma imagem (somente arquivos JPEG, PNG ou GIF são permitidos).',
+                    ephemeral: true
+                });
+            }
+
+            await handleModalSubmit(interaction, { imagem02: imageUrl });
+        }
+
+    }
 
 
     if (interaction.isButton) {
@@ -210,6 +261,8 @@ module.exports = async (interaction) => {
 
                         let titulo = cmd3.titulo02
 
+                        let imagem02 = cmd3.imagem02
+
                         let descrição = cmd3.descrição02
 
                         let iniciado = new EmbedBuilder()
@@ -229,9 +282,15 @@ module.exports = async (interaction) => {
 
                         let criado = new EmbedBuilder()
                             .setColor('#2f3136')
+
                             .setAuthor({ name: titulo, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                             .setDescription(descrição)
                             .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
+
+
+                        if (imagem02 && imagem02.trim() !== "") {
+                            criado.setImage(imagem02);
+                        }
 
                         let fechar = new ButtonBuilder()
                             .setCustomId('close')

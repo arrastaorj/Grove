@@ -52,7 +52,8 @@ client.on("interactionCreate", async (interaction) => {
             'modal_ticket', 'ticket', 'assumirTicket', 'call', 'EncerrarChamado',
             'AdicionarMembro', 'RemoverMembro', 'poke', 'addmembro',
             'removermembrotexto', 'SairdoTicket', 'close', 'reabrir', 'msg', 'deletar',
-            'button_name_modal', 'titulo1_modal', 'descricao1_modal', 'titulo2_modal', 'descricao2_modal'
+            'button_name_modal', 'titulo1_modal', 'descricao1_modal', 'titulo2_modal', 'descricao2_modal',
+            'imagem01Modal', 'imagem02Modal'
         ];
 
         if (ticketButtonIds.includes(interaction.customId)) {
