@@ -134,7 +134,8 @@ module.exports = {
                     `  - **Descrição 2 (Dentro do ticket):** <:summary:1293727240114278422> ${descrição02}\n` +
                     `  - **Imagem/GIF (Dentro do ticket):** <:media:1290453610911760396> ${imagem02}\n\n` +
                     `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
-                .setColor('#ba68c8')
+                .setColor("#ba68c8")
+
                 .setFooter({ text: `O sistema de tickets permite configurar apenas um canal, uma categoria e um cargo permitido.`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
                 .setTimestamp();
 
@@ -714,7 +715,7 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setAuthor({ name: `${ticketConfig.titulo01}`, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
                     .setDescription(ticketConfig.descrição01)
-                    .setColor('#2f3136')
+                    .setColor('#ba68c8')
                     .setThumbnail(interaction.guild.iconURL({ extension: 'png', dynamic: true }))
                     .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
                     .setTimestamp();

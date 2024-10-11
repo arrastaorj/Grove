@@ -266,7 +266,7 @@ module.exports = async (interaction) => {
                         let descrição = cmd3.descrição02
 
                         let iniciado = new EmbedBuilder()
-                            .setColor('#2f3136')
+                            .setColor('#ba68c8')
                             .setAuthor({ name: `Suporte - ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
                             .setDescription(`Olá ${interaction.user}, Seu ticket foi criado com sucesso.`)
                             .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
@@ -281,7 +281,7 @@ module.exports = async (interaction) => {
                         interaction.reply({ embeds: [iniciado], components: [butão], ephemeral: true })
 
                         let criado = new EmbedBuilder()
-                            .setColor('#2f3136')
+                            .setColor('#ba68c8')
 
                             .setAuthor({ name: titulo, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                             .setDescription(descrição)
@@ -374,7 +374,7 @@ module.exports = async (interaction) => {
 
                 // Notifique o canal sobre quem assumiu o ticket
                 let embed = new EmbedBuilder()
-                    .setColor('#2f3136')
+                    .setColor('#ba68c8')
                     .setDescription(`Este ticket foi assumido por ${atendente}.`);
 
                 // Responder à interação
@@ -510,7 +510,7 @@ module.exports = async (interaction) => {
                     const callIniciadaEmbed = new EmbedBuilder()
                         .setTitle("Chamada Iniciada")
                         .setDescription(`Uma chamada foi iniciada por ${interaction.user}. Abaixo estão várias funções disponíveis com interação apenas no chat de voz.`)
-                        .setColor("#27ae60")
+                        .setColor("#ba68c8")
                         .setFooter({
                             iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
                             text: `A chamada será encerrada após 2 minutos de inatividade.`
@@ -531,7 +531,7 @@ module.exports = async (interaction) => {
                         const inatividadeEmbed = new EmbedBuilder()
                             .setTitle(`Suporte por Chamada Encerrado`)
                             .setDescription(`O suporte por chamada foi encerrado devido à inatividade.`)
-                            .setColor("#e74c3c")
+                            .setColor("#ba68c8")
                             .setTimestamp()
                         setTimeout(() => {
                             if (channel.members.size <= 0) {
@@ -567,7 +567,7 @@ module.exports = async (interaction) => {
                 const sairEmbed = new EmbedBuilder()
                     .setTitle(`Suporte por Chamada Encerrado`)
                     .setDescription(`O suporte por chamada foi encerrado por um membro da equipe.\n\n**Usuário:** ${interaction.user.username}`)
-                    .setColor("#3498db")
+                    .setColor("#ba68c8")
                     .setTimestamp()
 
                 interaction.message.edit({ embeds: [sairEmbed], components: [] })
@@ -653,7 +653,7 @@ module.exports = async (interaction) => {
                     );
 
                     const embed = new EmbedBuilder()
-                        .setColor("#3498db") // Cor azul profissional
+                        .setColor("#ba68c8") // Cor azul profissional
                         .setTitle(`<a:alerta:1163274838111162499> Você foi mencionado em um Ticket!`)
                         .setDescription(`Olá membros com o cargo **${role.name}**,\n\nAlguém mencionou vocês em um ticket aberto e aguarda uma resposta.\n\nPor favor, verifique o ticket e forneça sua colaboração.`)
                         .setFooter({
@@ -768,7 +768,7 @@ module.exports = async (interaction) => {
                 })
 
                 let embed = new EmbedBuilder()
-                    .setColor('#2f3136')
+                    .setColor('#ba68c8')
                     .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                     .setDescription(`O Membro ${interaction.user}\`(${interaction.user.id})\` Fechou o ticket, Escolha uma opção abaixo.`)
 
@@ -820,7 +820,7 @@ module.exports = async (interaction) => {
                 })
 
                 let embed = new EmbedBuilder()
-                    .setColor('#2f3136')
+                    .setColor('#ba68c8')
                     .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                     .setDescription(`Olá <@${ticket}>, O Membro ${interaction.user} Reabriu seu ticket.`)
 
@@ -895,7 +895,7 @@ module.exports = async (interaction) => {
 
                     // Crie a embed com as informações do atendente e número de tickets
                     let embed = new EmbedBuilder()
-                        .setColor('#5865F2') // Azul do Discord
+                        .setColor('#ba68c8') // Azul do Discord
                         .setTitle('📋 Ticket Encerrado') // Título com emoji
                         .setDescription(`
                         **👤 Ticket de:** <@${topic}> \`(${topic})\`
