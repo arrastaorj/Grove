@@ -40,9 +40,13 @@ module.exports = {
 
             function calculateLevelXp(level) {
                 const baseXp = 100;
-                const xpGrowthRate = 1.2;
-                return Math.floor(baseXp * Math.pow(xpGrowthRate, level));
+                let requiredXp = Math.floor(baseXp * Math.pow(level, 1.5)); // Crescimento polinomial
+
+                // Define um limite máximo para o XP necessário
+                const maxXp = Number.MAX_SAFE_INTEGER; // Limite máximo seguro de XP
+                return Math.min(requiredXp, maxXp);
             }
+
 
             const xpToGive = getRandomXp(1, 20);
             const query = { userId: message.author.id, guildId: message.guild.id };
@@ -50,24 +54,26 @@ module.exports = {
             userLeveling.add(message.author.id);
 
             try {
-                let level = await Level.findOne(query);
-                if (!level) {
-                    level = new Level({
-                        userId: message.author.id,
-                        guildId: message.guild.id,
-                        xp: xpToGive,
-                        level: 0,
-                        requiredXp: calculateLevelXp(1)
-                    });
-                } else {
-                    level.xp += xpToGive;
-                }
+                // Atualiza ou cria um novo usuário com o upsert
+                const level = await Level.findOneAndUpdate(
+                    query,
+                    {
+                        $inc: { xp: xpToGive },  // Incrementa XP
+                        $setOnInsert: {
+                            level: 0,
+                            requiredXp: calculateLevelXp(1)
+                        }
+                    },
+                    { new: true, upsert: true } // new retorna o documento atualizado; upsert cria se não existir
+                );
 
+                // Lógica de nível após a atualização ou criação
                 if (level.xp >= level.requiredXp) {
                     level.xp -= level.requiredXp;
                     level.level += 1;
                     level.requiredXp = calculateLevelXp(level.level + 1);
 
+                    // Gera a imagem de level up
                     const levelUpImage = await new canvafy.LevelUp()
                         .setAvatar(message.author.displayAvatarURL({ format: 'png', size: 1024 }))
                         .setBackground("image", "https://github.com/arrastaorj/flags/blob/main/rankAtendimento.jpg?raw=true")
@@ -86,7 +92,7 @@ module.exports = {
                     });
                 }
 
-                await level.save();
+                await level.save(); // Salva as alterações no nível e XP
 
                 cooldowns.add(message.author.id);
                 setTimeout(() => cooldowns.delete(message.author.id), 60000);
