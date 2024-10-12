@@ -105,10 +105,10 @@ module.exports = {
         let ticketCategory = ticketConfig?.categoria ? `<#${ticketConfig.categoria}>` : 'Não configurada';
         let buttonName = ticketConfig?.nomeBotao || 'Não configurado';
         let allowedRole = ticketConfig?.cargo ? `<@&${ticketConfig.cargo}>` : 'Não configurado';
-        let titulo01 = ticketConfig?.titulo01 ? `${ticketConfig.titulo01}` : 'Não configurado';
-        let descrição01 = ticketConfig?.descrição01 ? `${ticketConfig.descrição01}` : 'Não configurado';
-        let titulo02 = ticketConfig?.titulo02 ? `${ticketConfig.titulo02}` : 'Não configurado';
-        let descrição02 = ticketConfig?.descrição02 ? `${ticketConfig.descrição02}` : 'Não configurado';
+        let titulo01 = ticketConfig?.titulo01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+        let descrição01 = ticketConfig?.descrição01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+        let titulo02 = ticketConfig?.titulo02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+        let descrição02 = ticketConfig?.descrição02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
 
         let imagem01 = ticketConfig?.imagem01 ? `${ticketConfig.imagem01}` : 'Não configurado';
         let imagem02 = ticketConfig?.imagem02 ? `${ticketConfig.imagem02}` : 'Não configurado';
@@ -155,10 +155,12 @@ module.exports = {
             const ticketCategory = updatedTicketConfig.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
             const buttonName = updatedTicketConfig.nomeBotao || 'Não configurado';
             const allowedRole = updatedTicketConfig.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
-            const titulo01 = updatedTicketConfig.titulo01 || 'Não configurado';
-            const descrição01 = updatedTicketConfig.descrição01 || 'Não configurado';
-            const titulo02 = updatedTicketConfig.titulo02 || 'Não configurado';
-            const descrição02 = updatedTicketConfig.descrição02 || 'Não configurado';
+
+            const titulo01 = updatedTicketConfig?.titulo01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const descrição01 = updatedTicketConfig?.descrição01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const titulo02 = updatedTicketConfig?.titulo02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const descrição02 = updatedTicketConfig?.descrição02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+
             const imagem01 = updatedTicketConfig.imagem01 || 'Não configurado';
             const imagem02 = updatedTicketConfig.imagem02 || 'Não configurado';
 
@@ -168,7 +170,7 @@ module.exports = {
             // Atualizar a resposta da interação com a nova embed
             await interaction.editReply({
                 embeds: [embed],
-                components: [row],
+                components: [row, row1],
             });
         }
 
@@ -198,12 +200,20 @@ module.exports = {
 
             ]);
 
-        const row = new ActionRowBuilder().addComponents(selectMenu);
+        const button = new ButtonBuilder()
+            .setLabel("Preview Ticket")
+            .setEmoji("<:search:1293726966360440966>")
+            .setCustomId('preview_ticket')
+            .setStyle(ButtonStyle.Secondary)
+
+
+        const row1 = new ActionRowBuilder().addComponents(button)
+        const row = new ActionRowBuilder().addComponents(selectMenu)
 
 
         const initialMessage = await interaction.reply({
             embeds: [embed],
-            components: [row]
+            components: [row, row1]
         })
 
 
@@ -550,6 +560,7 @@ module.exports = {
                     .setCustomId('titulo1_input')
                     .setLabel('Título 1')
                     .setStyle(TextInputStyle.Short)
+                    .setMaxLength(256)
                     .setPlaceholder('Título para abrir o ticket')
                     .setRequired(true); // Define como obrigatório
 
@@ -572,6 +583,7 @@ module.exports = {
                 const textInput = new TextInputBuilder()
                     .setCustomId('descricao1_input')
                     .setLabel('Descrição 1')
+                    .setMaxLength(4000)
                     .setStyle(TextInputStyle.Paragraph)
                     .setPlaceholder('Descrição para abrir o ticket')
                     .setRequired(true);
@@ -639,6 +651,7 @@ module.exports = {
                 const textInput = new TextInputBuilder()
                     .setCustomId('titulo2_input')
                     .setLabel('Título 2')
+                    .setMaxLength(256)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Título dentro do ticket')
                     .setRequired(true); // Define como obrigatório
@@ -662,6 +675,7 @@ module.exports = {
                 const textInput = new TextInputBuilder()
                     .setCustomId('descricao2_input')
                     .setLabel('Descrição 2')
+                    .setMaxLength(4000)
                     .setStyle(TextInputStyle.Paragraph)
                     .setPlaceholder('Descrição dentro do ticket')
                     .setRequired(true);
@@ -778,25 +792,7 @@ module.exports = {
                     }
                 );
 
-                // Valores resetados para a embed
-                let assignedChannel = 'Não configurado';
-                let assignedChannelLogs = 'Não configurado';
-                let ticketCategory = 'Não configurada';
-                let buttonName = 'Não configurado';
-                let allowedRole = 'Não configurado';
-                let titulo01 = 'Não configurado';
-                let descrição01 = 'Não configurado';
-                let titulo02 = 'Não configurado';
-                let descrição02 = 'Não configurado';
-                let imagem01 = 'Não configurado';
-                let imagem02 = 'Não configurado';
-
-                embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02)
-
-                await interaction.editReply({
-                    embeds: [embed],
-                    components: [row],
-                });
+                await updateTicketEmbed(interaction, row);
 
 
                 await i.reply({
@@ -804,6 +800,8 @@ module.exports = {
                     ephemeral: true
                 });
             }
+
+
 
 
         })
