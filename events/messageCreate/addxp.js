@@ -12,7 +12,8 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
         try {
-            if (message.author.bot || message.channel.type === 'dm') return;
+            // Verificação de bots e mensagens em DMs
+            if (message.author.bot || !message.guild || message.channel.type === 'dm') return;
             if (cooldowns.has(message.author.id)) return;
             if (userLeveling.has(message.author.id)) return;
 
@@ -24,6 +25,9 @@ module.exports = {
                 return;
             }
 
+            // Verificação para garantir que message.guild existe
+            if (!message.guild) return;
+
             let cmd = commandCache.get(message.guild.id);
             if (!cmd) {
                 cmd = await comandos.findOne({ guildId: message.guild.id });
@@ -34,6 +38,7 @@ module.exports = {
 
             const cmd1 = cmd.canal1;
 
+            // Lógica para cálculo de XP e nível
             function getRandomXp(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
@@ -46,7 +51,6 @@ module.exports = {
                 const maxXp = Number.MAX_SAFE_INTEGER; // Limite máximo seguro de XP
                 return Math.min(requiredXp, maxXp);
             }
-
 
             const xpToGive = getRandomXp(1, 20);
             const query = { userId: message.author.id, guildId: message.guild.id };
