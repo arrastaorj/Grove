@@ -1,6 +1,5 @@
 const {
     SlashCommandBuilder,
-    PermissionFlagsBits,
     PermissionsBitField,
     EmbedBuilder,
     ModalBuilder,
@@ -28,17 +27,18 @@ module.exports = {
 
     async execute(interaction) {
 
-        // Verificação de permissões
+        // Verificação de permissões do usuário
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão. (Administrator).`,
                 ephemeral: true
             });
         }
 
-        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
+        // Verificação de permissões do bot
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
+            return await interaction.reply({
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para concluir este comando (ManageMessages).`,
                 ephemeral: true
             });
         }

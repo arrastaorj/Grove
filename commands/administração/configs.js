@@ -37,7 +37,7 @@ module.exports = {
                 // Verificação de permissões
                 if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
                     return await interaction.reply({
-                        content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                        content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão.`,
                         ephemeral: true
                     });
                 }

@@ -26,7 +26,7 @@ module.exports = {
 
         // Verifica se o autor tem a permissão de mutar membros
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para mutar membros.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para mutar membros.", ephemeral: true });
         }
 
         const user = interaction.options.getUser("user");
@@ -36,17 +36,17 @@ module.exports = {
 
         // Verifica se o usuário está no servidor
         if (!member) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário não está no servidor.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está no servidor.", ephemeral: true });
         }
 
         // Verifica se o membro já está mutado
         const muteRole = interaction.guild.roles.cache.find(role => role.name.toLowerCase() === "mutado");
         if (!muteRole) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> O cargo de 'mutado' não foi encontrado. Por favor, crie um cargo 'mutado' e configure as permissões.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> O cargo de 'mutado' não foi encontrado. Por favor, crie um cargo 'mutado' e configure as permissões.", ephemeral: true });
         }
 
         if (member.roles.cache.has(muteRole.id)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário já está mutado.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário já está mutado.", ephemeral: true });
         }
 
         // Adicionando o cargo de mute ao usuário
@@ -70,7 +70,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar mutar este usuário.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao tentar mutar este usuário.", ephemeral: true });
         }
 
     }

@@ -26,7 +26,7 @@ module.exports = {
 
         if (!canalID) {
             return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
                 ephemeral: true
             });
         }
@@ -35,14 +35,14 @@ module.exports = {
 
         if (!canalPermitido) {
             return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
                 ephemeral: true
             });
         }
 
         if (interaction.channel.id !== canalPermitido) {
             return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
                 ephemeral: true
             });
         }

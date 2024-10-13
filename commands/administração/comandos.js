@@ -19,20 +19,23 @@ module.exports = {
 
 
     async execute(interaction) {
-        // Verificação de permissões
+
+        // Verificação de permissões do usuário
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
-                content: '> ⚠️ Você não tem permissão para usar este comando.',
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão. (Administrator).`,
                 ephemeral: true
             });
         }
 
-        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)) {
-            return interaction.reply({
-                content: '> ⚠️ Não tenho permissão para gerenciar canais.',
+        // Verificação de permissões do bot
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
+            return await interaction.reply({
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para concluir este comando (ManageMessages).`,
                 ephemeral: true
             });
         }
+
 
         const userId = interaction.user.id;
 
@@ -63,7 +66,7 @@ module.exports = {
             const formattedTime = formatTime(secondsRemaining);
 
             return interaction.reply({
-                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de Comandos. Aguarde ${formattedTime} antes de tentar novamente.`,
+                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação com o sistema de Comandos. Aguarde ${formattedTime} antes de tentar novamente.`,
                 ephemeral: true
             });
         }

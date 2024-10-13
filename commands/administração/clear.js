@@ -21,20 +21,20 @@ module.exports = {
 
 
         if (messageCount < 1 || messageCount > 100) {
-            return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro inesperado, Você precisa fornecer um numero de 1 a 100`, ephemeral: true })
+            return interaction.reply({ content: `> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro inesperado, Você precisa fornecer um numero de 1 a 100`, ephemeral: true })
         }
 
         // Verificação de permissões
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
             return await interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão.`,
                 ephemeral: true
             });
         }
 
         if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) {
             return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
                 ephemeral: true
             });
         }
@@ -50,7 +50,7 @@ module.exports = {
             })
 
             if (deletableMessages.size === 0) {
-                return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não há mensagens a serem excluídas, pois todas estão fixadas ou têm mais de 14 dias.`, ephemeral: true })
+                return interaction.reply({ content: `> \`-\` <:NA_Intr004:1289442144255213618> Não há mensagens a serem excluídas, pois todas estão fixadas ou têm mais de 14 dias.`, ephemeral: true })
             }
 
             await interaction.channel.bulkDelete(messagesToDelete, true)
@@ -68,9 +68,9 @@ module.exports = {
             }
 
             if (notDeletedCount === 1) {
-                responseMessage += `<a:alerta:1163274838111162499> Além disso, uma mensagem não pôde ser removida por ser mais antiga do que 14 dias.`
+                responseMessage += `<:NA_Intr004:1289442144255213618> Além disso, uma mensagem não pôde ser removida por ser mais antiga do que 14 dias.`
             } else if (notDeletedCount > 1) {
-                responseMessage += `<a:alerta:1163274838111162499> Além disso, ${notDeletedCount} mensagens não puderam ser removidas por serem mais antigas do que 14 dias.`
+                responseMessage += `<:NA_Intr004:1289442144255213618> Além disso, ${notDeletedCount} mensagens não puderam ser removidas por serem mais antigas do que 14 dias.`
             }
 
             const embed = new EmbedBuilder()
@@ -84,7 +84,7 @@ module.exports = {
 
         } catch (error) {
             interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> O Discord não permite a exclusão de mensagens com mais de 14 dias`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> O Discord não permite a exclusão de mensagens com mais de 14 dias`,
                 ephemeral: true,
             })
         }

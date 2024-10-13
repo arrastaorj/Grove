@@ -19,7 +19,7 @@ module.exports = {
             const canalID = await comandos.findOne({ guildId: interaction.guild.id });
             if (!canalID || !canalID.canal1) {
                 return interaction.reply({
-                    content: `> \`-\` <a:alerta:1163274838111162499> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                    content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
                     ephemeral: true
                 });
             }
@@ -27,7 +27,7 @@ module.exports = {
             const canalPermitido = canalID.canal1;
             if (interaction.channel.id !== canalPermitido) {
                 return interaction.reply({
-                    content: `> \`-\` <a:alerta:1163274838111162499> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
+                    content: `> \`-\` <:NA_Intr004:1289442144255213618> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
                     ephemeral: true
                 });
             }
@@ -39,7 +39,7 @@ module.exports = {
             let levelData = await Level.findOne({ userId: user.id, guildId: interaction.guild.id });
             if (!levelData) {
                 return interaction.reply({
-                    content: `> \`-\` <a:alerta:1163274838111162499> Este usuário ainda não possui dados de nível.`,
+                    content: `> \`-\` <:NA_Intr004:1289442144255213618> Este usuário ainda não possui dados de nível.`,
                     ephemeral: true
                 });
             }
@@ -79,7 +79,7 @@ module.exports = {
         } catch (error) {
             console.error(`Erro ao exibir o nível do usuário: ${error}`);
             interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao exibir o nível do usuário.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao exibir o nível do usuário.`,
                 ephemeral: true
             });
         }

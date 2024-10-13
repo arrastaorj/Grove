@@ -24,18 +24,20 @@ module.exports = {
         .setDescription('Configure o menu do ticket.'),
 
     async execute(interaction) {
-        // Verificação de permissões
+
+
+        // Verificação de permissões do usuário
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão. (Administrator).`,
                 ephemeral: true
             });
         }
 
-        const botMember = interaction.guild.members.cache.get(client.user.id);
-        if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois ainda não recebi permissão para gerenciar este servidor (Administrador)`,
+        // Verificação de permissões do bot
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
+            return await interaction.reply({
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para concluir este comando (ManageMessages).`,
                 ephemeral: true
             });
         }
@@ -70,7 +72,7 @@ module.exports = {
             const formattedTime = formatTime(secondsRemaining);
 
             return interaction.reply({
-                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de Ticket. Aguarde ${formattedTime} antes de tentar novamente.`,
+                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação com o sistema de Ticket. Aguarde ${formattedTime} antes de tentar novamente.`,
                 ephemeral: true
             });
         }
@@ -173,7 +175,6 @@ module.exports = {
                 components: [row, row1],
             });
         }
-
 
 
         const selectMenu = new StringSelectMenuBuilder()
@@ -491,13 +492,13 @@ module.exports = {
                             new ButtonBuilder()
                                 .setCustomId('previous_role_page')
                                 .setLabel('Voltar')
-                                .setEmoji('⬅️')
+                                .setEmoji('<:arrowwhite_left:1293008404662587402>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === 0),
                             new ButtonBuilder()
                                 .setCustomId('next_role_page')
                                 .setLabel('Avançar')
-                                .setEmoji('➡️')
+                                .setEmoji('<:arrowwhite:1293008459968544779>')
                                 .setStyle(ButtonStyle.Primary)
                                 .setDisabled(page === totalRolePages - 1)
                         );
@@ -717,7 +718,7 @@ module.exports = {
                 // Se houver itens faltando, informa o usuário
                 if (missingItems.length > 0) {
                     return await i.reply({
-                        content: `> \`-\` <a:alerta:1163274838111162499> Os seguintes itens não foram configurados: **${missingItems.join(', ')}**`,
+                        content: `> \`-\` <:NA_Intr004:1289442144255213618> Os seguintes itens não foram configurados: **${missingItems.join(', ')}**`,
                         ephemeral: true
                     });
                 }

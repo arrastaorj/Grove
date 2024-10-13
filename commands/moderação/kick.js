@@ -26,7 +26,7 @@ module.exports = {
 
         // Verifica se o autor tem a permissão de expulsar
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para expulsar membros.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para expulsar membros.", ephemeral: true });
         }
 
         const user = interaction.options.getUser("user");
@@ -36,12 +36,12 @@ module.exports = {
 
         // Verifica se o usuário está no servidor
         if (!member) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário não está no servidor.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está no servidor.", ephemeral: true });
         }
 
         // Verifica se o membro pode ser expulso (não pode expulsar administradores)
         if (!member.kickable) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Eu não posso expulsar este usuário.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Eu não posso expulsar este usuário.", ephemeral: true });
         }
 
         // Expulsando o membro
@@ -65,7 +65,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar expulsar este usuário.", ephemeral: true });
+            await interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao tentar expulsar este usuário.", ephemeral: true });
         }
 
     }

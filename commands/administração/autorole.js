@@ -49,26 +49,28 @@ module.exports = {
             const formattedTime = formatTime(secondsRemaining);
 
             return interaction.reply({
-                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de AutoRoles. Aguarde ${formattedTime} antes de tentar novamente.`,
+                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação com o sistema de AutoRoles. Aguarde ${formattedTime} antes de tentar novamente.`,
                 ephemeral: true
             });
         }
 
 
-        // Verificação de permissões
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+        // Verificação de permissões do usuário
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) {
             return await interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Você não possui permissão para gerenciar cargos (ManageRoles).`,
                 ephemeral: true
             });
         }
 
-        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois não recebi permissão para gerenciar este servidor (Administrador)`,
+        // Verificação de permissões do bot
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageRoles)) {
+            return await interaction.reply({
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para gerenciar cargos no servidor (ManageRoles).`,
                 ephemeral: true
             });
         }
+
 
 
         // Verificação se existe um registro para a guilda no banco de dados
@@ -194,7 +196,7 @@ module.exports = {
 
                     if (currentRoles.length >= 5) {
                         await i.reply({
-                            content: '> \`-\` <a:alerta:1163274838111162499> O máximo de cargos definidos foi atingido! Para adicionar outro cargo, remova algum da lista.',
+                            content: '> \`-\` <:NA_Intr004:1289442144255213618> O máximo de cargos definidos foi atingido! Para adicionar outro cargo, remova algum da lista.',
                             ephemeral: true
                         });
                     } else {

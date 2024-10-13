@@ -53,7 +53,7 @@ module.exports = {
             const formattedTime = formatTime(secondsRemaining);
 
             return interaction.reply({
-                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de AutoMod. Aguarde ${formattedTime} antes de tentar novamente.`,
+                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação com o sistema de AutoMod. Aguarde ${formattedTime} antes de tentar novamente.`,
                 ephemeral: true
             });
         }
@@ -62,14 +62,14 @@ module.exports = {
         // Verificação de permissões
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return await interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão.`,
                 ephemeral: true
             });
         }
 
         const botMember = interaction.guild.members.cache.get(client.user.id);
         if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-            return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true });
+            return interaction.reply({ content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir o comandos pois ainda não recebir permissão para gerenciar este servidor (Administrador)`, ephemeral: true });
         }
 
 
@@ -180,7 +180,7 @@ module.exports = {
                 automodSettings = await getOrCreateAutoModSettings(guild.id);
 
                 if (automodSettings.keywordBlockEnabled) {
-                    await i.reply({ content: '> \`-\` <a:alerta:1163274838111162499> A regra de AutoMod para **bloquear palavras ofensivas** já está ativada', ephemeral: true });
+                    await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> A regra de AutoMod para **bloquear palavras ofensivas** já está ativada', ephemeral: true });
                 } else {
                     automodSettings.keywordBlockEnabled = true;
                     await automodSettings.save();
@@ -211,7 +211,7 @@ module.exports = {
                 automodSettings = await getOrCreateAutoModSettings(guild.id);
 
                 if (automodSettings.messageSpamBlockEnabled) {
-                    await i.reply({ content: '> \`-\` <a:alerta:1163274838111162499> Informamos que a regra de AutoMod para bloqueio de spam de mensagens já está ativada.', ephemeral: true });
+                    await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> Informamos que a regra de AutoMod para bloqueio de spam de mensagens já está ativada.', ephemeral: true });
                 } else {
                     automodSettings.messageSpamBlockEnabled = true;
 
@@ -229,7 +229,7 @@ module.exports = {
                                 metadata: {
                                     channel: interaction.channel,
                                     durationSeconds: 10,
-                                    customMessage: `> \`-\` <a:alerta:1163274838111162499> O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
+                                    customMessage: `> \`-\` <:NA_Intr004:1289442144255213618> O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
                                 }
                             }
                         ]

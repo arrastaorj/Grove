@@ -18,7 +18,7 @@ module.exports = {
         // Verifica se o usuário tem permissão para gerenciar canais
         if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
             return interaction.reply({
-                content: `> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para usar este comando.`,
+                content: `> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para usar este comando.`,
                 ephemeral: true,
             });
         }

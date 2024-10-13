@@ -26,7 +26,7 @@ module.exports = {
 
         // Verifica se o autor tem a permissão de banir
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para banir membros.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para banir membros.", ephemeral: true });
         }
 
         const user = interaction.options.getUser("user");
@@ -36,12 +36,12 @@ module.exports = {
 
         // Verifica se o usuário está no servidor
         if (!member) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário não está no servidor.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está no servidor.", ephemeral: true });
         }
 
         // Verifica se o membro pode ser banido (não pode banir administradores)
         if (!member.bannable) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Eu não posso banir este usuário.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Eu não posso banir este usuário.", ephemeral: true });
         }
 
         // Banindo o membro
@@ -64,7 +64,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar banir este usuário.", ephemeral: true });
+            await interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao tentar banir este usuário.", ephemeral: true });
         }
     }
 }

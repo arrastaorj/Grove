@@ -26,7 +26,7 @@ module.exports = {
 
           // Verifica se o autor tem a permissão de desbanir
           if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para desbanir membros.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para desbanir membros.", ephemeral: true });
         }
 
         const userId = interaction.options.getString("user");
@@ -34,7 +34,7 @@ module.exports = {
 
         // Verifica se o ID é válido
         if (!userId || isNaN(userId)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Forneça um ID de usuário válido.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Forneça um ID de usuário válido.", ephemeral: true });
         }
 
         try {
@@ -42,7 +42,7 @@ module.exports = {
             const banInfo = await interaction.guild.bans.fetch(userId);
 
             if (!banInfo) {
-                return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário não está banido.", ephemeral: true });
+                return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está banido.", ephemeral: true });
             }
 
             // Desbanindo o usuário
@@ -65,7 +65,7 @@ module.exports = {
         
         } catch (error) {
           
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar desbanir este usuário. Verifique se o ID está correto ou o usuário ja foi desbanido.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao tentar desbanir este usuário. Verifique se o ID está correto ou o usuário ja foi desbanido.", ephemeral: true });
         }
 
     }

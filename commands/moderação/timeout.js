@@ -34,7 +34,7 @@ module.exports = {
 
         // Verifica se o autor tem a permissão de moderar membros
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Você não tem permissão para aplicar timeout em membros.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Você não tem permissão para aplicar timeout em membros.", ephemeral: true });
         }
 
         const user = interaction.options.getUser("user");
@@ -44,18 +44,18 @@ module.exports = {
 
         // Verifica se o usuário está no servidor
         if (!member) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Este usuário não está no servidor.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está no servidor.", ephemeral: true });
         }
 
         // Verifica se o membro pode ser silenciado (não pode aplicar timeout a administradores)
         if (!member.moderatable) {
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Eu não posso aplicar timeout neste usuário.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Eu não posso aplicar timeout neste usuário.", ephemeral: true });
         }
 
         // Converte o tempo para milissegundos
         const timeInMs = ms(duration);
         if (!timeInMs || timeInMs < 10000 || timeInMs > 2419200000) { // Entre 10 segundos e 28 dias
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> O tempo de timeout deve ser entre 10 segundos e 28 dias.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> O tempo de timeout deve ser entre 10 segundos e 28 dias.", ephemeral: true });
         }
 
         // Aplicando o timeout
@@ -79,7 +79,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            return interaction.reply({ content: "> \`-\` <a:alerta:1163274838111162499> Ocorreu um erro ao tentar aplicar timeout a este usuário. Você pode usar **/audit logs** para configurar um novo canal de logs.", ephemeral: true });
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Ocorreu um erro ao tentar aplicar timeout a este usuário. Você pode usar **/audit logs** para configurar um novo canal de logs.", ephemeral: true });
         }
 
     }
