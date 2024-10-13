@@ -15,7 +15,7 @@ const collectors = new Map()
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('roleall')
-        .setDescription('Configure e atribua um cargo a todos os membros.'),
+        .setDescription('Configure e atribua um cargo específico aos membros.'),
 
     async execute(interaction) {
 
@@ -117,6 +117,8 @@ module.exports = {
         });
 
         const timeoutDuration = 120000; // 60 segundos
+        const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
+
         const filter = i => i.customId === 'config_role' && i.user.id === interaction.user.id;
         const collector = interaction.channel.createMessageComponentCollector({ filter, time: timeoutDuration });
         collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
@@ -129,7 +131,12 @@ module.exports = {
                 const rolesPerPage = 25; // Número de cargos por página
                 const roles = interaction.guild.roles.cache
                     .filter(role => role.id !== interaction.guild.id) // Filtra o cargo @everyone
-                    .map(role => ({ label: role.name, value: role.id }));
+                    .map(role => ({
+                        label: role.name,
+                        description: `ID: ${role.id}`,
+                        emoji: `<:member_white:1288778434184609804>`,
+                        value: role.id
+                    }))
                 const totalRolePages = Math.ceil(roles.length / rolesPerPage);
 
                 const generateRoleSelectMenu = (page) => {
@@ -164,7 +171,7 @@ module.exports = {
                         );
                 };
 
-               
+
                 const rolePaginationMessage = await i.followUp({
                     content: `Página ${currentRolePage + 1}/${totalRolePages}. Selecione o cargo para adicionar:`,
                     components: [generateRoleSelectMenu(currentRolePage), generateRolePaginationButtons(currentRolePage)],
