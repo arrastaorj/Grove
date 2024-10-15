@@ -94,6 +94,8 @@ module.exports = {
             const keywordStatus = automodSettings.keywordBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado';
             const spamStatus = automodSettings.messageSpamBlockEnabled ? '<:8047onlinegray:1289442869060440109> Ativado' : '<:red_dot:1289442683705888929> Desativado';
 
+            embed.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+
             embed.setDescription(
                 `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao Sistema AutoMod - Proteção Inteligente para o Seu Servidor**\n` +
                 `  - O AutoMod é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +
@@ -180,31 +182,41 @@ module.exports = {
                 automodSettings = await getOrCreateAutoModSettings(guild.id);
 
                 if (automodSettings.keywordBlockEnabled) {
-                    await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> A regra de AutoMod para **bloquear palavras ofensivas** já está ativada', ephemeral: true });
+                    await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> A regra de AutoMod para **bloquear palavras ofensivas** já está ativada.', ephemeral: true });
                 } else {
-                    automodSettings.keywordBlockEnabled = true;
-                    await automodSettings.save();
-                    await guild.autoModerationRules.create({
-                        name: `Grove AutoMod`,
-                        creatorId: client.user.id,
-                        enabled: true,
-                        eventType: 1,
-                        triggerType: 4,
-                        triggerMetadata: { presets: [1, 2, 3] },
-                        actions: [{
-                            type: 1,
-                            metadata: {
-                                channel: interaction.channel,
-                                durationSeconds: 10,
-                                customMessage: `> \`-\` O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
-                            }
-                        }]
-                    });
-                    await i.reply({ content: '<:1078434426368839750:1290114335909085257> A regra **bloquear palavras ofensivas** foi configurada com sucesso!', ephemeral: true });
+                    const existingRules = await guild.autoModerationRules.fetch();
+                    const offensiveWordsRule = existingRules.find(rule => rule.triggerType === 4);
+
+                    if (offensiveWordsRule) {
+                        await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> Já existe uma regra de bloqueio de palavras ofensivas configurada.', ephemeral: true });
+                    } else {
+                        automodSettings.keywordBlockEnabled = true;
+                        await automodSettings.save();
+
+                        await guild.autoModerationRules.create({
+                            name: `Grove AutoMod`,
+                            creatorId: client.user.id,
+                            enabled: true,
+                            eventType: 1,
+                            triggerType: 4,
+                            triggerMetadata: { presets: [1, 2, 3] },
+                            actions: [{
+                                type: 1,
+                                metadata: {
+                                    channel: interaction.channel,
+                                    durationSeconds: 10,
+                                    customMessage: `> \`-\` O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
+                                }
+                            }]
+                        });
+
+                        await i.reply({ content: '<:1078434426368839750:1290114335909085257> A regra **bloquear palavras ofensivas** foi configurada com sucesso!', ephemeral: true });
+                    }
                 }
                 updateEmbed(automodSettings, embed);
                 sendMenu();
             }
+
 
             if (selectedOption === 'spam-mensagens') {
 
@@ -213,34 +225,41 @@ module.exports = {
                 if (automodSettings.messageSpamBlockEnabled) {
                     await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> Informamos que a regra de AutoMod para bloqueio de spam de mensagens já está ativada.', ephemeral: true });
                 } else {
-                    automodSettings.messageSpamBlockEnabled = true;
+                    const existingRules = await guild.autoModerationRules.fetch();
+                    const spamRule = existingRules.find(rule => rule.triggerType === 3);
 
-                    await automodSettings.save();
-                    await guild.autoModerationRules.create({
-                        name: `Grove AutoMod`,
-                        creatorId: client.user.id,
-                        enabled: true,
-                        eventType: 1,
-                        triggerType: 3,
-                        triggerMetadata: {},
-                        actions: [
-                            {
-                                type: 1,
-                                metadata: {
-                                    channel: interaction.channel,
-                                    durationSeconds: 10,
-                                    customMessage: `> \`-\` <:NA_Intr004:1289442144255213618> O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
+                    if (spamRule) {
+                        await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> Já existe uma regra de bloqueio de spam de mensagens configurada em seu servidor.', ephemeral: true });
+                    } else {
+                        automodSettings.messageSpamBlockEnabled = true;
+                        await automodSettings.save();
+
+                        await guild.autoModerationRules.create({
+                            name: `Grove AutoMod`,
+                            creatorId: client.user.id,
+                            enabled: true,
+                            eventType: 1,
+                            triggerType: 3,
+                            triggerMetadata: {},
+                            actions: [
+                                {
+                                    type: 1,
+                                    metadata: {
+                                        channel: interaction.channel,
+                                        durationSeconds: 10,
+                                        customMessage: `> \`-\` <:NA_Intr004:1289442144255213618> O GroveAutoMod identificou esta mensagem como inadequada e a bloqueou.`
+                                    }
                                 }
-                            }
-                        ]
-                    })
-                    await i.reply({ content: `<:1078434426368839750:1290114335909085257> A regra **bloqueio de spam de mensagens** foi configuradfa com sucesso!`, ephemeral: true })
+                            ]
+                        });
+
+                        await i.reply({ content: `<:1078434426368839750:1290114335909085257> A regra **bloqueio de spam de mensagens** foi configurada com sucesso!`, ephemeral: true });
+                    }
                 }
                 updateEmbed(automodSettings, embed);
                 sendMenu();
-
-
             }
+
 
             if (selectedOption === 'menção-spam') {
                 // Código para capturar o limite de menções via Modal

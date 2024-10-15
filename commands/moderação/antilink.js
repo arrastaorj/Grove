@@ -120,7 +120,7 @@ module.exports = {
 
         const createEmbed = (antilinkStatus, permittedRoles) => {
             return new EmbedBuilder()
-                .setTitle('Configuração do Sistema de AntiLink')
+                .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setDescription(
                     `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao Sistema Antilink - Proteção Inteligente para o Seu Servidor**\n` +
                     `  - O Antilink é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +

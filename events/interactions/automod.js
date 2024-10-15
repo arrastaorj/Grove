@@ -13,6 +13,8 @@ module.exports = async (interaction) => {
     const updateEmbed = async () => {
         if (interaction.message.embeds.length > 0) {
             const embed = EmbedBuilder.from(interaction.message.embeds[0]);
+            embed.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+
             embed.setDescription(
                 `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao Sistema AutoMod - Proteção Inteligente para o Seu Servidor**\n` +
                 `  - O AutoMod é uma solução avançada de moderação automática que garante a segurança e integridade do seu servidor.\n\n` +

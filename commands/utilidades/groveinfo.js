@@ -125,9 +125,9 @@ module.exports = {
                     .setColor("#ba68c8")
                     .setTitle("Política de Privacidade")
                     .setDescription(`
-                       POLÍTICA DE PRIVACIDADE DO BOT DO DISCORD
+                       POLÍTICA DE PRIVACIDADE USO DO BOT
 
-Última atualização: [28/09/2023]
+Última atualização: [1/10/2024]
 
 Esta Política de Privacidade descreve como o arrastaorj gerencia as informações coletadas dos usuários ("Usuários", "Você") ao utilizar o Bot do Discord Grove#4420. Ao utilizar o Bot, você concorda com esta Política de Privacidade. Se você não concordar com esta Política, por favor, não utilize o Bot.
 
