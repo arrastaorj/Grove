@@ -21,7 +21,6 @@ module.exports = {
                 .setRequired(true)
         ),
 
-
     async execute(interaction) {
 
         // Verifica se o autor tem a permissão de moderar membros
@@ -30,28 +29,29 @@ module.exports = {
         }
 
         const user = interaction.options.getUser("user");
-        const reason = interaction.options.getString("motivo")
+        const reason = interaction.options.getString("motivo");
 
         const member = interaction.guild.members.cache.get(user.id);
+        const botMember = interaction.guild.members.cache.get(interaction.client.user.id); // Pega o próprio bot
 
         // Verifica se o usuário está no servidor
         if (!member) {
             return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está no servidor.", ephemeral: true });
         }
 
-        // Verifica se o membro está mutado (tem o cargo de mute)
-        const muteRole = interaction.guild.roles.cache.find(role => role.name.toLowerCase() === "mutado");
-        if (!muteRole) {
-            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> O cargo de 'mutado' não foi encontrado. Verifique se ele existe.", ephemeral: true });
+        // Verifica se o cargo do bot é maior que o cargo do membro
+        if (botMember.roles.highest.position <= member.roles.highest.position) {
+            return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Eu não posso desmutar este usuário porque o cargo dele é igual ou superior ao meu.", ephemeral: true });
         }
 
-        if (!member.roles.cache.has(muteRole.id)) {
+        // Verifica se o membro está realmente mutado (em timeout)
+        if (!member.communicationDisabledUntilTimestamp) {
             return interaction.reply({ content: "> \`-\` <:NA_Intr004:1289442144255213618> Este usuário não está mutado.", ephemeral: true });
         }
 
-        // Removendo o cargo de mute do usuário
         try {
-            await member.roles.remove(muteRole, reason);
+            // Remove o timeout (desmute)
+            await member.timeout(null, reason); // Passar `null` remove o timeout
 
             // Cria o embed de confirmação da remoção do mute
             const unmuteEmbed = new EmbedBuilder()
@@ -73,4 +73,4 @@ module.exports = {
         }
 
     }
-}
+};

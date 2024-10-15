@@ -15,6 +15,7 @@ const {
     convertNextBoostLevel,
     calculateTimeDifference
 } = require('../../api/userinfo')
+const comandos = require("../../database/models/comandos");
 
 
 module.exports = {
