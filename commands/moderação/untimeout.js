@@ -51,13 +51,16 @@ module.exports = {
             // Cria o embed de confirmação da remoção do timeout
             const untimeoutEmbed = new EmbedBuilder()
                 .setColor("#00ff00")
-                .setDescription(`* <:1078434426368839750:1290114335909085257> O timeout do usuário **${user.tag}** foi removido com sucesso.\n` +
+                .setDescription(
+                    `* <:1078434426368839750:1290114335909085257> O timeout do usuário **${user.tag}** foi removido com sucesso.\n` +
+                    `  - O Untimeout remove as restrições temporárias de um usuário, permitindo que ele retome suas atividades normalmente após o período de penalização.\n\n` +
                     `* <:settings:1289442654806999040> **Informações sobre o timeout:**\n` +
                     `  - **Motivo:** <:edit1:1293726236505542788> ${reason}\n` +
                     `  - **Moderador:** <:member_white:1289442908298023003> ${interaction.user.tag}\n\n` +
                     `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
                 )
-                .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+                .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+                .setFooter({ text: 'Sistema de remover o timeout do usuário', iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
                 .setTimestamp()
 
             await interaction.reply({ embeds: [untimeoutEmbed] });
