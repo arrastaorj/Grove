@@ -51,12 +51,13 @@ module.exports = {
             // Cria o embed de confirmação da expulsão
             const kickEmbed = new EmbedBuilder()
                 .setColor("#ffa500")
-                .setTitle("👢 Expulsão Realizada!")
-                .setDescription(`O usuário **${user.tag}** foi expulso com sucesso.`)
-                .addFields(
-                    { name: "Motivo", value: `💬 ${reason}` },
-                    { name: "Moderador", value: `👮‍♂️ ${interaction.user.tag}` }
+                .setDescription(`* <:1078434426368839750:1290114335909085257> O usuário **${user.tag}** foi expulso com sucesso.\n` +
+                    `* <:settings:1289442654806999040> **Informações sobre o kick:**\n` +
+                    `  - **Motivo:** <:edit1:1293726236505542788> ${reason}\n` +
+                    `  - **Moderador:** <:member_white:1289442908298023003> ${interaction.user.tag}\n\n` +
+                    `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`
                 )
+
                 .setThumbnail(user.displayAvatarURL({ dynamic: true }))
                 .setTimestamp();
 

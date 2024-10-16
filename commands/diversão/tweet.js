@@ -27,34 +27,22 @@ module.exports = {
 
     async execute(interaction) {
 
-        const canalID = await comandos.findOne({ guildId: interaction.guild.id });
+         // Verifica se o canal correto foi configurado
+         const canalID = await comandos.findOne({ guildId: interaction.guild.id });
+         if (!canalID || !canalID.canal1) {
+             return interaction.reply({
+                 content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
+                 ephemeral: true
+             });
+         }
 
-        // Verifica se o resultado da consulta é null
-        if (!canalID) {
-            return interaction.reply({
-                content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
-                ephemeral: true
-            });
-        }
-
-        // Desestruturação para obter canal1
-        const { canal1: canalPermitido } = canalID;
-
-
-        // Verifica se o canal foi cadastrado ou foi resetado
-        if (!canalPermitido) {
-            return interaction.reply({
-                content: `> \`-\` <:NA_Intr004:1289442144255213618> Um administrador ainda não configurou o canal para a utilização dos comandos.`,
-                ephemeral: true
-            });
-        }
-
-        if (interaction.channel.id !== canalPermitido) {
-            return interaction.reply({
-                content: `> \`-\` <:NA_Intr004:1289442144255213618> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
-                ephemeral: true
-            });
-        }
+         const canalPermitido = canalID.canal1;
+         if (interaction.channel.id !== canalPermitido) {
+             return interaction.reply({
+                 content: `> \`-\` <:NA_Intr004:1289442144255213618> Você está tentando usar um comando no canal de texto errado, tente usá-lo no canal correto. <#${canalPermitido}>.`,
+                 ephemeral: true
+             });
+         }
 
         // Obtendo o usuário mencionado ou o próprio autor
         const user = interaction.options.getUser("usuário") || interaction.user;
