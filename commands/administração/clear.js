@@ -64,7 +64,7 @@ module.exports = {
             if (deletedCount === 1) {
                 responseMessage = `Uma mensagem foi removida com sucesso.`
             } else if (deletedCount > 1) {
-                responseMessage = `${deletedCount} mensagens foram removidas com sucesso.`
+                responseMessage = `${deletedCount} mensagens foram removidas com sucesso.\n`
             }
 
             if (notDeletedCount === 1) {
@@ -75,7 +75,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setTitle('Relatório de Exclusões')
-                .setDescription(`> \`+\` **${responseMessage}**`)
+                .setDescription(`<:1078434426368839750:1290114335909085257> **${responseMessage}**`)
                 .setTimestamp()
                 .setFooter({ text: `Limpado por: ${interaction.member.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
                 .setColor('#41b2b0')
