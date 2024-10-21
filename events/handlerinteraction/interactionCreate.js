@@ -49,14 +49,18 @@ client.on("interactionCreate", async (interaction) => {
 
     if (interaction.isButton() || interaction.isModalSubmit()) {
         const ticketButtonIds = [
-            'modal_ticket', 'ticket', 'assumirTicket', 'call', 'EncerrarChamado',
+            'modal_ticket', 'assumirTicket', 'call', 'EncerrarChamado',
             'AdicionarMembro', 'RemoverMembro', 'poke', 'addmembro',
             'removermembrotexto', 'SairdoTicket', 'close', 'reabrir', 'msg', 'deletar',
             'button_name_modal', 'titulo1_modal', 'descricao1_modal', 'titulo2_modal', 'descricao2_modal',
-            'imagem01Modal', 'imagem02Modal', 'preview_ticket'
+            'imagem01Modal', 'imagem02Modal', 'preview_ticket', 'voltar',
         ];
-
-        if (ticketButtonIds.includes(interaction.customId)) {
+    
+        // Verifica se o custom ID começa com 'open_ticket_' ou se está em ticketButtonIds
+        const isOpenTicket = interaction.customId.startsWith('open_ticket_');
+        const isTicketButtonId = ticketButtonIds.includes(interaction.customId);
+    
+        if (isOpenTicket || isTicketButtonId) {
             await ticketHandler(interaction);
         }
     }

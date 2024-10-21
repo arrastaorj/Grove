@@ -11,17 +11,16 @@ const {
     ButtonBuilder,
     ButtonStyle,
     TextInputStyle
-} = require('discord.js');
-
-const client = require("../../index");
+} = require('discord.js')
+const client = require("../../index")
 const ticket = require("../../database/models/ticket");
+const { v4: uuidv4 } = require('uuid')
 const collectors = new Map()
-
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ticket')
-        .setDescription('Configure o menu do ticket.'),
+        .setDescription('Gerencie as configurações do menu de tickets.'),
 
     async execute(interaction) {
 
@@ -31,7 +30,7 @@ module.exports = {
             return await interaction.reply({
                 content: `> \`-\` <:NA_Intr004:1289442144255213618> Não posso concluir este comando pois você não possui permissão. (Administrator).`,
                 ephemeral: true
-            });
+            })
         }
 
         // Verificação de permissões do bot
@@ -39,11 +38,10 @@ module.exports = {
             return await interaction.reply({
                 content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para concluir este comando (ManageMessages).`,
                 ephemeral: true
-            });
+            })
         }
 
         const userId = interaction.user.id;
-
 
         // Verificar se já existe um coletor ativo para o usuário
         if (collectors.has(userId)) {
@@ -69,37 +67,82 @@ module.exports = {
             }
 
             // Formatando o tempo restante
-            const formattedTime = formatTime(secondsRemaining);
+            const formattedTime = formatTime(secondsRemaining)
 
             return interaction.reply({
-                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação com o sistema de Ticket. Aguarde ${formattedTime} antes de tentar novamente.`,
+                content: `\`-\` <:NA_Intr004:1289442144255213618> Você já iniciou uma solicitação no sistema de Tickets. Por favor, aguarde ${formattedTime} antes de tentar novamente. Se preferir, você pode excluir a solicitação atual e utilizar o comando novamente.`,
                 ephemeral: true
-            });
-        }
-
-
-
-        // Buscar as configurações do banco de dados
-        let ticketConfig = await ticket.findOne({ guildId: interaction.guild.id });
-
-        if (!ticketConfig) {
-            // Se não existir, criar um novo registro com configurações padrão
-            ticketConfig = new ticket({
-                guildId: interaction.guild.id,
-                assignedChannel: null,
-                assignedChannelLogs: null,
-                ticketCategory: null,
-                buttonName: null,
-                allowedRole: null,
-                titulo01: null,
-                descrição01: null,
-                titulo02: null,
-                descrição02: null,
-                imagem01: null,
-                imagem02: null,
             })
-            await ticketConfig.save()
         }
+
+
+        let selectedTicketId = null;  // Variável para armazenar o ticketId
+
+        // Função para definir o valor da variável
+        function setSelectedTicketId(id) {
+            selectedTicketId = id;
+        }
+
+        // Função para obter o valor da variável
+        function getSelectedTicketId() {
+            return selectedTicketId;
+        }
+
+        // Exporta as funções para outros arquivos
+        module.exports = {
+            setSelectedTicketId,
+            getSelectedTicketId
+        };
+
+        // Buscar as configurações de tickets existentes no banco de dados
+        const ticketConfigs = await ticket.find({ guildId: interaction.guild.id });
+
+        // Criar opções no select menu para os diferentes tickets disponíveis
+        const selectMenuOptions = ticketConfigs.map(config => ({
+            label: `Ticket ID`,
+            emoji: '<:Logs:1297733186985398375>',
+            value: config.ticketId,
+            description: ` ${config.ticketId}`
+        }));
+
+        // Adicionar a opção de criar um novo sistema de tickets
+        selectMenuOptions.push({
+            label: 'Criar novo sistema de ticket',
+            emoji: '<:Ajouter:1297732836605825054>',
+            value: 'ticket_add',
+            description: 'Adicione um novo sistema de ticket'
+        });
+
+        const selectMenu = new StringSelectMenuBuilder()
+            .setCustomId('select_ticket_config')
+            .setPlaceholder('Selecione um ticket existente ou crie um novo')
+            .addOptions(selectMenuOptions);
+
+        const row = new ActionRowBuilder().addComponents(selectMenu);
+
+
+        const embedInicial = new EmbedBuilder()
+            .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+            .setFooter({ text: `O sistema de tickets permite configurar apenas um canal, uma categoria e um cargo permitido.`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
+            .setColor("#ba68c8")
+            .setTimestamp()
+            .setDescription(
+                `* <:shop_white:1289442593452724244> **Bem-vindo(a) ao sistema de configuração de tickets!**\n` +
+                `  - Acesse o menu abaixo para selecionar um ticket já existente ou iniciar a criação de um novo.\n\n` +
+                `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`)
+            .setColor("#ba68c8")
+
+
+
+        const initialMessage = await interaction.reply({
+            embeds: [embedInicial],
+            components: [row],
+        })
+
+
+        // Busca ou cria as configurações do ticket
+        let ticketConfig = await ticket.findOne({ guildId: interaction.guild.id, ticketId: selectedTicketId })
+
 
         // Garantir que as variáveis estão sendo corretamente definidas, evitando `undefined` 
         let assignedChannel = ticketConfig?.canal1 ? `<#${ticketConfig.canal1}>` : 'Não configurado';
@@ -147,37 +190,7 @@ module.exports = {
         let embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02)
 
 
-        async function updateTicketEmbed(interaction, row) {
-            // Buscar as informações mais recentes do banco de dados
-            const updatedTicketConfig = await ticket.findOne({ guildId: interaction.guild.id });
-
-            // Atualizar as variáveis com os novos valores do banco de dados
-            const assignedChannel = updatedTicketConfig.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
-            const assignedChannelLogs = updatedTicketConfig.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
-            const ticketCategory = updatedTicketConfig.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
-            const buttonName = updatedTicketConfig.nomeBotao || 'Não configurado';
-            const allowedRole = updatedTicketConfig.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
-
-            const titulo01 = updatedTicketConfig?.titulo01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
-            const descrição01 = updatedTicketConfig?.descrição01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
-            const titulo02 = updatedTicketConfig?.titulo02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
-            const descrição02 = updatedTicketConfig?.descrição02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
-
-            const imagem01 = updatedTicketConfig.imagem01 || 'Não configurado';
-            const imagem02 = updatedTicketConfig.imagem02 || 'Não configurado';
-
-            // Recriar a embed com as novas informações
-            const embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02);
-
-            // Atualizar a resposta da interação com a nova embed
-            await interaction.editReply({
-                embeds: [embed],
-                components: [row, row1],
-            });
-        }
-
-
-        const selectMenu = new StringSelectMenuBuilder()
+        const selectMenu2 = new StringSelectMenuBuilder()
             .setCustomId('config_ticket')
             .setPlaceholder('Selecione uma opção de configuração')
             .addOptions([
@@ -207,28 +220,109 @@ module.exports = {
             .setCustomId('preview_ticket')
             .setStyle(ButtonStyle.Secondary)
 
-
-        const row1 = new ActionRowBuilder().addComponents(button)
-        const row = new ActionRowBuilder().addComponents(selectMenu)
-
-
-        const initialMessage = await interaction.reply({
-            embeds: [embed],
-            components: [row, row1]
-        })
+        const buttonVoltar = new ButtonBuilder()
+            .setLabel("Voltar")
+            .setEmoji("<:arrowwhite_left:1293008404662587402>")
+            .setCustomId('voltar')
+            .setStyle(ButtonStyle.Secondary)
 
 
-        const timeoutDuration = 300000; // 60 segundos
+        const row1 = new ActionRowBuilder().addComponents(buttonVoltar, button)
+        const row2 = new ActionRowBuilder().addComponents(selectMenu2)
+        const rowTicketAdd = new ActionRowBuilder().addComponents(buttonVoltar)
+
+
+
+        async function updateTicketEmbed(interaction) {
+            // Buscar as informações mais recentes do banco de dados
+            const updatedTicketConfig = await ticket.findOne({ guildId: interaction.guild.id, ticketId: selectedTicketId });
+
+            // Atualizar as variáveis com os novos valores do banco de dados
+            const assignedChannel = updatedTicketConfig.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
+            const assignedChannelLogs = updatedTicketConfig.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
+            const ticketCategory = updatedTicketConfig.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
+            const buttonName = updatedTicketConfig.nomeBotao || 'Não configurado';
+            const allowedRole = updatedTicketConfig.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
+
+            const titulo01 = updatedTicketConfig?.titulo01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const descrição01 = updatedTicketConfig?.descrição01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const titulo02 = updatedTicketConfig?.titulo02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+            const descrição02 = updatedTicketConfig?.descrição02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
+
+            const imagem01 = updatedTicketConfig.imagem01 || 'Não configurado';
+            const imagem02 = updatedTicketConfig.imagem02 || 'Não configurado';
+
+            // Recriar a embed com as novas informações
+            const embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02);
+
+            // Atualizar a resposta da interação com a nova embed
+            await interaction.editReply({
+                content: ``,
+                embeds: [embed],
+                components: [row2, row1],
+            });
+        }
+
+
+        const timeoutDuration = 600000; // 60 segundos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
-        const filter = i => i.customId === 'config_ticket' && i.user.id === interaction.user.id;
+        const filter = (i) => (i.customId === 'select_ticket_config') && i.user.id === interaction.user.id;
         const collector = initialMessage.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: timeoutDuration });
 
         // Armazenar o coletor no Map com o tempo de início e duração
         collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
 
-
         collector.on('collect', async i => {
+            const selectedOption = i.values[0];  // O `ticketId` ou a opção `ticket_add`
+
+            // Se o usuário selecionar a opção de adicionar um novo ticket
+            if (selectedOption === 'ticket_add') {
+                // Gerar um novo `ticketId` (UUID ou timestamp)
+                const newTicketId = uuidv4();
+
+                // Criar uma nova configuração de ticket com valores padrão
+                const newTicketConfig = new ticket({
+                    guildId: interaction.guild.id,
+                    ticketId: newTicketId,
+                    canal1: null,
+                    canalLog: null,
+                    categoria: null,
+                    nomeBotao: null,
+                    cargo: null,
+                    titulo01: null,
+                    descrição01: null,
+                    titulo02: null,
+                    descrição02: null,
+                    imagem01: null,
+                    imagem02: null,
+                })
+
+                // Salvar a nova configuração no banco de dados
+                await newTicketConfig.save();
+
+                return i.update({
+                    content: `Novo sistema de ticket criado com o ID: **${newTicketId}**.\nAgora você pode configurá-lo no menu de tickets.`,
+                    components: [rowTicketAdd] // Remove os componentes após criar o novo ticket
+                })
+            } else {
+
+                selectedTicketId = selectedOption;
+                setSelectedTicketId(selectedOption);
+            }
+
+            if (selectedTicketId) {
+                await i.deferUpdate();
+                await updateTicketEmbed(interaction)
+            }
+        })
+
+
+
+        const filter2 = i => i.customId === 'config_ticket' && i.user.id === interaction.user.id;
+        const collector2 = initialMessage.createMessageComponentCollector({ filter2, componentType: ComponentType.StringSelect, time: timeoutDuration });
+
+        collector2.on('collect', async i => {
 
             const channelsPerPage = 25;
 
@@ -274,9 +368,10 @@ module.exports = {
                 ['previous_page', 'next_page', 'select_ticket_channel', 'select_log_channel'].includes(btnInt.customId) && btnInt.user.id === interaction.user.id;
 
 
-            const selectedOption = i.values[0];
+            const selectedOption2 = i.values[0];
 
-            if (selectedOption === 'canal_ticket') {
+
+            if (selectedOption2 === 'canal_ticket') {
                 await i.deferUpdate();
 
                 let currentPage = 0;
@@ -309,14 +404,14 @@ module.exports = {
                 selectMenuCollector.on('collect', async (i) => {
                     const selectedChannelId = i.values[0];
 
-                    // Salvar a escolha no banco de dados
-                    await ticket.findOneAndUpdate(
-                        { guildId: interaction.guild.id },
-                        { $set: { canal1: selectedChannelId } },
-                        { upsert: true }
-                    );
 
-                    await updateTicketEmbed(interaction, row);
+                    await ticket.updateOne(
+                        { guildId: interaction.guild.id, ticketId: selectedTicketId }, // Condições de busca
+                        { $set: { canal1: selectedChannelId } }, // Atualização
+                        { lean: true } // Usando lean para otimização, upsert para criar se não existir
+                    )
+
+                    await updateTicketEmbed(interaction);
 
 
                     await i.update({
@@ -327,7 +422,7 @@ module.exports = {
 
             }
 
-            if (selectedOption === 'canal_log') {
+            if (selectedOption2 === 'canal_log') {
                 await i.deferUpdate();
 
                 let logChannelPage = 0;
@@ -362,11 +457,11 @@ module.exports = {
                 selectLogMenuCollector.on('collect', async (i) => {
                     const selectedLogChannelId = i.values[0];
 
-                    await ticket.findOneAndUpdate(
-                        { guildId: interaction.guild.id },
-                        { $set: { canalLog: selectedLogChannelId } },
-                        { upsert: true }
-                    );
+                    await ticket.updateOne(
+                        { guildId: interaction.guild.id, ticketId: selectedTicketId }, // Condições de busca
+                        { $set: { canalLog: selectedLogChannelId } }, // Atualização
+                        { lean: true } // Usando lean para otimização, upsert para criar se não existir
+                    )
 
                     await updateTicketEmbed(interaction, row);
 
@@ -378,7 +473,7 @@ module.exports = {
 
             }
 
-            if (selectedOption === 'categoria') {
+            if (selectedOption2 === 'categoria') {
                 await i.deferUpdate();
 
                 let categoryPage = 0;
@@ -419,12 +514,14 @@ module.exports = {
                 selectCategoryCollector.on('collect', async (i) => {
                     const selectedCategoryId = i.values[0];
 
-                    // Salvar a escolha no banco de dados
-                    await ticket.findOneAndUpdate(
-                        { guildId: interaction.guild.id },
-                        { $set: { categoria: selectedCategoryId } },
-                        { upsert: true }
-                    );
+
+
+                    await ticket.updateOne(
+                        { guildId: interaction.guild.id, ticketId: selectedTicketId }, // Condições de busca
+                        { $set: { categoria: selectedCategoryId } }, // Atualização
+                        { lean: true } // Usando lean para otimização, upsert para criar se não existir
+                    )
+
 
                     await updateTicketEmbed(interaction, row);
 
@@ -436,11 +533,10 @@ module.exports = {
                     });
                 });
 
-
-
             }
 
-            if (selectedOption === 'nome_botao') {
+
+            if (selectedOption2 === 'nome_botao') {
                 // Cria um modal para solicitar o nome do botão
                 const modal = new ModalBuilder()
                     .setCustomId('button_name_modal')
@@ -462,7 +558,7 @@ module.exports = {
                 await i.showModal(modal)
             }
 
-            if (selectedOption === 'cargo') {
+            if (selectedOption2 === 'cargo') {
                 await i.deferUpdate();
 
                 let currentRolePage = 0;
@@ -531,12 +627,12 @@ module.exports = {
                 selectRoleCollector.on('collect', async (i) => {
                     const selectedRoleId = i.values[0];
 
-                    // Salvar a escolha no banco de dados
-                    await ticket.findOneAndUpdate(
-                        { guildId: interaction.guild.id },
-                        { $set: { cargo: selectedRoleId } },
-                        { upsert: true }
-                    );
+
+                    await ticket.updateOne(
+                        { guildId: interaction.guild.id, ticketId: selectedTicketId }, // Condições de busca
+                        { $set: { cargo: selectedRoleId } }, // Atualização
+                        { lean: true } // Usando lean para otimização, upsert para criar se não existir
+                    )
 
 
                     await updateTicketEmbed(interaction, row);
@@ -545,12 +641,12 @@ module.exports = {
                     await i.update({
                         content: `<:1078434426368839750:1290114335909085257> Cargo permitido configurado com sucesso: <@&${selectedRoleId}>`, // Menciona o cargo
                         components: [] // Remove os componentes após a seleção
-                    });
-                });
+                    })
+                })
 
             }
 
-            if (selectedOption === 'titulo1') {
+            if (selectedOption2 === 'titulo1') {
                 // Cria um modal para solicitar o título 1
                 const modal = new ModalBuilder()
                     .setCustomId('titulo1_modal')
@@ -574,7 +670,7 @@ module.exports = {
 
             }
 
-            if (selectedOption === 'descrição1') {
+            if (selectedOption2 === 'descrição1') {
                 // Cria um modal para solicitar a descrição 1
                 const modal = new ModalBuilder()
                     .setCustomId('descricao1_modal')
@@ -597,7 +693,7 @@ module.exports = {
                 await i.showModal(modal);
             }
 
-            if (selectedOption === 'imagem01') {
+            if (selectedOption2 === 'imagem01') {
                 // Cria o modal para coletar o link da imagem 01
                 const modal = new ModalBuilder()
                     .setCustomId('imagem01Modal')
@@ -619,30 +715,8 @@ module.exports = {
                 await i.showModal(modal);
             }
 
-            if (selectedOption === 'imagem02') {
-                // Cria o modal para coletar o link da imagem 02
-                const modal = new ModalBuilder()
-                    .setCustomId('imagem02Modal')
-                    .setTitle('Configurar Imagem 02');
 
-                // Campo para o usuário inserir o link da imagem 02
-                const imageLinkInput = new TextInputBuilder()
-                    .setCustomId('imagem02Link')
-                    .setLabel('Insira o link da Imagem 02')
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder('https://example.com/imagem.png')
-                    .setRequired(true);
-
-                // Adiciona o campo de texto ao modal
-                const actionRow = new ActionRowBuilder().addComponents(imageLinkInput);
-                modal.addComponents(actionRow);
-
-                // Exibe o modal para o usuário
-                await i.showModal(modal);
-            }
-
-            // Faça o mesmo para titulo2 e descrição2
-            if (selectedOption === 'titulo2') {
+            if (selectedOption2 === 'titulo2') {
                 // Cria um modal para solicitar o título 1
                 const modal = new ModalBuilder()
                     .setCustomId('titulo2_modal')
@@ -665,7 +739,7 @@ module.exports = {
                 await i.showModal(modal);
             }
 
-            if (selectedOption === 'descrição2') {
+            if (selectedOption2 === 'descrição2') {
 
                 // Cria um modal para solicitar a descrição 1
                 const modal = new ModalBuilder()
@@ -689,10 +763,32 @@ module.exports = {
                 await i.showModal(modal);
             }
 
-            if (selectedOption === 'enviaticket') {
+            if (selectedOption2 === 'imagem02') {
+                // Cria o modal para coletar o link da imagem 02
+                const modal = new ModalBuilder()
+                    .setCustomId('imagem02Modal')
+                    .setTitle('Configurar Imagem 02');
+
+                // Campo para o usuário inserir o link da imagem 02
+                const imageLinkInput = new TextInputBuilder()
+                    .setCustomId('imagem02Link')
+                    .setLabel('Insira o link da Imagem 02')
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('https://example.com/imagem.png')
+                    .setRequired(true);
+
+                // Adiciona o campo de texto ao modal
+                const actionRow = new ActionRowBuilder().addComponents(imageLinkInput);
+                modal.addComponents(actionRow);
+
+                // Exibe o modal para o usuário
+                await i.showModal(modal);
+            }
+
+            if (selectedOption2 === 'enviaticket') {
 
                 // Recupera as configurações do ticket
-                const ticketConfig = await ticket.findOne({ guildId: interaction.guild.id });
+                const ticketConfig = await ticket.findOne({ guildId: interaction.guild.id, ticketId: selectedTicketId });
 
                 // Cria uma lista de itens obrigatórios e seus nomes amigáveis
                 const requiredItems = [
@@ -744,7 +840,7 @@ module.exports = {
                 const button = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setCustomId('ticket')
+                            .setCustomId(`open_ticket_${selectedTicketId}`)
                             .setEmoji('<:Ticket:1289442436556259359>')
                             .setLabel(ticketConfig.nomeBotao)
                             .setStyle(ButtonStyle.Secondary)
@@ -759,57 +855,11 @@ module.exports = {
                     ephemeral: true
                 });
             }
-
-            if (selectedOption === 'reset_settings') {
-
-                // Recupera as configurações do ticket
-                const ticketConfig = await ticket.findOne({ guildId: interaction.guild.id });
-
-                // Verifica se as configurações existem antes de tentar resetá-las
-                if (!ticketConfig) {
-                    return await i.reply({
-                        content: 'Nenhuma configuração foi encontrada para este servidor.',
-                        ephemeral: true
-                    });
-                }
-
-                // Reseta todas as configurações (dependendo da estrutura do seu banco de dados)
-                await ticket.updateOne(
-                    { guildId: interaction.guild.id },
-                    {
-                        $set: {
-                            canal1: null,
-                            canalLog: null,
-                            categoria: null,
-                            nomeBotao: null,
-                            cargo: null,
-                            titulo01: null,
-                            descrição01: null,
-                            titulo02: null,
-                            descrição02: null,
-                            imagem01: null,
-                            imagem02: null,
-                        }
-                    }
-                );
-
-                await updateTicketEmbed(interaction, row);
-
-
-                await i.reply({
-                    content: '<:1078434426368839750:1290114335909085257> As configurações do sistema de Ticket foram redefinidas.',
-                    ephemeral: true
-                });
-            }
-
-
-
-
         })
 
         collector.on('end', async (collected, reason) => {
 
-            const originalMessage = await interaction.fetchReply().catch(() => null);
+            const originalMessage = await interaction.fetchReply().catch(() => null)
 
             if (!originalMessage) {
                 return collectors.delete(userId)
@@ -818,11 +868,11 @@ module.exports = {
             if (reason === 'time') {
                 await interaction.editReply({
                     components: []
-                });
+                })
             } else {
                 await interaction.editReply({
                     components: []
-                });
+                })
             }
 
             collectors.delete(userId)
@@ -830,5 +880,3 @@ module.exports = {
 
     }
 }
-
-

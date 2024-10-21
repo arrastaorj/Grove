@@ -189,6 +189,9 @@ module.exports = {
             if (!cargoList) {
                 continue;
             }
+
+            const botMember = interaction.guild.members.cache.get(client.user.id)
+
             if (cargoList.position >= botMember.roles.highest.position) {
                 return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> O cargo selecionado está acima ou na mesma posição hierárquica do cargo do Grove. O Grove não tem permissão para adicionar esse cargo adicione o cargo do Grove acima desse cargo.`, ephemeral: true });
             }

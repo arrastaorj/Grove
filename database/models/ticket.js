@@ -1,7 +1,8 @@
 const db = require('mongoose')
 
 const cmd = new db.Schema({
-    guildId: { type: String, required: true },
+    guildId: { type: String, required: true, index: true }, // Index para guildId
+    ticketId: { type: String, required: true, index: true },
 
     canal1: { type: String },
     canalLog: { type: String },
