@@ -267,17 +267,39 @@ module.exports = {
         const timeoutDuration = 600000; // 60 segundos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
-        const filter = (i) => (i.customId === 'select_ticket_config') && i.user.id === interaction.user.id;
+        const filter = (i) => (i.customId === 'select_ticket_config')
         const collector = initialMessage.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: timeoutDuration });
 
         // Armazenar o coletor no Map com o tempo de início e duração
         collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
 
         collector.on('collect', async i => {
+
+            // Verificar se o usuário que interagiu é o mesmo que iniciou a interação
+            if (i.user.id !== interaction.user.id) {
+                // Se não for o mesmo usuário, enviar uma mensagem apenas para aquele usuário
+                return i.reply({
+                    content: '<:NA_Intr004:1289442144255213618> Você não pode interagir com este comando, pois não foi o iniciador ou não possui a permissão necessária.',
+                    ephemeral: true // Define a resposta como privada
+                });
+            }
+
             const selectedOption = i.values[0];  // O `ticketId` ou a opção `ticket_add`
 
             // Se o usuário selecionar a opção de adicionar um novo ticket
             if (selectedOption === 'ticket_add') {
+                // Verificar quantos tickets já existem para o servidor
+                const existingTickets = await ticket.find({ guildId: interaction.guild.id }).countDocuments();
+
+                // Se o número de tickets for 5 ou mais, informar o limite atingido
+                if (existingTickets >= 5) {
+                    return i.update({
+                        content: '<:NA_Intr004:1289442144255213618> O limite de 5 sistemas de tickets já foi atingido para este servidor.',
+                        embeds: [],
+                        components: [rowTicketAdd]
+                    });
+                }
+
                 // Gerar um novo `ticketId` (UUID ou timestamp)
                 const newTicketId = uuidv4();
 
@@ -296,33 +318,61 @@ module.exports = {
                     descrição02: null,
                     imagem01: null,
                     imagem02: null,
-                })
+                });
 
-                // Salvar a nova configuração no banco de dados
+                // Salvar o novo ticket
                 await newTicketConfig.save();
 
-                return i.update({
-                    content: `Novo sistema de ticket criado com o ID: **${newTicketId}**.\nAgora você pode configurá-lo no menu de tickets.`,
-                    components: [rowTicketAdd] // Remove os componentes após criar o novo ticket
-                })
-            } else {
+                // Informar ao usuário que o ticket está sendo criado
+                await i.update({
+                    content: '<a:1278158897487806668:1298101208053059594> O sistema de ticket está sendo criado, por favor aguarde...',
+                    embeds: [],
+                    components: []
+                });
 
+                const embed = new EmbedBuilder()
+                    .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+                    .setFooter({ text: `O sistema de tickets permite a configuração de até 5 opções diferentes.`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) })
+                    .setColor("#48ff00")
+                    .setDescription(
+                        `* **<:new:1289442513094049854> Novo sistema de ticket criado com sucesso.**\n` +
+                        `  - **<:new1:1289442459776057375> ID:** \`\`${newTicketId}\`\`\n` +
+                        `* Agora você pode configurá-lo no menu de tickets.\n\n` +
+                        `-# <:info:1290116635814002749> Caso tenha dúvidas ou enfrente algum problema, sinta-se à vontade para entrar em nosso [servidor de suporte](http://dsc.gg/grovesuporte). Nossa equipe está à disposição para auxiliá-lo!`,
+                    )
+
+                setTimeout(() => {
+                    i.editReply({
+                        content: ``,
+                        embeds: [embed],
+                        components: [rowTicketAdd]
+                    });
+                }, 5000);
+
+                // Retornar para evitar que o fluxo continue para o else
+                return;
+            }
+
+            // Caso contrário, tratar as outras interações
+            if (selectedOption !== 'ticket_add') {
                 selectedTicketId = selectedOption;
                 setSelectedTicketId(selectedOption);
+
+                if (selectedTicketId) {
+                    await i.deferUpdate();
+                    await updateTicketEmbed(interaction);
+                }
             }
 
-            if (selectedTicketId) {
-                await i.deferUpdate();
-                await updateTicketEmbed(interaction)
-            }
         })
 
 
 
-        const filter2 = i => i.customId === 'config_ticket' && i.user.id === interaction.user.id;
+        const filter2 = i => i.customId === 'config_ticket'
         const collector2 = initialMessage.createMessageComponentCollector({ filter2, componentType: ComponentType.StringSelect, time: timeoutDuration });
 
         collector2.on('collect', async i => {
+
 
             const channelsPerPage = 25;
 

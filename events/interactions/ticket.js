@@ -209,6 +209,7 @@ module.exports = async (interaction) => {
 
 
             await interaction.editReply({
+                content: ``,
                 embeds: [embedInicial],
                 components: [row], // Certifique-se de que a variável 'row' esteja definida
 
