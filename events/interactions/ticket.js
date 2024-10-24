@@ -23,6 +23,71 @@ module.exports = async (interaction) => {
 
     if (interaction.isModalSubmit()) {
 
+
+        if (interaction.customId.startsWith('addmembro_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels))
+                return interaction.reply({
+                    content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                    ephemeral: true
+                })
+
+
+            const cmd = await ticket.findOne({
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
+            })
+
+
+            const channelId = cmd.createdChannelID
+
+
+            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
+
+
+            const user = interaction.fields.getTextInputValue(`idUser_ticket_${selectedTicketId}`)
+
+            fetchedChannel.permissionOverwrites.edit(user, { ViewChannel: true })
+
+            fetchedChannel.send({
+                content: `<:member_white333:1289442716761067620> <@${user}> foi adicionado ao ticket por <:new1:1289442459776057375> <@${interaction.user.id}>.`,
+            })
+
+            interaction.deferUpdate()
+            return;
+        }
+
+        if (interaction.customId.startsWith('removermembrotexto_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
+
+            const cmd = await ticket.findOne({
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
+            })
+
+            const channelId = cmd.createdChannelID
+
+            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
+
+            const newnamea = interaction.fields.getTextInputValue(`idMember_ticket_${selectedTicketId}`);
+
+            fetchedChannel.permissionOverwrites.edit(newnamea, { ViewChannel: false })
+
+            fetchedChannel.send({
+                content: `<:member_white22:1289442774378090506> <@${newnamea}> foi removido do ticket por <:new1:1289442459776057375> <@${interaction.user.id}>.`,
+            })
+
+            interaction.deferUpdate()
+            return;
+        }
+
+
         const { getSelectedTicketId } = require('../../commands/administração/ticket');
         const selectedTicketId = getSelectedTicketId();
 
@@ -159,12 +224,6 @@ module.exports = async (interaction) => {
 
     if (interaction.isButton) {
 
-        // Iniciamos o armazenamento global para tickets
-        if (!interaction.client.ticketData) {
-            interaction.client.ticketData = new Map();
-        }
-
-
         if (interaction.customId === 'voltar') {
 
             await interaction.deferUpdate();
@@ -275,27 +334,6 @@ module.exports = async (interaction) => {
 
             } else {
 
-
-                try {
-                    const cmd3 = await ticket.findOne({
-                        guildId: interaction.guild.id,
-                        ticketId: selectedTicketId
-                    });
-
-                    if (cmd3) {
-                        // Armazena o ticketId e os dados do ticket
-                        interaction.client.ticketData.set(interaction.user.id, {
-                            guildId: interaction.guild.id,
-                            ticketId: selectedTicketId,
-                            cmd3: cmd3 // Armazena os dados completos do ticket
-                        })
-                    }
-
-                } catch (error) {
-                    console.error("Erro ao buscar o ticket:", error);
-                }
-
-
                 const cmd = await ticket.findOne({
                     guildId: interaction.guild.id,
                     ticketId: selectedTicketId
@@ -353,7 +391,6 @@ module.exports = async (interaction) => {
                     ]
 
                 }).then(async (channel) => {
-
 
 
                     const createdChannelID = channel.id;
@@ -414,7 +451,6 @@ module.exports = async (interaction) => {
 
                     let criado = new EmbedBuilder()
                         .setColor('#ba68c8')
-
                         .setAuthor({ name: titulo, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                         .setDescription(descrição)
                         .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ extension: 'png' }) })
@@ -425,40 +461,38 @@ module.exports = async (interaction) => {
                     }
 
                     let fechar = new ButtonBuilder()
-                        .setCustomId('close')
+                        .setCustomId(`close_ticket_${selectedTicketId}`)
                         .setEmoji('<:crvt:1168024673481662534>')
                         .setStyle(4)
                         .setLabel(`Finalizar Atendimento`)
-
                     let call = new ButtonBuilder()
-                        .setCustomId('call')
+                        .setCustomId(`call_ticket_${selectedTicketId}`)
                         .setEmoji('<:crvt:1168024678204461129>')
                         .setStyle(2)
                         .setLabel(`Criar Canal de Voz`)
 
                     let add = new ButtonBuilder()
-                        .setCustomId("AdicionarMembro")
+                        .setCustomId(`AdicionarMembro_ticket_${selectedTicketId}`)
                         .setEmoji('<:crvt:1168024675599790100>')
                         .setLabel(`Adicionar Membro`)
                         .setStyle(2)
                     let remover = new ButtonBuilder()
-                        .setCustomId("RemoverMembro")
+                        .setCustomId(`RemoverMembro_ticket_${selectedTicketId}`)
                         .setEmoji('<:crvt:1168024676879040613>')
                         .setLabel(`Remover Membro`)
                         .setStyle(2)
                     let notificar = new ButtonBuilder()
-                        .setCustomId("poke")
+                        .setCustomId(`poke_ticket_${selectedTicketId}`)
                         .setEmoji('<:crvt:1168024680683282495>')
                         .setLabel(`Notificação`)
                         .setStyle(2)
                     let sair = new ButtonBuilder()
-                        .setCustomId("SairdoTicket")
+                        .setCustomId(`SairdoTicket`)
                         .setEmoji('<:voltar:1167104944420175984>')
                         .setLabel(`Sair do Canal`)
                         .setStyle(1)
-
-                    let assumir = new ButtonBuilder()  // Novo botão para assumir o ticket
-                        .setCustomId("assumirTicket")
+                    let assumir = new ButtonBuilder()
+                        .setCustomId(`assumirTicket_ticket_${selectedTicketId}`)
                         .setEmoji('🤝')
                         .setLabel("Assumir Atendimento")
                         .setStyle(3);
@@ -473,7 +507,9 @@ module.exports = async (interaction) => {
 
         }
 
-        if (interaction.customId === 'assumirTicket') {
+        if (interaction.customId.startsWith('assumirTicket_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
 
             // Verifique se o usuário tem permissão para gerenciar canais
             if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
@@ -491,6 +527,7 @@ module.exports = async (interaction) => {
             // Verifique se o ticket já foi assumido
             const cmd = await ticket.findOne({
                 guildId: interaction.guild.id,
+                ticketId: selectedTicketId,
                 createdChannelID: channel.id
             });
 
@@ -520,6 +557,7 @@ module.exports = async (interaction) => {
             // Atualize o atendente no banco de dados para o ticket
             await ticket.findOneAndUpdate({
                 guildId: interaction.guild.id,
+                ticketId: selectedTicketId,
                 createdChannelID: channel.id
             }, { $set: { atendenteId: atendente.id } });
 
@@ -555,7 +593,9 @@ module.exports = async (interaction) => {
 
         }
 
-        if (interaction.customId === 'call') {
+        if (interaction.customId.startsWith('call_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
 
 
             if (!interaction.isButton()) return;
@@ -567,7 +607,8 @@ module.exports = async (interaction) => {
                 })
 
             const cmd = await ticket.findOne({
-                guildId: interaction.guild.id
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
             })
 
             const userVoice = cmd.userId
@@ -577,10 +618,10 @@ module.exports = async (interaction) => {
 
 
             const cmd2 = await ticket.findOne({
-                guildId: interaction.guild.id
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
             })
             const userVoiceId = cmd2.createdVoicelID
-
 
 
             if (possuido)
@@ -612,13 +653,15 @@ module.exports = async (interaction) => {
                 const createdVoicelID = channel.id;
 
                 const cmd = await ticket.findOne({
-                    guildId: interaction.guild.id
+                    guildId: interaction.guild.id,
+                    ticketId: selectedTicketId
                 })
 
 
                 if (!cmd) {
                     const newCmd = {
                         guildId: interaction.guild.id,
+                        ticketId: selectedTicketId
                     }
                     if (createdVoicelID) {
                         newCmd.createdVoicelID = createdVoicelID
@@ -629,11 +672,13 @@ module.exports = async (interaction) => {
 
                     if (!createdVoicelID) {
                         await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
+                            guildId: interaction.guild.id,
+                            ticketId: selectedTicketId
                         }, { $unset: { "createdVoicelID": "" } })
                     } else {
                         await ticket.findOneAndUpdate({
-                            guildId: interaction.guild.id
+                            guildId: interaction.guild.id,
+                            ticketId: selectedTicketId
                         }, { $set: { "createdVoicelID": createdVoicelID } })
                     }
 
@@ -652,7 +697,7 @@ module.exports = async (interaction) => {
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setCustomId("EncerrarChamado")
+                            .setCustomId(`EncerrarChamado_ticket_${selectedTicketId}`)
                             .setEmoji('1001951864620859462')
                             .setLabel(`Encerrar Chamada de Voz`)
                             .setStyle(1),
@@ -676,7 +721,9 @@ module.exports = async (interaction) => {
             })
         }
 
-        if (interaction.customId === 'EncerrarChamado') {
+        if (interaction.customId.startsWith('EncerrarChamado_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
 
             if (!interaction.isButton()) return;
 
@@ -687,7 +734,8 @@ module.exports = async (interaction) => {
                 })
 
             const cmd = await ticket.findOne({
-                guildId: interaction.guild.id
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
             })
 
             const voiceId = cmd.createdVoicelID
@@ -706,18 +754,20 @@ module.exports = async (interaction) => {
 
         }
 
-        if (interaction.customId === 'AdicionarMembro') {
+        if (interaction.customId.startsWith('AdicionarMembro_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
 
             if (!interaction.isButton()) return;
 
             if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
 
             const modal = new ModalBuilder()
-                .setCustomId('addmembro')
+                .setCustomId(`addmembro_ticket_${selectedTicketId}`)
                 .setTitle(`Adicionar Membro`)
 
             const favoriteColorInput = new TextInputBuilder()
-                .setCustomId('idUser')
+                .setCustomId(`idUser_ticket_${selectedTicketId}`)
                 .setLabel(`Qual ID do membro a ser adicionado?`)
                 .setStyle(TextInputStyle.Short)
 
@@ -728,19 +778,21 @@ module.exports = async (interaction) => {
             await interaction.showModal(modal)
         }
 
-        if (interaction.customId === 'RemoverMembro') {
+        if (interaction.customId.startsWith('RemoverMembro_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
 
             if (!interaction.isButton()) return;
 
             if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
 
             const modal = new ModalBuilder()
-                .setCustomId('removermembrotexto')
+                .setCustomId(`removermembrotexto_ticket_${selectedTicketId}`)
                 .setTitle(`${interaction.guild.name}`);
 
 
             const favoriteColorInput = new TextInputBuilder()
-                .setCustomId('idMember')
+                .setCustomId(`idMember_ticket_${selectedTicketId}`)
                 .setLabel(`Qual ID do membro a ser removido?`)
                 .setStyle(TextInputStyle.Short);
 
@@ -752,142 +804,74 @@ module.exports = async (interaction) => {
 
         }
 
-        if (interaction.customId === 'poke') {
+        if (interaction.customId.startsWith('poke_ticket_')) {
 
-            const ticketInfo = interaction.client.ticketData.get(interaction.user.id);
+            const selectedTicketId = interaction.customId.split('_')[2];
 
-            if (ticketInfo) {
 
-                const { cmd3 } = ticketInfo; // Recupera o cmd3 salvo
+            const cmd = await ticket.findOne({
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
+            })
 
-                const ticketid = cmd3.ticketId;
+            const channelId = cmd.createdChannelID;
 
-                const cmd = await ticket.findOne({
-                    guildId: interaction.guild.id,
-                    ticketId: ticketid
-                });
+            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
 
-                const channelId = cmd.createdChannelID;
-                console.log(`Canal ID: ${channelId}`); // Verificar se o ID está correto
 
-                let fetchedChannel;
+            const roleId = cmd.cargo;
 
-                try {
-                    // Tenta buscar o canal do cache ou da API
-                    fetchedChannel = await interaction.guild.channels.fetch(channelId);
-                } catch (error) {
-                    return interaction.reply({ content: `Erro: Canal não encontrado ou foi excluído.`, ephemeral: true });
+            const role = interaction.guild.roles.cache.get(roleId);
+
+            if (role) {
+                const membersWithRole = role.members;
+
+                if (membersWithRole.size === 0) {
+                    interaction.reply('Nenhum membro com o cargo encontrado.');
+                    return;
                 }
 
-                // Verifique se o canal foi realmente encontrado
-                if (!fetchedChannel) {
-                    return interaction.reply({ content: 'Erro: Canal não encontrado.', ephemeral: true });
-                }
+                const row = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setLabel('Visualizar o Ticket')
+                        .setEmoji("<:crvt:1168028479833505842>")
+                        .setURL(fetchedChannel.url)
+                        .setStyle(5)
+                );
 
-                const roleId = cmd.cargo;
-                const role = interaction.guild.roles.cache.get(roleId);
+                const embed = new EmbedBuilder()
+                    .setColor("#ba68c8") // Cor azul profissional
+                    .setTitle('<a:alerta:1163274838111162499> Você foi mencionado em um Ticket!')
+                    .setDescription('Olá membros com o cargo **${role.name}**,\n\nAlguém mencionou vocês em um ticket aberto e aguarda uma resposta.\n\nPor favor, verifique o ticket e forneça sua colaboração.')
+                    .setFooter({
+                        iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
+                        text: `Agradecemos sua colaboração em ${interaction.guild.name}!`
+                    });
 
-                if (role) {
-                    const membersWithRole = role.members;
 
-                    if (membersWithRole.size === 0) {
-                        interaction.reply(`Nenhum membro com o cargo encontrado.`);
-                        return;
+                membersWithRole.forEach(async member => {
+                    try {
+                        await member.send({ embeds: [embed], components: [row] })
+                    } catch (error) {
+                        console.error(`Erro ao enviar mensagem para ${member.user.tag}: ${error.message}`);
                     }
+                })
 
-                    // Construindo a URL manualmente para o canal
-                    const channelUrl = `https://discord.com/channels/${interaction.guild.id}/${fetchedChannel.id}`;
-
-                    const row = new ActionRowBuilder().addComponents(
-                        new ButtonBuilder()
-                            .setLabel('Visualizar o Ticket')
-                            .setEmoji("<:crvt:1168028479833505842>")
-                            .setURL(channelUrl)
-                            .setStyle(5) // Link button style
-                    );
-
-                    const embed = new EmbedBuilder()
-                        .setColor("#ba68c8") // Cor personalizada
-                        .setTitle('<a:alerta:1163274838111162499> Você foi mencionado em um Ticket!')
-                        .setDescription(`Olá membros com o cargo **${role.name}**,\n\nAlguém mencionou vocês em um ticket aberto e aguarda uma resposta.\n\nPor favor, verifique o ticket e forneça sua colaboração.`)
-                        .setFooter({
-                            iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
-                            text: `Agradecemos sua colaboração em ${interaction.guild.name}!`
-                        });
-
-                    // Enviar a mensagem privada para cada membro com o cargo
-                    membersWithRole.forEach(async (member) => {
-                        try {
-                            await member.send({ embeds: [embed], components: [row] });
-                        } catch (error) {
-                            console.error(`Erro ao enviar mensagem para ${member.user.tag}: ${error.message}`);
-                        }
-                    });
-
-                    interaction.reply({
-                        content: `> \`+\` <a:alerta:1163274838111162499> Notificação enviada para membros com o cargo <@&${role.id}>. \n\n> \`-\` <a:alerta:1163274838111162499> **Evite usar essa função de maneira inadequada, pois isso acarretará penalidades.**`,
-                        ephemeral: true
-                    });
-
-                } else {
-                    interaction.reply({ content: `> \`-\` Cargo não encontrado.`, ephemeral: true });
-                }
-
-
-            }
-
-        }
-
-
-        if (interaction.customId === 'addmembro') {
-
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels))
-                return interaction.reply({
-                    content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                interaction.reply({
+                    content: `> \+\ <a:alerta:1163274838111162499> Notificação enviada para membros com o cargo <@&${role.id}>. \n\n> \-\ <a:alerta:1163274838111162499> **Evite usar essa função de maneira inadequada, pois isso acarretará penalidades.**`,
                     ephemeral: true
                 })
 
+            } else {
 
-            const cmd = await ticket.findOne({
-                guildId: interaction.guild.id
-            })
+                interaction.reply({ content: `> \-\ Cargo não encontrado.`, ephemeral: true })
 
-
-            const channelId = cmd.createdChannelID
-
-
-            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
-
-
-            const user = interaction.fields.getTextInputValue('idUser')
-
-            fetchedChannel.permissionOverwrites.edit(user, { ViewChannel: true })
-
-            interaction.deferUpdate()
-
+            }
         }
 
-        if (interaction.customId === 'removermembrotexto') {
 
-
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
-
-            const cmd = await ticket.findOne({
-                guildId: interaction.guild.id
-            })
-
-            const channelId = cmd.createdChannelID
-
-            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
-
-            const newnamea = interaction.fields.getTextInputValue('idMember');
-
-            fetchedChannel.permissionOverwrites.edit(newnamea, { ViewChannel: false })
-            interaction.deferUpdate()
-        }
 
         if (interaction.customId === 'SairdoTicket') {
-
 
             interaction.channel.permissionOverwrites.edit(interaction.user.id, { ViewChannel: false })
 
@@ -895,234 +879,234 @@ module.exports = async (interaction) => {
 
         }
 
-        if (interaction.customId === 'close') {
+        if (interaction.customId.startsWith('close_ticket_')) {
 
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+            const ticketClose = require("../../database/models/ticket")
+
+            const cmd = await ticketClose.findOne({
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
+            })
 
             if (!interaction.isButton()) return;
 
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
-
-            const ticketInfo = interaction.client.ticketData.get(interaction.user.id);
-
-            if (ticketInfo) {
-                const { cmd3 } = ticketInfo; // Recupera o cmd3 salvo
-
-                let ticket = interaction.channel.topic
-                interaction.channel.edit({
-
-                    permissionOverwrites: [
-                        {
-                            id: cmd3.cargo,
-                            allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
-                        },
-                        {
-                            id: ticket,
-                            deny: [PermissionFlagsBits.ViewChannel],
-                        },
-                        {
-                            id: interaction.guild.id,
-                            deny: [PermissionFlagsBits.ViewChannel],
-                        }
-
-                    ],
-
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+                return interaction.reply({
+                    content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                    ephemeral: true
                 })
-
-                let embed = new EmbedBuilder()
-                    .setColor('#ba68c8')
-                    .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-                    .setDescription(`O Membro ${interaction.user}\`(${interaction.user.id})\` Fechou o ticket, Escolha uma opção abaixo.`)
-
-                let botoes = new ActionRowBuilder().addComponents([
-
-                    new ButtonBuilder()
-                        .setStyle(ButtonStyle.Success)
-                        .setLabel(`Reabrir`)
-                        .setCustomId('reabrir'),
-                    new ButtonBuilder()
-                        .setStyle(ButtonStyle.Danger)
-                        .setLabel(`Deletar`)
-                        .setCustomId('deletar')])
-
-
-                interaction.reply({ embeds: [embed], components: [botoes] })
             }
 
 
-        }
 
-        if (interaction.customId === 'reabrir') {
+            let ticket = interaction.channel.topic
+            interaction.channel.edit({
 
-
-            if (!interaction.isButton()) return;
-
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
-
-            interaction.message.delete()
-
-            // Recupera os dados do ticket armazenados
-            const ticketInfo = interaction.client.ticketData.get(interaction.user.id);
-
-            if (ticketInfo) {
-
-                const { cmd3 } = ticketInfo; // Recupera o cmd3 salvo
-                let ticket = interaction.channel.topic
-
-                interaction.channel.edit({
-
-                    permissionOverwrites: [
-                        {
-                            id: cmd3.cargo,
-                            allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
-                        },
-                        {
-                            id: ticket,
-                            allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
-                        },
-                        {
-                            id: interaction.guild.id,
-                            deny: [PermissionFlagsBits.ViewChannel],
-                        }
-
-                    ],
-
-
-                })
-
-                let embed = new EmbedBuilder()
-                    .setColor('#ba68c8')
-                    .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-                    .setDescription(`Olá <@${ticket}>, O Membro ${interaction.user} Reabriu seu ticket.`)
-
-                let button = new ButtonBuilder()
-                    .setLabel(`Apagar Mensagem`)
-                    .setStyle(2)
-                    .setCustomId('msg')
-
-                const row = new ActionRowBuilder().addComponents(button)
-
-                interaction.channel.send({ content: `<@${ticket}>`, embeds: [embed], components: [row] })
-            }
-
-
-        }
-
-        if (interaction.customId === 'msg') {
-
-
-            if (!interaction.isButton()) return;
-
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
-
-            interaction.message.delete()
-
-        }
-
-        if (interaction.customId === 'deletar') {
-            if (!interaction.isButton()) return;
-
-
-            // Recupera os dados do ticket armazenados
-            const ticketInfo = interaction.client.ticketData.get(interaction.user.id);
-
-            if (ticketInfo) {
-                const { cmd3 } = ticketInfo; // Recupera o cmd3 salvo
-
-
-                try {
-                    // Verifique se o usuário tem permissão para gerenciar canais
-                    if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
-                        return interaction.reply({
-                            content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
-                            ephemeral: true
-                        });
+                permissionOverwrites: [
+                    {
+                        id: cmd.cargo,
+                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
+                    },
+                    {
+                        id: ticket,
+                        deny: [PermissionFlagsBits.ViewChannel],
+                    },
+                    {
+                        id: interaction.guild.id,
+                        deny: [PermissionFlagsBits.ViewChannel],
                     }
 
-                    const channel = interaction.channel;
-                    const topic = channel.topic;
-                    const guildId = interaction.guild.id;
+                ],
+
+            })
+
+            let embed = new EmbedBuilder()
+                .setColor('#ba68c8')
+                .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+                .setDescription(`O Membro ${interaction.user}\`(${interaction.user.id})\` Fechou o ticket, Escolha uma opção abaixo.`)
+
+            let botoes = new ActionRowBuilder().addComponents([
+
+                new ButtonBuilder()
+                    .setStyle(ButtonStyle.Success)
+                    .setLabel(`Reabrir`)
+                    .setCustomId(`reabrir_ticket_${selectedTicketId}`),
+                new ButtonBuilder()
+                    .setStyle(ButtonStyle.Danger)
+                    .setLabel(`Deletar`)
+                    .setCustomId(`deletar_ticket_${selectedTicketId}`)])
 
 
-                    // Obter o ticket relacionado ao canal atual
-                    const cmd = await ticket.findOne({
-                        guildId: guildId,
-                        createdChannelID: channel.id
+            interaction.reply({ embeds: [embed], components: [botoes] })
+
+
+
+        }
+
+        if (interaction.customId.startsWith('reabrir_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+
+            if (!interaction.isButton()) return;
+
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
+
+            interaction.message.delete()
+
+            const cmd = await ticket.findOne({
+                guildId: interaction.guild.id,
+                ticketId: selectedTicketId
+            })
+
+            let ticket = interaction.channel.topic
+
+            interaction.channel.edit({
+
+                permissionOverwrites: [
+                    {
+                        id: cmd.cargo,
+                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
+                    },
+                    {
+                        id: ticket,
+                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
+                    },
+                    {
+                        id: interaction.guild.id,
+                        deny: [PermissionFlagsBits.ViewChannel],
+                    }
+
+                ],
+
+
+            })
+
+            let embed = new EmbedBuilder()
+                .setColor('#ba68c8')
+                .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+                .setDescription(`Olá <@${ticket}>, O Membro ${interaction.user} Reabriu seu ticket.`)
+
+            let button = new ButtonBuilder()
+                .setLabel(`Apagar Mensagem`)
+                .setStyle(2)
+                .setCustomId(`msg_ticket_${selectedTicketId}`)
+
+            const row = new ActionRowBuilder().addComponents(button)
+
+            interaction.channel.send({ content: `<@${ticket}>`, embeds: [embed], components: [row] })
+
+        }
+
+        if (interaction.customId.startsWith('msg_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+
+            if (!interaction.isButton()) return;
+
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
+
+            interaction.message.delete()
+
+        }
+
+        if (interaction.customId.startsWith('deletar_ticket_')) {
+
+            const selectedTicketId = interaction.customId.split('_')[2];
+
+            if (!interaction.isButton()) return;
+
+
+
+            try {
+                // Verifique se o usuário tem permissão para gerenciar canais
+                if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+                    return interaction.reply({
+                        content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                        ephemeral: true
                     });
+                }
 
-                    // Verifique se o ticket foi assumido por alguém
-                    if (!cmd || !cmd.atendenteId) {
-                        return interaction.reply({
-                            content: 'Este ticket ainda não foi assumido por nenhum atendente.',
-                            ephemeral: true
-                        });
-                    }
+                const channel = interaction.channel;
+                const topic = channel.topic;
+                const guildId = interaction.guild.id;
 
-                    // Obtenha os dados do atendente
-                    const atendenteData = await Atendente.findOne({ guildId: guildId, userId: cmd.atendenteId });
 
-                    if (!atendenteData) {
-                        return interaction.reply({
-                            content: 'Não foi possível encontrar os dados do atendente.',
-                            ephemeral: true
-                        });
-                    }
+                // Obter o ticket relacionado ao canal atual
+                const cmd = await ticket.findOne({
+                    guildId: guildId,
+                    ticketId: selectedTicketId,
+                    createdChannelID: channel.id
+                });
 
-                    const attachment = await discordTranscripts.createTranscript(channel);
-                    const transcriptTimestamp = Math.round(Date.now() / 1000);
+                // Verifique se o ticket foi assumido por alguém
+                if (!cmd || !cmd.atendenteId) {
+                    return interaction.reply({
+                        content: 'Este ticket ainda não foi assumido por nenhum atendente.',
+                        ephemeral: true
+                    });
+                }
 
-                    // Deletar o canal após o transcript ser criado
-                    await interaction.channel.delete();
+                // Obtenha os dados do atendente
+                const atendenteData = await Atendente.findOne({ guildId: guildId, userId: cmd.atendenteId });
 
-                    // Crie a embed com as informações do atendente e número de tickets
-                    let embed = new EmbedBuilder()
-                        .setColor('#ba68c8') // Azul do Discord
-                        .setTitle('📋 Ticket Encerrado') // Título com emoji
-                        .setDescription(`
+                if (!atendenteData) {
+                    return interaction.reply({
+                        content: 'Não foi possível encontrar os dados do atendente.',
+                        ephemeral: true
+                    });
+                }
+
+                const attachment = await discordTranscripts.createTranscript(channel);
+                const transcriptTimestamp = Math.round(Date.now() / 1000);
+
+                // Deletar o canal após o transcript ser criado
+                await interaction.channel.delete();
+
+                // Crie a embed com as informações do atendente e número de tickets
+                let embed = new EmbedBuilder()
+                    .setColor('#ba68c8') // Azul do Discord
+                    .setTitle('📋 Ticket Encerrado') // Título com emoji
+                    .setDescription(`
                     **👤 Ticket de:** <@${topic}> \`(${topic})\`
                     **🛠️ Encerrado por:** ${interaction.user} \`(${interaction.user.id})\`
                     **📅 Data de encerramento:** <t:${transcriptTimestamp}:R> (<t:${transcriptTimestamp}:F>)
                     **👨‍💼 Assumido por:** <@${cmd.atendenteId}> 
                     **🏆 Atendimentos realizados:** ${atendenteData.atendimentosRealizados}
                 `)
-                        .setThumbnail(interaction.guild.iconURL({ extension: 'png' })) // Imagem pequena do servidor
-                        .setFooter({
-                            text: `Ticket ID: ${channel.id}`,
-                            iconURL: interaction.user.displayAvatarURL({ extension: 'png' })
-                        })
-                        .setTimestamp();
+                    .setThumbnail(interaction.guild.iconURL({ extension: 'png' })) // Imagem pequena do servidor
+                    .setFooter({
+                        text: `Ticket ID: ${channel.id}`,
+                        iconURL: interaction.user.displayAvatarURL({ extension: 'png' })
+                    })
+                    .setTimestamp();
 
-                    // Busca o ticket no banco de dados para resetar o atendente
-                    await ticket.findOneAndUpdate({
-                        guildId: guildId,
-                        createdChannelID: channel.id
-                    }, {
-                        $unset: { atendenteId: "" } // Remove o atendente associado ao ticket
-                    });
+                // Busca o ticket no banco de dados para resetar o atendente
+                await ticket.findOneAndUpdate({
+                    guildId: guildId,
+                    ticketId: selectedTicketId,
+                    createdChannelID: channel.id
+                }, {
+                    $unset: { atendenteId: "" } // Remove o atendente associado ao ticket
+                });
 
 
 
-                    // Enviar a embed para o canal de logs
-                    let chat_log = cmd3.canalLog;
-                    let canal = interaction.guild.channels.cache.get(chat_log);
-                    await canal.send({ embeds: [embed], files: [attachment] });
+                // Enviar a embed para o canal de logs
+                let chat_log = cmd.canalLog;
+                let canal = interaction.guild.channels.cache.get(chat_log);
+                await canal.send({ embeds: [embed], files: [attachment] });
 
-                } catch (error) {
-                    console.error('Erro ao deletar o ticket:', error);
-                    await interaction.reply({
-                        content: 'Houve um erro ao processar a solicitação de deletar o ticket.',
-                        ephemeral: true
-                    });
-                }
+            } catch (error) {
+                console.error('Erro ao deletar o ticket:', error);
+                await interaction.reply({
+                    content: 'Houve um erro ao processar a solicitação de deletar o ticket.',
+                    ephemeral: true
+                });
             }
         }
-
-        // } catch (error) {
-
-        //     return interaction.reply({
-        //         content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
-        //         ephemeral: true
-        //     })
-        // }
-
     }
 }
