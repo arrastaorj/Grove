@@ -753,66 +753,91 @@ module.exports = async (interaction) => {
         }
 
         if (interaction.customId === 'poke') {
-            const cmd = await ticket.findOne({
-                guildId: interaction.guild.id
-            });
 
-            const channelId = cmd.createdChannelID;
+            const ticketInfo = interaction.client.ticketData.get(interaction.user.id);
 
-            const fetchedChannel = interaction.guild.channels.cache.get(channelId)
+            if (ticketInfo) {
 
+                const { cmd3 } = ticketInfo; // Recupera o cmd3 salvo
 
+                const ticketid = cmd3.ticketId;
 
+                const cmd = await ticket.findOne({
+                    guildId: interaction.guild.id,
+                    ticketId: ticketid
+                });
 
-            const roleId = cmd.cargo;
+                const channelId = cmd.createdChannelID;
+                console.log(`Canal ID: ${channelId}`); // Verificar se o ID está correto
 
-            const role = interaction.guild.roles.cache.get(roleId);
+                let fetchedChannel;
 
-            if (role) {
-                const membersWithRole = role.members;
-
-                if (membersWithRole.size === 0) {
-                    interaction.reply(`Nenhum membro com o cargo encontrado.`);
-                    return;
+                try {
+                    // Tenta buscar o canal do cache ou da API
+                    fetchedChannel = await interaction.guild.channels.fetch(channelId);
+                } catch (error) {
+                    return interaction.reply({ content: `Erro: Canal não encontrado ou foi excluído.`, ephemeral: true });
                 }
 
-                const row = new ActionRowBuilder().addComponents(
-                    new ButtonBuilder()
-                        .setLabel(`Visualizar o Ticket"`)
-                        .setEmoji("<:crvt:1168028479833505842>")
-                        .setURL(fetchedChannel.url)
-                        .setStyle(5)
-                );
+                // Verifique se o canal foi realmente encontrado
+                if (!fetchedChannel) {
+                    return interaction.reply({ content: 'Erro: Canal não encontrado.', ephemeral: true });
+                }
 
-                const embed = new EmbedBuilder()
-                    .setColor("#ba68c8") // Cor azul profissional
-                    .setTitle(`<a:alerta:1163274838111162499> Você foi mencionado em um Ticket!`)
-                    .setDescription(`Olá membros com o cargo **${role.name}**,\n\nAlguém mencionou vocês em um ticket aberto e aguarda uma resposta.\n\nPor favor, verifique o ticket e forneça sua colaboração.`)
-                    .setFooter({
-                        iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
-                        text: `Agradecemos sua colaboração em ${interaction.guild.name}!`
+                const roleId = cmd.cargo;
+                const role = interaction.guild.roles.cache.get(roleId);
+
+                if (role) {
+                    const membersWithRole = role.members;
+
+                    if (membersWithRole.size === 0) {
+                        interaction.reply(`Nenhum membro com o cargo encontrado.`);
+                        return;
+                    }
+
+                    // Construindo a URL manualmente para o canal
+                    const channelUrl = `https://discord.com/channels/${interaction.guild.id}/${fetchedChannel.id}`;
+
+                    const row = new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setLabel('Visualizar o Ticket')
+                            .setEmoji("<:crvt:1168028479833505842>")
+                            .setURL(channelUrl)
+                            .setStyle(5) // Link button style
+                    );
+
+                    const embed = new EmbedBuilder()
+                        .setColor("#ba68c8") // Cor personalizada
+                        .setTitle('<a:alerta:1163274838111162499> Você foi mencionado em um Ticket!')
+                        .setDescription(`Olá membros com o cargo **${role.name}**,\n\nAlguém mencionou vocês em um ticket aberto e aguarda uma resposta.\n\nPor favor, verifique o ticket e forneça sua colaboração.`)
+                        .setFooter({
+                            iconURL: interaction.user.displayAvatarURL({ extension: 'png' }),
+                            text: `Agradecemos sua colaboração em ${interaction.guild.name}!`
+                        });
+
+                    // Enviar a mensagem privada para cada membro com o cargo
+                    membersWithRole.forEach(async (member) => {
+                        try {
+                            await member.send({ embeds: [embed], components: [row] });
+                        } catch (error) {
+                            console.error(`Erro ao enviar mensagem para ${member.user.tag}: ${error.message}`);
+                        }
                     });
 
+                    interaction.reply({
+                        content: `> \`+\` <a:alerta:1163274838111162499> Notificação enviada para membros com o cargo <@&${role.id}>. \n\n> \`-\` <a:alerta:1163274838111162499> **Evite usar essa função de maneira inadequada, pois isso acarretará penalidades.**`,
+                        ephemeral: true
+                    });
 
-                membersWithRole.forEach(async member => {
-                    try {
-                        await member.send({ embeds: [embed], components: [row] })
-                    } catch (error) {
-                        console.error(`Erro ao enviar mensagem para ${member.user.tag}: ${error.message}`);
-                    }
-                })
+                } else {
+                    interaction.reply({ content: `> \`-\` Cargo não encontrado.`, ephemeral: true });
+                }
 
-                interaction.reply({
-                    content: `> \`+\` <a:alerta:1163274838111162499> Notificação enviada para membros com o cargo <@&${role.id}>. \n\n> \`-\` <a:alerta:1163274838111162499> **Evite usar essa função de maneira inadequada, pois isso acarretará penalidades.**`,
-                    ephemeral: true
-                })
-
-            } else {
-
-                interaction.reply({ content: `> \`-\` Cargo não encontrado.`, ephemeral: true })
 
             }
+
         }
+
 
         if (interaction.customId === 'addmembro') {
 
