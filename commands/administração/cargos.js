@@ -8,6 +8,7 @@ const {
 } = require('discord.js')
 
 const cargos = require("../../database/models/cargos")
+const client = require("../../index")
 
 module.exports = {
     data: new SlashCommandBuilder()

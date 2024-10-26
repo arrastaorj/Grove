@@ -127,7 +127,7 @@ module.exports = {
 
             const { masteryData, summonerData, accountPuuid, accountData, desafioNames } = await getPlayerData(interaction)
 
-            console.log(accountData)
+          
 
             const json_data_raw = require("../../plugins/champions.json");
 
