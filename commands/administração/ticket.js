@@ -820,7 +820,6 @@ module.exports = {
                 await i.showModal(modal);
             }
 
-
             if (selectedOption2 === 'titulo2') {
                 // Cria um modal para solicitar o título 1
                 const modal = new ModalBuilder()

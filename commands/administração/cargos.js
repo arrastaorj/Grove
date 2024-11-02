@@ -457,13 +457,16 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                             .setDisabled(page === 0),
                         new ButtonBuilder()
-                            .setCustomId('next_page')
+                            .setCustomId('next_log_page')
                             .setLabel('Avançar')
                             .setEmoji('<:arrowwhite:1293008459968544779>')
                             .setStyle(ButtonStyle.Primary)
                             .setDisabled(page === totalPages - 1)
                     );
             };
+
+            const filterrr = (btnInt) =>
+                ['previous_page', 'next_log_page'].includes(btnInt.customId) && btnInt.user.id === interaction.user.id;
 
             if (i.customId === 'initial-menu') {
 
@@ -485,11 +488,11 @@ module.exports = {
                         ephemeral: true
                     });
 
-                    const logCollector = paginationLogMessage.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: timeoutDuration });
+                    const logCollector = paginationLogMessage.createMessageComponentCollector({ filterrr, componentType: ComponentType.Button, time: timeoutDuration });
 
                     logCollector.on('collect', async (btnInt) => {
                         if (btnInt.customId === 'previous_page') logChannelPage -= 1;
-                        if (btnInt.customId === 'next_page') logChannelPage += 1;
+                        if (btnInt.customId === 'next_log_page') logChannelPage += 1;
 
                         await btnInt.update({
                             content: `Página ${logChannelPage + 1}/${totalLogPages}. Selecione o canal de logs:`,
@@ -627,10 +630,12 @@ module.exports = {
                 }
 
                 if (selectedValue === 'send_in_channel') {
+
                     const configData = await cargos.findOne({ guildId: interaction.guild.id, cargosId: selectedCargotId })
 
                     if (configData.cargos.length === 0) {
                         await i.reply({ content: '> \`-\` <:NA_Intr004:1289442144255213618> É necessário ter pelo menos um cargo configurado antes de enviar o Select-Cargos.', ephemeral: true });
+                        await updateCargosEmbed(interaction);
                         return;
                     }
 
@@ -646,10 +651,12 @@ module.exports = {
                     });
 
                     if (missingItems.length > 0) {
-                        return await i.reply({
+                        await i.reply({
                             content: `> \`-\` <:NA_Intr004:1289442144255213618> Os seguintes itens não foram configurados: **${missingItems.join(', ')}**`,
                             ephemeral: true
-                        });
+                        })
+                        await updateCargosEmbed(interaction);
+                        return;
                     }
 
                     const textChannels = interaction.guild.channels.cache
@@ -657,121 +664,102 @@ module.exports = {
                         .map(channel => ({ label: channel.name, value: channel.id }));
 
                     if (textChannels.length === 0) {
-                        return await interaction.reply({
+                        await interaction.reply({
                             content: '> Não foram encontrados canais de texto disponíveis para selecionar.',
                             ephemeral: true
-                        });
+                        })
+                        await updateCargosEmbed(interaction);
+                        return;
                     }
 
-                    let currentPage = 0;
-                    const channelsPerPage = 25;
-                    const totalPages = Math.ceil(textChannels.length / channelsPerPage);
+                    await i.deferUpdate();
 
-                    const createSelectMenuPage = (page) => {
-                        const paginatedChannels = textChannels.slice(page * channelsPerPage, (page + 1) * channelsPerPage);
-                        return new ActionRowBuilder().addComponents(
-                            new StringSelectMenuBuilder()
-                                .setCustomId('select-channel')
-                                .setPlaceholder('Selecione um canal para enviar a mensagem')
-                                .addOptions(paginatedChannels)
-                        )
-                    }
 
-                    const createPaginationButtons = (page) => new ActionRowBuilder().addComponents(
-                        new ButtonBuilder()
-                            .setCustomId('prev_page')
-                            .setLabel('Página Anterior')
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji('<:arrowwhite_left:1293008404662587402>')
-                            .setDisabled(page === 0),
-                        new ButtonBuilder()
-                            .setCustomId('next_page')
-                            .setLabel('Próxima Página')
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji('<:arrowwhite:1293008459968544779>')
-                            .setDisabled(page === totalPages - 1)
-                    );
+                    let logChannelPage = 0;
+                    const totalLogPages = Math.ceil(textChannels.length / channelsPerPage);
 
-                    const selectMenu = createSelectMenuPage(currentPage);
-                    const buttons = createPaginationButtons(currentPage);
-
-                    await i.reply({
-                        content: `Selecione o canal onde deseja enviar a mensagem: (Página ${currentPage + 1} de ${totalPages})`,
-                        components: [selectMenu, buttons],
+                    const paginationLogMessage = await i.followUp({
+                        content: `Página ${logChannelPage + 1}/${totalLogPages}. Selecione o canal de logs:`,
+                        components: [
+                            generateChannelSelectMenu(logChannelPage, textChannels, 'select_log_channel', 'Selecione o canal de logs'),
+                            generatePaginationButtons(logChannelPage, totalLogPages)
+                        ],
                         ephemeral: true
                     });
 
-                    const filter = (interaction) => interaction.user.id === i.user.id;
-                    const collector = i.channel.createMessageComponentCollector({ filter, time: 60000 });
+                    const logCollector = paginationLogMessage.createMessageComponentCollector({ filterrr, componentType: ComponentType.Button, time: timeoutDuration });
 
-                    collector.on('collect', async (interaction) => {
-                        if (interaction.isButton()) {
-                            currentPage += interaction.customId === 'next_page' ? 1 : -1;
+                    logCollector.on('collect', async (btnInt) => {
+                        if (btnInt.customId === 'previous_page') logChannelPage -= 1;
+                        if (btnInt.customId === 'next_log_page') logChannelPage += 1;
 
-                            await interaction.update({
-                                content: `Selecione o canal onde deseja enviar a mensagem: (Página ${currentPage + 1} de ${totalPages})`,
-                                components: [createSelectMenuPage(currentPage), createPaginationButtons(currentPage)]
-                            });
+                        await btnInt.update({
+                            content: `Página ${logChannelPage + 1}/${totalLogPages}. Selecione o canal de logs:`,
+                            components: [
+                                generateChannelSelectMenu(logChannelPage, textChannels, 'select_log_channel', 'Selecione o canal de logs'),
+                                generatePaginationButtons(logChannelPage, totalLogPages)
+                            ]
+                        });
+                    });
+
+                    const selectLogMenuCollector = paginationLogMessage.createMessageComponentCollector({ filter: (int) => int.customId === 'select_log_channel', time: timeoutDuration });
+
+                    selectLogMenuCollector.on('collect', async (i) => {
+
+                        const selectedChannelId = i.values[0];
+                        const selectedChannel = interaction.guild.channels.cache.get(selectedChannelId);
+
+
+                        if (!configData || !configData.cargos || configData.cargos.length === 0) {
+                            await i.reply({ content: 'Nenhum cargo configurado para enviar a mensagem.', ephemeral: true });
+                            await updateCargosEmbed(interaction);
+                            return;
                         }
 
-                        if (interaction.isStringSelectMenu()) {
-                            const selectedChannelId = interaction.values[0];
-                            const selectedChannel = interaction.guild.channels.cache.get(selectedChannelId);
+                        const { description, Img, cargos } = configData;
 
-                            try {
-                                if (!configData || !configData.cargos || configData.cargos.length === 0) {
-                                    await interaction.reply({ content: 'Nenhum cargo configurado para enviar a mensagem.', ephemeral: true });
-                                    return;
-                                }
-
-                                const { description, Img, cargos } = configData;
-
-                                if (cargos.length === 0) {
-                                    await interaction.reply({ content: 'É necessário ter pelo menos um cargo configurado.', ephemeral: true });
-                                    return;
-                                }
-
-                                const cargoOptions = cargos.map(cargoId => {
-                                    const cargo = interaction.guild.roles.cache.get(cargoId);
-                                    return { label: cargo ? cargo.name : 'Cargo desconhecido', value: cargoId };
-                                });
-
-                                const maxValues = Math.min(cargoOptions.length, 10);
-
-                                const cargoSelectMenu = new StringSelectMenuBuilder()
-                                    .setCustomId(`select-cargo-${selectedCargotId}`)
-                                    .setPlaceholder('Selecione o cargo que deseja.')
-                                    .setMaxValues(maxValues)
-                                    .setMinValues(0)
-                                    .addOptions(cargoOptions);
-
-                                const cargoRow = new ActionRowBuilder().addComponents(cargoSelectMenu);
-
-                                if (description || Img) {
-                                    const embed = new EmbedBuilder();
-                                    if (description) embed.setDescription(description)
-                                    if (Img) embed.setImage(Img)
-                                    await selectedChannel.send({
-                                        embeds: [embed],
-                                        components: [cargoRow]
-                                    })
-
-                                } else {
-                                    await selectedChannel.send({ components: [cargoRow] });
-                                }
-
-                                await interaction.update({
-                                    content: `Mensagem com a seleção de cargos enviada para o canal **${selectedChannel.name}**!`,
-                                    components: [],
-                                    ephemeral: true
-                                });
-
-                                collector.stop();
-                            } catch (error) {
-                                console.error('Erro ao recuperar as configurações de cargos:', error);
-                                await interaction.reply({ content: 'Ocorreu um erro ao tentar recuperar as configurações dos cargos.', ephemeral: true });
-                            }
+                        if (cargos.length === 0) {
+                            await i.reply({ content: 'É necessário ter pelo menos um cargo configurado.', ephemeral: true });
+                            await updateCargosEmbed(interaction);
+                            return;
                         }
+
+                        const cargoOptions = cargos.map(cargoId => {
+                            const cargo = interaction.guild.roles.cache.get(cargoId);
+                            return { label: cargo ? cargo.name : 'Cargo desconhecido', value: cargoId };
+                        });
+
+                        const maxValues = Math.min(cargoOptions.length, 10);
+
+                        const cargoSelectMenu = new StringSelectMenuBuilder()
+                            .setCustomId(`select-cargo-${selectedCargotId}`)
+                            .setPlaceholder('Selecione o cargo que deseja.')
+                            .setMaxValues(maxValues)
+                            .setMinValues(0)
+                            .addOptions(cargoOptions);
+
+                        const cargoRow = new ActionRowBuilder().addComponents(cargoSelectMenu);
+
+                        if (description || Img) {
+                            const embed = new EmbedBuilder();
+                            if (description) embed.setDescription(description)
+                            if (Img) embed.setImage(Img)
+                            await selectedChannel.send({
+                                embeds: [embed],
+                                components: [cargoRow]
+                            })
+
+                        } else {
+                            await selectedChannel.send({ components: [cargoRow] });
+                        }
+
+                        await i.update({
+                            content: `Mensagem com a seleção de cargos enviada para o canal **${selectedChannel.name}**!`,
+                            components: [],
+                            ephemeral: true
+                        })
+                        await updateCargosEmbed(interaction);
+                        return;
                     })
                 }
             }
@@ -805,7 +793,6 @@ module.exports = {
                 const { components, totalPages } = await createAddRoleMenu(interaction.guild, newPage);
 
                 await i.editReply({
-
                     content: `Selecione os cargos para adicionar: (Página ${newPage + 1} de ${totalPages})`,
                     components: components
                 })

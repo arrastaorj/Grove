@@ -192,7 +192,7 @@ module.exports = async (interaction) => {
 
     if (interaction.isModalSubmit()) {
 
-        const { getSelectedCargotId } = require('../../commands/administração/teste')
+        const { getSelectedCargotId } = require('../../commands/administração/cargos')
         const selectedCargoId = getSelectedCargotId();
 
 
