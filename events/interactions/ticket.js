@@ -247,6 +247,15 @@ module.exports = async (interaction) => {
                 description: 'Adicione um novo sistema de ticket'
             });
 
+            // Adicionar a opção de criar um novo sistema de tickets
+            selectMenuOptions.push({
+                label: 'Deletar ticket existente',
+                emoji: '<:Supprimer:1299793527768612904>',
+                value: 'ticket_delete',
+                description: 'Apague um ticket existente'
+            });
+
+
             const selectMenu = new StringSelectMenuBuilder()
                 .setCustomId('select_ticket_config')
                 .setPlaceholder('Selecione um ticket existente ou crie um novo')

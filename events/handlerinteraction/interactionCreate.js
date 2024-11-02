@@ -40,12 +40,13 @@ client.on("interactionCreate", async (interaction) => {
         }
     }
 
-    if (interaction.isStringSelectMenu()) {
+    if (interaction.isStringSelectMenu() || interaction.isModalSubmit() || interaction.isButton()) {
 
-        if (interaction.customId === 'select2') {
+        if (interaction.customId.startsWith('select-cargo-') || interaction.customId === "voltarCargos" || interaction.customId === "descricao_cargos_modal" || interaction.customId === 'imagem_Modal') {
             await selectCargosHandler(interaction)
         }
     }
+
 
     if (interaction.isButton() || interaction.isModalSubmit()) {
         const ticketButtonIds = [

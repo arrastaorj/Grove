@@ -153,6 +153,7 @@ module.exports = {
         collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
 
         collector.on('collect', async i => {
+            
             if (i.customId === 'autorole_menu') {
                 const selectedValue = i.values[0];
 
@@ -281,6 +282,8 @@ module.exports = {
                 }
             }
 
+
+        
             if (i.customId === 'select_role_to_add') {
                 await i.deferUpdate();
                 const selectedRoleIds = i.values;

@@ -62,11 +62,7 @@ module.exports = {
                 await channel.send({ content: `Olá ${member}`, files: [mensagem] });
             }
         } catch (error) {
-            console.error("Erro ao processar o evento guildMemberAdd:", error);
-            const channel = client.channels.cache.get(canalBoasVindas); // Usa o canal configurado
-            if (channel) {
-                channel.send(`> \`-\` <a:alerta:1163274838111162499> Não posso concluir o comando pois ainda não recebi permissão para gerenciar este servidor (Administrador)`);
-            }
+            console.error("Erro ao processar o evento guildMemberAdd:", error)
         }
     }
-};
+}

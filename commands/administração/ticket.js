@@ -113,6 +113,14 @@ module.exports = {
             description: 'Adicione um novo sistema de ticket'
         });
 
+        // Adicionar a opção de criar um novo sistema de tickets
+        selectMenuOptions.push({
+            label: 'Deletar Sistema de Ticket',
+            emoji: '<:Supprimer:1299793527768612904>',
+            value: 'ticket_delete',
+            description: 'Exclua um sistema de ticket já configurado'
+        });
+
         const selectMenu = new StringSelectMenuBuilder()
             .setCustomId('select_ticket_config')
             .setPlaceholder('Selecione um ticket existente ou crie um novo')
@@ -232,25 +240,24 @@ module.exports = {
         const rowTicketAdd = new ActionRowBuilder().addComponents(buttonVoltar)
 
 
-
         async function updateTicketEmbed(interaction) {
             // Buscar as informações mais recentes do banco de dados
             const updatedTicketConfig = await ticket.findOne({ guildId: interaction.guild.id, ticketId: selectedTicketId });
 
             // Atualizar as variáveis com os novos valores do banco de dados
-            const assignedChannel = updatedTicketConfig.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
-            const assignedChannelLogs = updatedTicketConfig.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
-            const ticketCategory = updatedTicketConfig.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
-            const buttonName = updatedTicketConfig.nomeBotao || 'Não configurado';
-            const allowedRole = updatedTicketConfig.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
+            const assignedChannel = updatedTicketConfig?.canal1 ? `<#${updatedTicketConfig.canal1}>` : 'Não configurado';
+            const assignedChannelLogs = updatedTicketConfig?.canalLog ? `<#${updatedTicketConfig.canalLog}>` : 'Não configurado';
+            const ticketCategory = updatedTicketConfig?.categoria ? `<#${updatedTicketConfig.categoria}>` : 'Não configurada';
+            const buttonName = updatedTicketConfig?.nomeBotao || 'Não configurado';
+            const allowedRole = updatedTicketConfig?.cargo ? `<@&${updatedTicketConfig.cargo}>` : 'Não configurado';
 
             const titulo01 = updatedTicketConfig?.titulo01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
             const descrição01 = updatedTicketConfig?.descrição01 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
             const titulo02 = updatedTicketConfig?.titulo02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
             const descrição02 = updatedTicketConfig?.descrição02 ? `Para visualizar utilize o botão de preview abaixo` : 'Não configurado';
 
-            const imagem01 = updatedTicketConfig.imagem01 || 'Não configurado';
-            const imagem02 = updatedTicketConfig.imagem02 || 'Não configurado';
+            const imagem01 = updatedTicketConfig?.imagem01 || 'Não configurado';
+            const imagem02 = updatedTicketConfig?.imagem02 || 'Não configurado';
 
             // Recriar a embed com as novas informações
             const embed = createEmbed(assignedChannelLogs, assignedChannel, ticketCategory, buttonName, allowedRole, titulo01, descrição01, titulo02, descrição02, imagem01, imagem02);
@@ -264,10 +271,10 @@ module.exports = {
         }
 
 
-        const timeoutDuration = 600000; // 60 segundos
+        const timeoutDuration = 600000; // 10 minutos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
-        const filter = (i) => (i.customId === 'select_ticket_config')
+        const filter = (i) => i.customId === 'select_ticket_config' || i.customId === 'select_ticket_confirm_delete';
         const collector = initialMessage.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: timeoutDuration });
 
         // Armazenar o coletor no Map com o tempo de início e duração
@@ -353,8 +360,58 @@ module.exports = {
                 return;
             }
 
-            // Caso contrário, tratar as outras interações
-            if (selectedOption !== 'ticket_add') {
+            // Supondo que o coletor original já está configurado
+            if (selectedOption === 'ticket_delete') {
+
+                // Busca as configurações de tickets da guilda
+                const ticketConfigs = await ticket.find({ guildId: interaction.guild.id });
+                if (ticketConfigs.length === 0) {
+                    return i.reply({ content: `<:info:1290116635814002749> Nenhum ticket existente encontrado.`, ephemeral: true });
+                }
+
+                // Cria o select menu com opções de tickets existentes
+                const selectMenuOptionstes = ticketConfigs.map(config => ({
+                    label: `Ticket ID`,
+                    emoji: '<:Logs:1297733186985398375>',
+                    value: config.ticketId,
+                    description: `Apagar ticket ID ${config.ticketId}`
+                }));
+
+                // Define o select menu para escolher o ticket a ser deletado
+                const rowDelete = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId('select_ticket_confirm_delete')
+                        .setPlaceholder('Selecione o ticket que deseja deletar')
+                        .addOptions(selectMenuOptionstes)
+                );
+
+                // Envia a mensagem com o novo select menu para selecionar o ticket específico
+                await i.update({
+                    content: 'Selecione o ticket que deseja deletar:',
+                    embeds: [],
+                    components: [rowDelete],
+                })
+                return
+            }
+
+            // Se a interação for para confirmar a deleção de um ticket
+            if (i.customId === 'select_ticket_confirm_delete') {
+                const selectedTicketId = i.values[0];
+
+                // Deleta o ticket do banco de dados
+                await ticket.deleteOne({ ticketId: selectedTicketId });
+
+                await i.update({
+                    content: `<:1078434426368839750:1290114335909085257> O ticket foi deletado com sucesso.\n<:id:1284903920019308604> **ID:** \`\`${selectedTicketId}\`\``,
+                    components: [rowTicketAdd],
+
+                })
+                return
+            }
+
+
+            // Adiciona o código modificado para outras ações e seleciona o ticket para atualização
+            if (selectedOption !== 'ticket_add' && selectedOption !== 'ticket_delete' && selectedOption !== 'select_ticket_confirm_delete') {
                 selectedTicketId = selectedOption;
                 setSelectedTicketId(selectedOption);
 
@@ -365,7 +422,6 @@ module.exports = {
             }
 
         })
-
 
 
         const filter2 = i => i.customId === 'config_ticket'
@@ -402,13 +458,13 @@ module.exports = {
                         new ButtonBuilder()
                             .setCustomId('previous_page')
                             .setLabel('Voltar')
-                            .setEmoji('⬅️')
+                            .setEmoji('<:arrowwhite_left:1293008404662587402>')
                             .setStyle(ButtonStyle.Primary)
                             .setDisabled(page === 0),
                         new ButtonBuilder()
                             .setCustomId('next_page')
                             .setLabel('Avançar')
-                            .setEmoji('➡️')
+                            .setEmoji('<:arrowwhite:1293008459968544779>')
                             .setStyle(ButtonStyle.Primary)
                             .setDisabled(page === totalPages - 1)
                     );
@@ -584,7 +640,6 @@ module.exports = {
                 });
 
             }
-
 
             if (selectedOption2 === 'nome_botao') {
                 // Cria um modal para solicitar o nome do botão
