@@ -2,7 +2,7 @@ const {
     SlashCommandBuilder,
     PermissionsBitField,
     EmbedBuilder,
- 
+
 } = require('discord.js')
 
 require('dotenv').config()
@@ -108,6 +108,7 @@ module.exports = {
                 ephemeral: true
             })
         }
+
 
         const canal = interaction.options.getChannel('canal')
         const usuario = interaction.options.getString('twitch_username').toLowerCase()

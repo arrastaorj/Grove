@@ -11,6 +11,7 @@ const {
     TextInputStyle,
 } = require('discord.js')
 
+const { createCanvas, loadImage } = require('canvas');
 const bemvindo = require("../../database/models/bemvindo")
 const collectors = new Map()
 
@@ -190,41 +191,45 @@ module.exports = {
                 const modalFilter = (modalInteraction) => modalInteraction.customId === 'welcome_image_modal' && modalInteraction.user.id === interaction.user.id;
                 const modalCollector = await i.awaitModalSubmit({ filter: modalFilter, time: 60000 });
 
-                const imageUrl = modalCollector.fields.getTextInputValue('imageUrl');
-
-                // Validação da URL
-                const isValidImageUrl = (url) => {
-                    const validImageExtensions = /\.(jpeg|jpg|png)$/i; // Permite .jpeg, .jpg, .png
-                    const isGif = /\.gif$/i; // Verifica se é um GIF
-                    return validImageExtensions.test(url) && !isGif.test(url);
-                };
-
-                if (!imageUrl.startsWith('http') || !isValidImageUrl(imageUrl)) {
-                    return modalCollector.reply({
-                        content: 'Por favor, insira uma URL válida que termine com .jpeg, .jpg, ou .png. GIFs não são permitidos.',
-                        ephemeral: true
+                const imageUrl = modalCollector.fields.getTextInputValue('imageUrl')
+                
+                // Verifica se a URL tem um formato válido de link e protocolo
+                const validUrlPattern = /^(https?:\/\/)([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/i;
+                if (!validUrlPattern.test(imageUrl)) {
+                    return await modalCollector.reply({
+                        content: 'A URL fornecida não parece válida. Por favor, insira uma URL de imagem válida que comece com "http" ou "https".',
+                        ephemeral: true,
                     });
                 }
+                try {
+                    await loadImage(imageUrl);
 
-                // Atualiza o banco de dados com a nova imagem
-                await bemvindo.findOneAndUpdate(
-                    { guildId: modalCollector.guild.id },
-                    { $set: { welcomeImage: imageUrl } },
-                    { upsert: true }
-                );
+                    // Atualiza o banco de dados com a nova imagem
+                    await bemvindo.findOneAndUpdate(
+                        { guildId: modalCollector.guild.id },
+                        { $set: { welcomeImage: imageUrl } },
+                        { upsert: true }
+                    );
 
-                welcomeImage = imageUrl;
-                embed = createEmbed(isActive, assignedChannel, welcomeImage);
+                    welcomeImage = imageUrl;
+                    embed = createEmbed(isActive, assignedChannel, welcomeImage);
 
-                await modalCollector.update({
-                    embeds: [embed],
-                    components: [initialSelectMenu],
-                });
+                    await modalCollector.update({
+                        embeds: [embed],
+                        components: [initialSelectMenu],
+                    });
 
-                await modalCollector.followUp({
-                    content: 'Imagem de boas-vindas configurada com sucesso!',
-                    ephemeral: true
-                });
+                    await modalCollector.followUp({
+                        content: 'Imagem de boas-vindas configurada com sucesso!',
+                        ephemeral: true
+                    });
+                } catch (error) {
+                    // Caso a imagem não possa ser carregada para o canvas
+                    await modalCollector.reply({
+                        content: 'A URL fornecida não leva a uma imagem válida para o canvas. Por favor, tente outro link. Você também pode entrar no nosso servidor de suporte e abrir um ticket caso o erro continue.',
+                        ephemeral: true,
+                    });
+                }
             }
 
 

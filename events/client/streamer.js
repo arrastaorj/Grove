@@ -209,7 +209,8 @@ async function handleEventSubNotification(req, res) {
 
             const embed = new EmbedBuilder()
                 .setColor('#9146FF')
-                .setTitle(`${userName} está ao vivo! 🎥`)
+                .setAuthor({ name: `Twitch` })
+                .setTitle(`<:Twitch:1303157770014560357> ${userName} - Twitch`)
                 .addFields(
                     { name: 'Título da Live', value: streamData.title || 'Título ainda não disponível', inline: true },
                 )
@@ -220,7 +221,7 @@ async function handleEventSubNotification(req, res) {
                 .setTimestamp()
 
             sendNotification(streamerConfig.canal1, {
-                content: `<@${streamerConfig.discordMemberId}> está ao vivo!`,
+                content: `<@${streamerConfig.discordMemberId}> Está ao vivo na Twitch!`,
                 embeds: [embed],
                 components: [row]
             });
