@@ -149,7 +149,7 @@ module.exports = {
             components: [initialSelectMenu],
         });
 
-        const timeoutDuration = 60000; // 60 segundos
+        const timeoutDuration = 240000; // 4 minutos
         const startTime = Date.now();
 
         const filter = (i) => i.customId === 'antilink_menu' && i.user.id === interaction.user.id;

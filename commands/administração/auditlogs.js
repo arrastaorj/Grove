@@ -12,7 +12,9 @@ const {
 } = require('discord.js')
 
 const client = require("../../index")
-const GuildConfig = require('../../database/models/auditlogs');
+const GuildConfig = require('../../database/models/auditlogs')
+
+const collectors = new Map()
 
 
 module.exports = {
@@ -42,6 +44,41 @@ module.exports = {
                 content: `> \`-\` <:NA_Intr004:1289442144255213618> O bot não possui permissão para concluir este comando (ManageMessages).`,
                 ephemeral: true
             })
+        }
+
+
+        const userId = interaction.user.id;
+
+        // Verificar se já existe um coletor ativo para o usuário
+        if (collectors.has(userId)) {
+            const { timeout, startTime } = collectors.get(userId);
+            const timeElapsed = Date.now() - startTime;
+            const timeRemaining = timeout - timeElapsed;
+
+            // Convertendo o tempo restante para segundos
+            const secondsRemaining = Math.ceil(timeRemaining / 1000);
+
+            // Função para formatar o tempo em horas, minutos e segundos
+            function formatTime(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secondsLeft = seconds % 60;
+
+                let result = '';
+                if (hours > 0) result += `${hours} hora${hours > 1 ? 's' : ''}, `;
+                if (minutes > 0) result += `${minutes} minuto${minutes > 1 ? 's' : ''}, `;
+                result += `${secondsLeft} segundo${secondsLeft > 1 ? 's' : ''}`;
+
+                return result;
+            }
+
+            // Formatando o tempo restante
+            const formattedTime = formatTime(secondsRemaining);
+
+            return interaction.reply({
+                content: `\`-\` <a:alerta:1163274838111162499> Você já iniciou uma solicitação com o sistema de Bem Vindo(a). Aguarde ${formattedTime} antes de tentar novamente.`,
+                ephemeral: true
+            });
         }
 
 
@@ -107,12 +144,14 @@ module.exports = {
         })
 
 
-        const timeoutDuration = 60000; // 60 segundos
+        const timeoutDuration = 240000; // 4 minutos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
         // Cria um coletor para o menu inicial
         const filter = (i) => i.customId === 'logs_menu' && i.user.id === interaction.user.id;
         const collector = message.createMessageComponentCollector({ filter, time: timeoutDuration });
+
+        collectors.set(userId, { collector, timeout: timeoutDuration, startTime });
 
 
         collector.on('collect', async (i) => {
@@ -283,6 +322,26 @@ module.exports = {
             }
         })
 
+
+        collector.on('end', async (collected, reason) => {
+            const originalMessage = await interaction.fetchReply().catch(() => null);
+
+            if (!originalMessage) {
+                return collectors.delete(userId)
+            }
+
+            if (reason === 'time') {
+                await interaction.editReply({
+                    components: []
+                });
+            } else {
+                await interaction.editReply({
+                    components: []
+                });
+            }
+
+            collectors.delete(userId)
+        })
 
     }
 }

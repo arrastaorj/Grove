@@ -116,7 +116,7 @@ module.exports = {
             components: [createAutoroleMenu()],
         });
 
-        const timeoutDuration = 120000; // 60 segundos
+        const timeoutDuration = 240000; // 4 minutos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
         const filter = i => i.customId === 'config_role' && i.user.id === interaction.user.id;

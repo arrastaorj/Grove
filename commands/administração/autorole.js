@@ -140,7 +140,7 @@ module.exports = {
 
         await interaction.reply({ embeds: [embed], components: [createAutoroleMenu(isActive)] })
 
-        const timeoutDuration = 60000; // 60 segundos
+        const timeoutDuration = 240000; // 4 minutos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
 

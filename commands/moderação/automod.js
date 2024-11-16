@@ -164,7 +164,7 @@ module.exports = {
             components: [createMenu()]
         });
 
-        const timeoutDuration = 120000; // 60 segundos
+        const timeoutDuration = 240000; // 4 minutos
         const startTime = Date.now(); // Marca o momento em que o coletor foi iniciado
 
         // Coletor para respostas do menu suspenso
