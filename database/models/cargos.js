@@ -13,4 +13,4 @@ const cargos = new db.Schema({
 });
 
 
-module.exports = db.model('Guild', cargos)
+module.exports = db.model('selectCargos', cargos)
