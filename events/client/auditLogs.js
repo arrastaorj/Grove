@@ -15,42 +15,42 @@ async function sendLog(guildId, embed) {
 }
 
 
-client.on("messageDelete", async (message) => {
+// client.on("messageDelete", async (message) => {
 
-    try {
-        if (message.partial) await message.fetch();
-    } catch (error) {
+//     try {
+//         if (message.partial) await message.fetch();
+//     } catch (error) {
 
-        return
-    }
+//         return
+//     }
 
-    const embed = new EmbedBuilder()
-        .setTitle("🗑️ Mensagem Excluída")
-        .setColor("#FF4500")
-        .setDescription(`Uma mensagem foi excluída no canal ${message.channel}.\n**Autor:** ${message.author.tag}`)
-        .addFields({ name: "Conteúdo", value: message.content || "Nenhum conteúdo detectado." })
-        .setTimestamp();
+//     const embed = new EmbedBuilder()
+//         .setTitle("Mensagem Excluída")
+//         .setColor("#FF4500")
+//         .setDescription(`Uma mensagem foi excluída no canal ${message.channel}.\n**Autor:** ${message.author.tag}`)
+//         .addFields({ name: "Conteúdo", value: message.content || "Nenhum conteúdo detectado." })
+//         .setTimestamp();
 
-    await sendLog(message.guild.id, embed);
-})
+//     await sendLog(message.guild.id, embed);
+// })
 
-client.on("messageUpdate", async (oldMessage, newMessage) => {
-    if (oldMessage.partial || newMessage.partial) await Promise.all([oldMessage.fetch(), newMessage.fetch()]);
+// client.on("messageUpdate", async (oldMessage, newMessage) => {
+//     if (oldMessage.partial || newMessage.partial) await Promise.all([oldMessage.fetch(), newMessage.fetch()]);
 
-    if (oldMessage.content === newMessage.content) return;
+//     if (oldMessage.content === newMessage.content) return;
 
-    const embed = new EmbedBuilder()
-        .setTitle("✏️ Mensagem Editada")
-        .setColor("#03f7ff")
-        .setDescription(`Uma mensagem foi editada no canal ${oldMessage.channel}.\n**Autor:** ${oldMessage.author.tag}`)
-        .addFields(
-            { name: "Antes", value: oldMessage.content || "Nenhum conteúdo detectado." },
-            { name: "Depois", value: newMessage.content || "Nenhum conteúdo detectado." }
-        )
-        .setTimestamp();
+//     const embed = new EmbedBuilder()
+//         .setTitle("✏️ Mensagem Editada")
+//         .setColor("#03f7ff")
+//         .setDescription(`Uma mensagem foi editada no canal ${oldMessage.channel}.\n**Autor:** ${oldMessage.author.tag}`)
+//         .addFields(
+//             { name: "Antes", value: oldMessage.content || "Nenhum conteúdo detectado." },
+//             { name: "Depois", value: newMessage.content || "Nenhum conteúdo detectado." }
+//         )
+//         .setTimestamp();
 
-    await sendLog(oldMessage.guild.id, embed);
-})
+//     await sendLog(oldMessage.guild.id, embed);
+// })
 
 client.on("guildBanAdd", async (ban) => {
     const embed = new EmbedBuilder()
