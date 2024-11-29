@@ -956,21 +956,22 @@ module.exports = async (interaction) => {
 
         if (interaction.customId.startsWith('reabrir_ticket_')) {
 
-            const selectedTicketId = interaction.customId.split('_')[2];
-
-
             if (!interaction.isButton()) return;
-
-            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({ content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`, ephemeral: true })
+            if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({
+                content: `> \`-\` <a:alerta:1163274838111162499> Não posso concluir este comando pois você não possui permissão.`,
+                ephemeral: true
+            })
 
             interaction.message.delete()
+            const selectedTicketId = interaction.customId.split('_')[2];
+          
 
             const cmd = await ticket.findOne({
                 guildId: interaction.guild.id,
                 ticketId: selectedTicketId
             })
 
-            let ticket = interaction.channel.topic
+            let tickettste = interaction.channel.topic
 
             interaction.channel.edit({
 
@@ -980,7 +981,7 @@ module.exports = async (interaction) => {
                         allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
                     },
                     {
-                        id: ticket,
+                        id: tickettste,
                         allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.AttachFiles, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.AddReactions],
                     },
                     {
@@ -996,7 +997,7 @@ module.exports = async (interaction) => {
             let embed = new EmbedBuilder()
                 .setColor('#ba68c8')
                 .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-                .setDescription(`Olá <@${ticket}>, O Membro ${interaction.user} Reabriu seu ticket.`)
+                .setDescription(`Olá <@${tickettste}>, O Membro ${interaction.user} Reabriu seu ticket.`)
 
             let button = new ButtonBuilder()
                 .setLabel(`Apagar Mensagem`)
@@ -1005,7 +1006,7 @@ module.exports = async (interaction) => {
 
             const row = new ActionRowBuilder().addComponents(button)
 
-            interaction.channel.send({ content: `<@${ticket}>`, embeds: [embed], components: [row] })
+            interaction.channel.send({ content: `<@${tickettste}>`, embeds: [embed], components: [row] })
 
         }
 

@@ -242,17 +242,22 @@ module.exports = {
                 }
 
 
-                const membersWithoutRole = guild.members.cache.filter(member => !member.roles.cache.has(selectedRoleId));
 
                 let successCount = 0;
                 let failureCount = 0;
 
+                await guild.members.fetch(); // Busca todos os membros do servidor
+
+                const membersWithoutRole = guild.members.cache.filter(member => !member.roles.cache.has(selectedRoleId) && !member.user.bot);
+
+                // Atribuir o cargo aos membros
                 for (const member of membersWithoutRole.values()) {
                     try {
                         await member.roles.add(role);
                         successCount++;
                     } catch (error) {
                         failureCount++;
+                        console.error(`Falha ao atribuir o cargo ao membro ${member.user.tag}:`, error);
                     }
                 }
 
